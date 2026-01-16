@@ -1,150 +1,139 @@
 <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Pygame Zero auf Pydroid - Teil 1&colon; Deine ersten Spiele&excl; &#x1f3ae;</title>
-            <style>
-/* From extension vscode.github */
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pygame Zero auf Pydroid - Teil 1&colon; Deine ersten Spiele&excl; &#x1f3ae;</title>
 
-.vscode-dark img[src$=\#gh-light-mode-only],
-.vscode-light img[src$=\#gh-dark-mode-only],
-.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
-.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
-	display: none;
-}
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+    <style>
+        .task-list-item {
+            list-style-type: none;
+        }
 
-</style>
-            
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-<style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
-                font-size: 14px;
-                line-height: 1.6;
+        .task-list-item-checkbox {
+            margin-left: -20px;
+            vertical-align: middle;
+            pointer-events: none;
+        }
+    </style>
+    <style>
+        :root {
+            --color-note: #0969da;
+            --color-tip: #1a7f37;
+            --color-warning: #9a6700;
+            --color-severe: #bc4c00;
+            --color-caution: #d1242f;
+            --color-important: #8250df;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-note: #2f81f7;
+                --color-tip: #3fb950;
+                --color-warning: #d29922;
+                --color-severe: #db6d28;
+                --color-caution: #f85149;
+                --color-important: #a371f7;
             }
-        </style>
-        <style>
-.task-list-item {
-    list-style-type: none;
-}
+        }
 
-.task-list-item-checkbox {
-    margin-left: -20px;
-    vertical-align: middle;
-    pointer-events: none;
-}
-</style>
-<style>
-:root {
-  --color-note: #0969da;
-  --color-tip: #1a7f37;
-  --color-warning: #9a6700;
-  --color-severe: #bc4c00;
-  --color-caution: #d1242f;
-  --color-important: #8250df;
-}
+    </style>
+    <style>
+        .markdown-alert {
+            padding: 0.5rem 1rem;
+            margin-bottom: 16px;
+            color: inherit;
+            border-left: .25em solid #888;
+        }
 
-</style>
-<style>
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-note: #2f81f7;
-    --color-tip: #3fb950;
-    --color-warning: #d29922;
-    --color-severe: #db6d28;
-    --color-caution: #f85149;
-    --color-important: #a371f7;
-  }
-}
+        .markdown-alert > :first-child {
+            margin-top: 0
+        }
 
-</style>
-<style>
-.markdown-alert {
-  padding: 0.5rem 1rem;
-  margin-bottom: 16px;
-  color: inherit;
-  border-left: .25em solid #888;
-}
+        .markdown-alert > :last-child {
+            margin-bottom: 0
+        }
 
-.markdown-alert>:first-child {
-  margin-top: 0
-}
+        .markdown-alert .markdown-alert-title {
+            display: flex;
+            font-weight: 500;
+            align-items: center;
+            line-height: 1
+        }
 
-.markdown-alert>:last-child {
-  margin-bottom: 0
-}
+        .markdown-alert .markdown-alert-title .octicon {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
 
-.markdown-alert .markdown-alert-title {
-  display: flex;
-  font-weight: 500;
-  align-items: center;
-  line-height: 1
-}
+        .markdown-alert.markdown-alert-note {
+            border-left-color: var(--color-note);
+        }
 
-.markdown-alert .markdown-alert-title .octicon {
-  margin-right: 0.5rem;
-  display: inline-block;
-  overflow: visible !important;
-  vertical-align: text-bottom;
-  fill: currentColor;
-}
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
 
-.markdown-alert.markdown-alert-note {
-  border-left-color: var(--color-note);
-}
+        .markdown-alert.markdown-alert-important {
+            border-left-color: var(--color-important);
+        }
 
-.markdown-alert.markdown-alert-note .markdown-alert-title {
-  color: var(--color-note);
-}
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
 
-.markdown-alert.markdown-alert-important {
-  border-left-color: var(--color-important);
-}
+        .markdown-alert.markdown-alert-warning {
+            border-left-color: var(--color-warning);
+        }
 
-.markdown-alert.markdown-alert-important .markdown-alert-title {
-  color: var(--color-important);
-}
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
 
-.markdown-alert.markdown-alert-warning {
-  border-left-color: var(--color-warning);
-}
+        .markdown-alert.markdown-alert-tip {
+            border-left-color: var(--color-tip);
+        }
 
-.markdown-alert.markdown-alert-warning .markdown-alert-title {
-  color: var(--color-warning);
-}
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
 
-.markdown-alert.markdown-alert-tip {
-  border-left-color: var(--color-tip);
-}
+        .markdown-alert.markdown-alert-caution {
+            border-left-color: var(--color-caution);
+        }
 
-.markdown-alert.markdown-alert-tip .markdown-alert-title {
-  color: var(--color-tip);
-}
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
 
-.markdown-alert.markdown-alert-caution {
-  border-left-color: var(--color-caution);
-}
+    </style>
 
-.markdown-alert.markdown-alert-caution .markdown-alert-title {
-  color: var(--color-caution);
-}
-
-</style>
-        
-        </head>
-        <body class="vscode-body vscode-light">
-            <h1 id="pygame-zero-auf-pydroid---teil-1-deine-ersten-spiele-">Pygame Zero auf Pydroid - Teil 1: Deine ersten Spiele! 🎮</h1>
-<p>Hallo! In diesem Tutorial lernst du, wie du coole Spiele auf deinem Android-Handy programmieren kannst. Wir benutzen dafür <strong>Pygame Zero</strong> - das ist super einfach!</p>
+</head>
+<body class="vscode-body vscode-light">
+<h1 id="pygame-zero-auf-pydroid---teil-1-deine-ersten-spiele-">Pygame Zero auf Pydroid - Teil 1: Deine ersten Spiele!
+    🎮</h1>
+<p>Hallo! In diesem Tutorial lernst du, wie du coole Spiele auf deinem Android-Handy programmieren kannst. Wir benutzen
+    dafür <strong>Pygame Zero</strong> - das ist super einfach!</p>
 <p><strong>Was du am Ende kannst:</strong></p>
 <ul>
-<li>Formen auf den Bildschirm malen</li>
-<li>Auf Touch-Eingaben reagieren</li>
-<li>5 komplette Spiele programmieren!</li>
+    <li>Formen auf den Bildschirm malen</li>
+    <li>Auf Touch-Eingaben reagieren</li>
+    <li>5 komplette Spiele programmieren!</li>
 </ul>
 <hr>
 <h2 id="kapitel-1-installation-und-einrichtung">Kapitel 1: Installation und Einrichtung</h2>
@@ -152,31 +141,31 @@
 <p>Du installierst alles was du brauchst, um Spiele zu programmieren.</p>
 <h3 id="was-du-brauchst">Was du brauchst</h3>
 <ol>
-<li>Ein Android-Handy oder Tablet</li>
-<li>Die App <strong>Pydroid 3</strong> (aus dem Play Store)</li>
-<li>Das Plugin <strong>Pydroid repository plugin</strong> (auch aus dem Play Store)</li>
+    <li>Ein Android-Handy oder Tablet</li>
+    <li>Die App <strong>Pydroid 3</strong> (aus dem Play Store)</li>
+    <li>Das Plugin <strong>Pydroid repository plugin</strong> (auch aus dem Play Store)</li>
 </ol>
 <h3 id="schritt-für-schritt-anleitung">Schritt-für-Schritt Anleitung</h3>
 <p><strong>Schritt 1: Pydroid 3 installieren</strong></p>
 <ol>
-<li>Öffne den Google Play Store auf deinem Handy</li>
-<li>Suche nach &quot;Pydroid 3&quot;</li>
-<li>Tippe auf &quot;Installieren&quot;</li>
-<li>Warte bis die Installation fertig ist</li>
+    <li>Öffne den Google Play Store auf deinem Handy</li>
+    <li>Suche nach &quot;Pydroid 3&quot;</li>
+    <li>Tippe auf &quot;Installieren&quot;</li>
+    <li>Warte bis die Installation fertig ist</li>
 </ol>
 <p><strong>Schritt 2: Das Plugin installieren</strong></p>
 <ol>
-<li>Suche im Play Store nach &quot;Pydroid repository plugin&quot;</li>
-<li>Installiere es (das hilft dir später Pakete zu installieren)</li>
+    <li>Suche im Play Store nach &quot;Pydroid repository plugin&quot;</li>
+    <li>Installiere es (das hilft dir später Pakete zu installieren)</li>
 </ol>
 <p><strong>Schritt 3: Pygame Zero installieren</strong></p>
 <ol>
-<li>Öffne Pydroid 3</li>
-<li>Tippe auf die drei Striche oben links (☰)</li>
-<li>Wähle &quot;Pip&quot; aus dem Menü</li>
-<li>Gib in das Textfeld ein: <code>pgzero</code></li>
-<li>Tippe auf &quot;Install&quot;</li>
-<li>Warte bis &quot;Successfully installed&quot; erscheint</li>
+    <li>Öffne Pydroid 3</li>
+    <li>Tippe auf die drei Striche oben links (☰)</li>
+    <li>Wähle &quot;Pip&quot; aus dem Menü</li>
+    <li>Gib in das Textfeld ein: <code>pgzero</code></li>
+    <li>Tippe auf &quot;Install&quot;</li>
+    <li>Warte bis &quot;Successfully installed&quot; erscheint</li>
 </ol>
 <p><strong>Geschafft!</strong> Du bist bereit zum Programmieren!</p>
 <hr>
@@ -226,12 +215,13 @@ HEIGHT = <span class="hljs-number">600</span>  <span class="hljs-comment"># Höh
 <h3 id="ziel-dieses-kapitels-2">Ziel dieses Kapitels</h3>
 <p>Du lernst verschiedene Formen auf den Bildschirm zu malen.</p>
 <h3 id="warum-ist-das-wichtig">Warum ist das wichtig?</h3>
-<p>Bevor wir Spiele machen, müssen wir wissen wie man Dinge zeichnet. In unseren ersten Spielen benutzen wir einfache Formen wie Rechtecke und Kreise als Spielfiguren.</p>
+<p>Bevor wir Spiele machen, müssen wir wissen wie man Dinge zeichnet. In unseren ersten Spielen benutzen wir einfache
+    Formen wie Rechtecke und Kreise als Spielfiguren.</p>
 <h3 id="das-koordinatensystem-verstehen">Das Koordinatensystem verstehen</h3>
 <p>Der Bildschirm ist wie ein Gitter aus Punkten. Jeder Punkt hat eine Position:</p>
 <ul>
-<li><strong>x</strong> = wie weit nach rechts (0 ist ganz links)</li>
-<li><strong>y</strong> = wie weit nach unten (0 ist ganz oben!)</li>
+    <li><strong>x</strong> = wie weit nach rechts (0 ist ganz links)</li>
+    <li><strong>y</strong> = wie weit nach unten (0 ist ganz oben!)</li>
 </ul>
 <pre><code>    x = 0       x = 200      x = 400
      ↓           ↓            ↓
@@ -250,39 +240,43 @@ HEIGHT = <span class="hljs-number">600</span>  <span class="hljs-comment"># Höh
 <p><strong>So geht's:</strong></p>
 <pre><code class="language-python"><span class="hljs-comment"># Rechteck zeichnen</span>
 <span class="hljs-comment"># screen.draw.filled_rect(Rect(x, y, breite, höhe), farbe)</span>
-screen.draw.filled_rect(Rect(<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>), <span class="hljs-string">&quot;red&quot;</span>)
+screen.draw.filled_rect(Rect(<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span
+            class="hljs-number">50</span>, <span class="hljs-number">50</span>), <span class="hljs-string">&quot;red&quot;</span>)
 </code></pre>
 <p><strong>Erklärung:</strong></p>
 <ul>
-<li><code>Rect(100, 200, 50, 50)</code> erstellt ein Rechteck
-<ul>
-<li><code>100</code> = x-Position (100 Pixel von links)</li>
-<li><code>200</code> = y-Position (200 Pixel von oben)</li>
-<li><code>50</code> = Breite</li>
-<li><code>50</code> = Höhe</li>
-</ul>
-</li>
-<li><code>&quot;red&quot;</code> = die Farbe</li>
+    <li><code>Rect(100, 200, 50, 50)</code> erstellt ein Rechteck
+        <ul>
+            <li><code>100</code> = x-Position (100 Pixel von links)</li>
+            <li><code>200</code> = y-Position (200 Pixel von oben)</li>
+            <li><code>50</code> = Breite</li>
+            <li><code>50</code> = Höhe</li>
+        </ul>
+    </li>
+    <li><code>&quot;red&quot;</code> = die Farbe</li>
 </ul>
 <h3 id="schritt-2-einen-kreis-zeichnen">Schritt 2: Einen Kreis zeichnen</h3>
 <p><strong>Ziel:</strong> Einen gelben Kreis auf den Bildschirm malen.</p>
 <p><strong>So geht's:</strong></p>
 <pre><code class="language-python"><span class="hljs-comment"># Kreis zeichnen</span>
 <span class="hljs-comment"># screen.draw.filled_circle((x, y), radius, farbe)</span>
-screen.draw.filled_circle((<span class="hljs-number">200</span>, <span class="hljs-number">300</span>), <span class="hljs-number">30</span>, <span class="hljs-string">&quot;yellow&quot;</span>)
+screen.draw.filled_circle((<span class="hljs-number">200</span>, <span class="hljs-number">300</span>), <span
+            class="hljs-number">30</span>, <span class="hljs-string">&quot;yellow&quot;</span>)
 </code></pre>
 <p><strong>Erklärung:</strong></p>
 <ul>
-<li><code>(200, 300)</code> = die Mitte des Kreises (x=200, y=300)</li>
-<li><code>30</code> = der Radius (wie groß der Kreis ist)</li>
-<li><code>&quot;yellow&quot;</code> = die Farbe</li>
+    <li><code>(200, 300)</code> = die Mitte des Kreises (x=200, y=300)</li>
+    <li><code>30</code> = der Radius (wie groß der Kreis ist)</li>
+    <li><code>&quot;yellow&quot;</code> = die Farbe</li>
 </ul>
 <h3 id="schritt-3-text-schreiben">Schritt 3: Text schreiben</h3>
 <p><strong>Ziel:</strong> Text auf den Bildschirm schreiben.</p>
 <p><strong>So geht's:</strong></p>
 <pre><code class="language-python"><span class="hljs-comment"># Text schreiben</span>
 <span class="hljs-comment"># screen.draw.text(&quot;dein text&quot;, (x, y), color=&quot;farbe&quot;, fontsize=größe)</span>
-screen.draw.text(<span class="hljs-string">&quot;Hallo!&quot;</span>, (<span class="hljs-number">150</span>, <span class="hljs-number">100</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">40</span>)
+screen.draw.text(<span class="hljs-string">&quot;Hallo!&quot;</span>, (<span class="hljs-number">150</span>, <span
+            class="hljs-number">100</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">40</span>)
 </code></pre>
 <h3 id="komplettes-beispiel-alles-zusammen">Komplettes Beispiel: Alles zusammen</h3>
 <p><strong>Ziel:</strong> Verschiedene Formen und Text auf einem blauen Hintergrund zeigen.</p>
@@ -294,96 +288,103 @@ HEIGHT = <span class="hljs-number">600</span>
     screen.fill(<span class="hljs-string">&quot;darkblue&quot;</span>)
 
     <span class="hljs-comment"># Schritt 2: Ein rotes Rechteck zeichnen</span>
-    screen.draw.filled_rect(Rect(<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>), <span class="hljs-string">&quot;red&quot;</span>)
+    screen.draw.filled_rect(Rect(<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span
+            class="hljs-number">50</span>, <span class="hljs-number">50</span>), <span class="hljs-string">&quot;red&quot;</span>)
 
     <span class="hljs-comment"># Schritt 3: Ein grünes Rechteck zeichnen</span>
-    screen.draw.filled_rect(Rect(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>, <span class="hljs-number">80</span>, <span class="hljs-number">40</span>), <span class="hljs-string">&quot;green&quot;</span>)
+    screen.draw.filled_rect(Rect(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>, <span
+            class="hljs-number">80</span>, <span class="hljs-number">40</span>), <span class="hljs-string">&quot;green&quot;</span>)
 
     <span class="hljs-comment"># Schritt 4: Einen gelben Kreis zeichnen</span>
-    screen.draw.filled_circle((<span class="hljs-number">200</span>, <span class="hljs-number">350</span>), <span class="hljs-number">40</span>, <span class="hljs-string">&quot;yellow&quot;</span>)
+    screen.draw.filled_circle((<span class="hljs-number">200</span>, <span class="hljs-number">350</span>), <span
+            class="hljs-number">40</span>, <span class="hljs-string">&quot;yellow&quot;</span>)
 
     <span class="hljs-comment"># Schritt 5: Einen orangen Kreis zeichnen</span>
-    screen.draw.filled_circle((<span class="hljs-number">100</span>, <span class="hljs-number">450</span>), <span class="hljs-number">25</span>, <span class="hljs-string">&quot;orange&quot;</span>)
+    screen.draw.filled_circle((<span class="hljs-number">100</span>, <span class="hljs-number">450</span>), <span
+            class="hljs-number">25</span>, <span class="hljs-string">&quot;orange&quot;</span>)
 
     <span class="hljs-comment"># Schritt 6: Eine Linie zeichnen</span>
-    screen.draw.line((<span class="hljs-number">50</span>, <span class="hljs-number">500</span>), (<span class="hljs-number">350</span>, <span class="hljs-number">500</span>), <span class="hljs-string">&quot;white&quot;</span>)
+    screen.draw.line((<span class="hljs-number">50</span>, <span class="hljs-number">500</span>), (<span
+            class="hljs-number">350</span>, <span class="hljs-number">500</span>), <span class="hljs-string">&quot;white&quot;</span>)
 
     <span class="hljs-comment"># Schritt 7: Text schreiben</span>
-    screen.draw.text(<span class="hljs-string">&quot;Hallo!&quot;</span>, (<span class="hljs-number">150</span>, <span class="hljs-number">80</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">50</span>)
+    screen.draw.text(<span class="hljs-string">&quot;Hallo!&quot;</span>, (<span class="hljs-number">150</span>, <span
+            class="hljs-number">80</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">50</span>)
 </code></pre>
 <h3 id="übung-für-dich">Übung für dich</h3>
 <p>Versuche folgendes zu ändern:</p>
 <ol>
-<li>Mach den Hintergrund grün (<code>&quot;green&quot;</code>)</li>
-<li>Mach das Rechteck größer (ändere 50, 50 zu 100, 100)</li>
-<li>Füge deinen Namen als Text hinzu</li>
+    <li>Mach den Hintergrund grün (<code>&quot;green&quot;</code>)</li>
+    <li>Mach das Rechteck größer (ändere 50, 50 zu 100, 100)</li>
+    <li>Füge deinen Namen als Text hinzu</li>
 </ol>
 <h3 id="farben-die-du-benutzen-kannst">Farben die du benutzen kannst</h3>
 <table>
-<thead>
-<tr>
-<th>Englisch</th>
-<th>Deutsch</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>&quot;red&quot;</code></td>
-<td>Rot</td>
-</tr>
-<tr>
-<td><code>&quot;blue&quot;</code></td>
-<td>Blau</td>
-</tr>
-<tr>
-<td><code>&quot;green&quot;</code></td>
-<td>Grün</td>
-</tr>
-<tr>
-<td><code>&quot;yellow&quot;</code></td>
-<td>Gelb</td>
-</tr>
-<tr>
-<td><code>&quot;white&quot;</code></td>
-<td>Weiß</td>
-</tr>
-<tr>
-<td><code>&quot;black&quot;</code></td>
-<td>Schwarz</td>
-</tr>
-<tr>
-<td><code>&quot;orange&quot;</code></td>
-<td>Orange</td>
-</tr>
-<tr>
-<td><code>&quot;purple&quot;</code></td>
-<td>Lila</td>
-</tr>
-<tr>
-<td><code>&quot;pink&quot;</code></td>
-<td>Rosa</td>
-</tr>
-<tr>
-<td><code>&quot;cyan&quot;</code></td>
-<td>Türkis</td>
-</tr>
-<tr>
-<td><code>&quot;gray&quot;</code></td>
-<td>Grau</td>
-</tr>
-<tr>
-<td><code>&quot;darkblue&quot;</code></td>
-<td>Dunkelblau</td>
-</tr>
-<tr>
-<td><code>&quot;darkgreen&quot;</code></td>
-<td>Dunkelgrün</td>
-</tr>
-<tr>
-<td><code>&quot;skyblue&quot;</code></td>
-<td>Himmelblau</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Englisch</th>
+        <th>Deutsch</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>&quot;red&quot;</code></td>
+        <td>Rot</td>
+    </tr>
+    <tr>
+        <td><code>&quot;blue&quot;</code></td>
+        <td>Blau</td>
+    </tr>
+    <tr>
+        <td><code>&quot;green&quot;</code></td>
+        <td>Grün</td>
+    </tr>
+    <tr>
+        <td><code>&quot;yellow&quot;</code></td>
+        <td>Gelb</td>
+    </tr>
+    <tr>
+        <td><code>&quot;white&quot;</code></td>
+        <td>Weiß</td>
+    </tr>
+    <tr>
+        <td><code>&quot;black&quot;</code></td>
+        <td>Schwarz</td>
+    </tr>
+    <tr>
+        <td><code>&quot;orange&quot;</code></td>
+        <td>Orange</td>
+    </tr>
+    <tr>
+        <td><code>&quot;purple&quot;</code></td>
+        <td>Lila</td>
+    </tr>
+    <tr>
+        <td><code>&quot;pink&quot;</code></td>
+        <td>Rosa</td>
+    </tr>
+    <tr>
+        <td><code>&quot;cyan&quot;</code></td>
+        <td>Türkis</td>
+    </tr>
+    <tr>
+        <td><code>&quot;gray&quot;</code></td>
+        <td>Grau</td>
+    </tr>
+    <tr>
+        <td><code>&quot;darkblue&quot;</code></td>
+        <td>Dunkelblau</td>
+    </tr>
+    <tr>
+        <td><code>&quot;darkgreen&quot;</code></td>
+        <td>Dunkelgrün</td>
+    </tr>
+    <tr>
+        <td><code>&quot;skyblue&quot;</code></td>
+        <td>Himmelblau</td>
+    </tr>
+    </tbody>
 </table>
 <hr>
 <h2 id="kapitel-4-touch-eingabe-verstehen">Kapitel 4: Touch-Eingabe verstehen</h2>
@@ -393,13 +394,15 @@ HEIGHT = <span class="hljs-number">600</span>
 <p>Bei Handyspielen steuerst du alles durch Tippen. Du musst wissen, wo der Finger den Bildschirm berührt hat.</p>
 <h3 id="die-spezielle-funktion-on_mouse_down">Die spezielle Funktion: on_mouse_down</h3>
 <p>Wenn jemand auf den Bildschirm tippt, ruft Pygame Zero automatisch eine Funktion auf:</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-comment"># pos enthält die Position wo getippt wurde</span>
     <span class="hljs-comment"># pos[0] = x-Position</span>
     <span class="hljs-comment"># pos[1] = y-Position</span>
 </code></pre>
 <h3 id="das-problem-mit-variablen">Das Problem mit Variablen</h3>
-<p>Wenn du eine Variable in einer Funktion ändern willst, musst du Python sagen, dass du die Variable von &quot;außen&quot; meinst. Das machst du mit dem Wort <code>global</code>.</p>
+<p>Wenn du eine Variable in einer Funktion ändern willst, musst du Python sagen, dass du die Variable von &quot;außen&quot;
+    meinst. Das machst du mit dem Wort <code>global</code>.</p>
 <p><strong>Ohne global (funktioniert NICHT richtig):</strong></p>
 <pre><code class="language-python">punkte = <span class="hljs-number">0</span>
 
@@ -429,7 +432,8 @@ kreis_y = <span class="hljs-number">300</span>
     screen.draw.filled_circle((kreis_x, kreis_y), <span class="hljs-number">40</span>, <span class="hljs-string">&quot;red&quot;</span>)
 </code></pre>
 <p><strong>Schritt 3:</strong> Auf Tippen reagieren</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> kreis_x, kreis_y  <span class="hljs-comment"># WICHTIG: global nicht vergessen!</span>
     kreis_x = pos[<span class="hljs-number">0</span>]  <span class="hljs-comment"># x-Position vom Finger</span>
     kreis_y = pos[<span class="hljs-number">1</span>]  <span class="hljs-comment"># y-Position vom Finger</span>
@@ -450,12 +454,20 @@ anzahl_tipps = <span class="hljs-number">0</span>
     screen.draw.filled_circle((kreis_x, kreis_y), <span class="hljs-number">40</span>, <span class="hljs-string">&quot;red&quot;</span>)
 
     <span class="hljs-comment"># Anleitung zeigen</span>
-    screen.draw.text(<span class="hljs-string">&quot;Tippe irgendwo!&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">&quot;Tippe irgendwo!&quot;</span>, (<span class="hljs-number">100</span>, <span
+            class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
 
     <span class="hljs-comment"># Position anzeigen</span>
-    screen.draw.text(<span class="hljs-string">f&quot;X: <span class="hljs-subst">{kreis_x}</span>&quot;</span>, (<span class="hljs-number">20</span>, <span class="hljs-number">520</span>), color=<span class="hljs-string">&quot;yellow&quot;</span>, fontsize=<span class="hljs-number">25</span>)
-    screen.draw.text(<span class="hljs-string">f&quot;Y: <span class="hljs-subst">{kreis_y}</span>&quot;</span>, (<span class="hljs-number">20</span>, <span class="hljs-number">550</span>), color=<span class="hljs-string">&quot;yellow&quot;</span>, fontsize=<span class="hljs-number">25</span>)
-    screen.draw.text(<span class="hljs-string">f&quot;Tipps: <span class="hljs-subst">{anzahl_tipps}</span>&quot;</span>, (<span class="hljs-number">250</span>, <span class="hljs-number">535</span>), color=<span class="hljs-string">&quot;green&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;X: <span class="hljs-subst">{kreis_x}</span>&quot;</span>, (<span
+            class="hljs-number">20</span>, <span class="hljs-number">520</span>), color=<span class="hljs-string">&quot;yellow&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Y: <span class="hljs-subst">{kreis_y}</span>&quot;</span>, (<span
+            class="hljs-number">20</span>, <span class="hljs-number">550</span>), color=<span class="hljs-string">&quot;yellow&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Tipps: <span class="hljs-subst">{anzahl_tipps}</span>&quot;</span>, (<span
+            class="hljs-number">250</span>, <span class="hljs-number">535</span>), color=<span class="hljs-string">&quot;green&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> kreis_x, kreis_y, anzahl_tipps
@@ -465,19 +477,21 @@ anzahl_tipps = <span class="hljs-number">0</span>
 </code></pre>
 <h3 id="was-du-gelernt-hast">Was du gelernt hast</h3>
 <ol>
-<li><code>on_mouse_down(pos)</code> wird aufgerufen wenn du tippst</li>
-<li><code>pos[0]</code> ist die x-Position (links/rechts)</li>
-<li><code>pos[1]</code> ist die y-Position (oben/unten)</li>
-<li><code>global</code> brauchst du um Variablen in Funktionen zu ändern</li>
+    <li><code>on_mouse_down(pos)</code> wird aufgerufen wenn du tippst</li>
+    <li><code>pos[0]</code> ist die x-Position (links/rechts)</li>
+    <li><code>pos[1]</code> ist die y-Position (oben/unten)</li>
+    <li><code>global</code> brauchst du um Variablen in Funktionen zu ändern</li>
 </ol>
 <hr>
 <h2 id="kapitel-5-bewegung-mit-der-update-funktion">Kapitel 5: Bewegung mit der Update-Funktion</h2>
 <h3 id="ziel-dieses-kapitels-4">Ziel dieses Kapitels</h3>
 <p>Du lernst wie sich Dinge von alleine bewegen.</p>
 <h3 id="warum-ist-das-wichtig-2">Warum ist das wichtig?</h3>
-<p>In Spielen bewegen sich Bälle, Feinde und andere Objekte automatisch. Das passiert alles in der <code>update()</code> Funktion.</p>
+<p>In Spielen bewegen sich Bälle, Feinde und andere Objekte automatisch. Das passiert alles in der <code>update()</code>
+    Funktion.</p>
 <h3 id="wie-funktioniert-update">Wie funktioniert update()?</h3>
-<p>Die <code>update()</code> Funktion wird 60 mal pro Sekunde aufgerufen! Wenn du dort die Position eines Objekts ein kleines bisschen änderst, sieht es aus als würde es sich bewegen.</p>
+<p>Die <code>update()</code> Funktion wird 60 mal pro Sekunde aufgerufen! Wenn du dort die Position eines Objekts ein
+    kleines bisschen änderst, sieht es aus als würde es sich bewegen.</p>
 <pre><code>Sekunde 1:    ●
 Sekunde 2:      ●
 Sekunde 3:        ●
@@ -500,7 +514,8 @@ geschwindigkeit = <span class="hljs-number">3</span>  <span class="hljs-comment"
     screen.draw.filled_circle((ball_x, ball_y), <span class="hljs-number">20</span>, <span class="hljs-string">&quot;yellow&quot;</span>)
 </code></pre>
 <p><strong>Schritt 3:</strong> Den Ball bewegen</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_x
 
     <span class="hljs-comment"># Ball nach rechts bewegen</span>
@@ -521,7 +536,9 @@ geschwindigkeit = <span class="hljs-number">3</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
     screen.fill(<span class="hljs-string">&quot;darkblue&quot;</span>)
     screen.draw.filled_circle((ball_x, ball_y), <span class="hljs-number">20</span>, <span class="hljs-string">&quot;yellow&quot;</span>)
-    screen.draw.text(<span class="hljs-string">&quot;Der Ball bewegt sich!&quot;</span>, (<span class="hljs-number">80</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">&quot;Der Ball bewegt sich!&quot;</span>, (<span
+            class="hljs-number">80</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_x
@@ -548,7 +565,8 @@ schwerkraft = <span class="hljs-number">0.5</span>      <span class="hljs-commen
 <hr>
 <h1 id="spiel-1-fang-den-ball-">SPIEL 1: Fang den Ball! ⚽</h1>
 <h3 id="ziel-des-spiels">Ziel des Spiels</h3>
-<p>Ein Ball fällt von oben nach unten. Du musst ihn mit einem Fänger auffangen. Jedes Mal wenn du den Ball fängst, bekommst du einen Punkt!</p>
+<p>Ein Ball fällt von oben nach unten. Du musst ihn mit einem Fänger auffangen. Jedes Mal wenn du den Ball fängst,
+    bekommst du einen Punkt!</p>
 <h3 id="was-wir-programmieren-müssen">Was wir programmieren müssen</h3>
 <pre><code>┌─────────────────────────────────────────┐
 │  1. Einen Ball der nach unten fällt     │
@@ -580,7 +598,8 @@ faenger_hoehe = <span class="hljs-number">20</span>    <span class="hljs-comment
 punkte = <span class="hljs-number">0</span>
 </code></pre>
 <p><strong>Warum brauchen wir <code>import random</code>?</strong>
-Damit der Ball jedes Mal an einer anderen Stelle erscheint. <code>random.randint(1, 10)</code> gibt uns eine zufällige Zahl zwischen 1 und 10.</p>
+    Damit der Ball jedes Mal an einer anderen Stelle erscheint. <code>random.randint(1, 10)</code> gibt uns eine
+    zufällige Zahl zwischen 1 und 10.</p>
 <h3 id="schritt-2-alles-zeichnen">Schritt 2: Alles zeichnen</h3>
 <p><strong>Ziel:</strong> Ball, Fänger und Punkte auf den Bildschirm malen.</p>
 <pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
@@ -597,11 +616,15 @@ Damit der Ball jedes Mal an einer anderen Stelle erscheint. <code>random.randint
     )
 
     <span class="hljs-comment"># Punkte anzeigen</span>
-    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
 </code></pre>
 <h3 id="schritt-3-den-ball-fallen-lassen">Schritt 3: Den Ball fallen lassen</h3>
 <p><strong>Ziel:</strong> Der Ball soll von oben nach unten fallen.</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_y
 
     <span class="hljs-comment"># Ball fällt nach unten (y wird größer = weiter unten)</span>
@@ -609,7 +632,8 @@ Damit der Ball jedes Mal an einer anderen Stelle erscheint. <code>random.randint
 </code></pre>
 <h3 id="schritt-4-prüfen-ob-ball-gefangen-wurde">Schritt 4: Prüfen ob Ball gefangen wurde</h3>
 <p><strong>Ziel:</strong> Wenn der Ball den Fänger berührt, gibt es einen Punkt.</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_x, ball_y, ball_speed, punkte
 
     <span class="hljs-comment"># Ball fällt nach unten</span>
@@ -649,11 +673,13 @@ Wenn ball_x zwischen diesen beiden Werten ist = GEFANGEN!
         ball_y = <span class="hljs-number">0</span>
         ball_x = random.randint(<span class="hljs-number">30</span>, <span class="hljs-number">370</span>)
         punkte = <span class="hljs-number">0</span>  <span class="hljs-comment"># Punkte zurücksetzen</span>
-        ball_speed = <span class="hljs-number">5</span>  <span class="hljs-comment"># Geschwindigkeit zurücksetzen</span>
+        ball_speed = <span class="hljs-number">5</span>  <span
+            class="hljs-comment"># Geschwindigkeit zurücksetzen</span>
 </code></pre>
 <h3 id="schritt-6-fänger-mit-finger-steuern">Schritt 6: Fänger mit Finger steuern</h3>
 <p><strong>Ziel:</strong> Wenn du auf den Bildschirm tippst, bewegt sich der Fänger dorthin.</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> faenger_x
     <span class="hljs-comment"># Fänger bewegt sich dahin wo du tippst</span>
     <span class="hljs-comment"># Wir ziehen die halbe Breite ab, damit die Mitte des Fängers beim Finger ist</span>
@@ -696,8 +722,13 @@ punkte = <span class="hljs-number">0</span>
     )
 
     <span class="hljs-comment"># Punkte anzeigen</span>
-    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">30</span>)
-    screen.draw.text(<span class="hljs-string">&quot;Tippe um zu bewegen!&quot;</span>, (<span class="hljs-number">80</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;gray&quot;</span>, fontsize=<span class="hljs-number">20</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">&quot;Tippe um zu bewegen!&quot;</span>, (<span
+            class="hljs-number">80</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;gray&quot;</span>, fontsize=<span
+            class="hljs-number">20</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_x, ball_y, ball_speed, punkte
@@ -727,14 +758,15 @@ punkte = <span class="hljs-number">0</span>
 </code></pre>
 <h3 id="ideen-zum-verbessern">Ideen zum Verbessern</h3>
 <ol>
-<li><strong>Mach den Fänger schmaler</strong> wenn du mehr Punkte hast</li>
-<li><strong>Füge mehrere Bälle hinzu</strong></li>
-<li><strong>Ändere die Farben</strong> des Balls bei jedem Fang</li>
+    <li><strong>Mach den Fänger schmaler</strong> wenn du mehr Punkte hast</li>
+    <li><strong>Füge mehrere Bälle hinzu</strong></li>
+    <li><strong>Ändere die Farben</strong> des Balls bei jedem Fang</li>
 </ol>
 <hr>
 <h1 id="spiel-2-springende-box-">SPIEL 2: Springende Box 📦</h1>
 <h3 id="ziel-des-spiels-1">Ziel des Spiels</h3>
-<p>Eine Box läuft auf dem Boden. Hindernisse kommen von rechts. Du musst über sie springen! Wie das Dino-Spiel in Chrome.</p>
+<p>Eine Box läuft auf dem Boden. Hindernisse kommen von rechts. Du musst über sie springen! Wie das Dino-Spiel in
+    Chrome.</p>
 <h3 id="was-wir-programmieren-müssen-1">Was wir programmieren müssen</h3>
 <pre><code>┌─────────────────────────────────────────┐
 │  1. Eine Box die auf dem Boden steht    │
@@ -757,7 +789,8 @@ box_x = <span class="hljs-number">80</span>            <span class="hljs-comment
 box_y = <span class="hljs-number">450</span>           <span class="hljs-comment"># Startet auf dem Boden</span>
 box_breite = <span class="hljs-number">40</span>
 box_hoehe = <span class="hljs-number">40</span>
-box_speed_y = <span class="hljs-number">0</span>       <span class="hljs-comment"># Geschwindigkeit nach oben/unten</span>
+box_speed_y = <span class="hljs-number">0</span>       <span
+            class="hljs-comment"># Geschwindigkeit nach oben/unten</span>
 schwerkraft = <span class="hljs-number">0.8</span>     <span class="hljs-comment"># Zieht die Box nach unten</span>
 boden_y = <span class="hljs-number">500</span>         <span class="hljs-comment"># Wo ist der Boden?</span>
 
@@ -769,7 +802,8 @@ hindernis_hoehe = <span class="hljs-number">60</span>
 <span class="hljs-comment"># === SPIELSTAND ===</span>
 punkte = <span class="hljs-number">0</span>
 spiel_laeuft = <span class="hljs-literal">True</span>
-geschwindigkeit = <span class="hljs-number">6</span>   <span class="hljs-comment"># Wie schnell kommt das Hindernis?</span>
+geschwindigkeit = <span class="hljs-number">6</span>   <span
+            class="hljs-comment"># Wie schnell kommt das Hindernis?</span>
 </code></pre>
 <h3 id="schritt-2-alles-zeichnen-1">Schritt 2: Alles zeichnen</h3>
 <p><strong>Ziel:</strong> Box, Hindernis, Boden und Punkte malen.</p>
@@ -778,7 +812,8 @@ geschwindigkeit = <span class="hljs-number">6</span>   <span class="hljs-comment
     screen.fill(<span class="hljs-string">&quot;skyblue&quot;</span>)
 
     <span class="hljs-comment"># Boden (grünes Rechteck ganz unten)</span>
-    screen.draw.filled_rect(Rect(<span class="hljs-number">0</span>, boden_y, WIDTH, <span class="hljs-number">100</span>), <span class="hljs-string">&quot;green&quot;</span>)
+    screen.draw.filled_rect(Rect(<span class="hljs-number">0</span>, boden_y, WIDTH, <span
+            class="hljs-number">100</span>), <span class="hljs-string">&quot;green&quot;</span>)
 
     <span class="hljs-comment"># Box (der Spieler)</span>
     screen.draw.filled_rect(
@@ -793,15 +828,24 @@ geschwindigkeit = <span class="hljs-number">6</span>   <span class="hljs-comment
     )
 
     <span class="hljs-comment"># Punkte</span>
-    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
 
     <span class="hljs-comment"># Anleitung</span>
-    screen.draw.text(<span class="hljs-string">&quot;Tippe zum Springen!&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;gray&quot;</span>, fontsize=<span class="hljs-number">20</span>)
+    screen.draw.text(<span class="hljs-string">&quot;Tippe zum Springen!&quot;</span>, (<span
+            class="hljs-number">100</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;gray&quot;</span>, fontsize=<span
+            class="hljs-number">20</span>)
 
     <span class="hljs-comment"># Game Over Nachricht</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> spiel_laeuft:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER!&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">50</span>)
-        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">80</span>, <span class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER!&quot;</span>, (<span class="hljs-number">100</span>, <span
+            class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">50</span>)
+        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">80</span>, <span
+            class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 </code></pre>
 <h3 id="schritt-3-schwerkraft-und-springen">Schritt 3: Schwerkraft und Springen</h3>
 <p><strong>Ziel:</strong> Die Box soll fallen und springen können.</p>
@@ -812,7 +856,8 @@ geschwindigkeit = <span class="hljs-number">6</span>   <span class="hljs-comment
 4. Box fängt an zu fallen
 5. Box landet auf dem Boden
 </code></pre>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> box_y, box_speed_y
 
     <span class="hljs-comment"># Schwerkraft - macht die Box langsamer (beim Hochfliegen)</span>
@@ -829,7 +874,8 @@ geschwindigkeit = <span class="hljs-number">6</span>   <span class="hljs-comment
 </code></pre>
 <h3 id="schritt-4-hindernis-bewegen">Schritt 4: Hindernis bewegen</h3>
 <p><strong>Ziel:</strong> Das Hindernis bewegt sich von rechts nach links.</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> hindernis_x, punkte, geschwindigkeit
     <span class="hljs-comment"># (... vorheriger Code ...)</span>
 
@@ -838,7 +884,8 @@ geschwindigkeit = <span class="hljs-number">6</span>   <span class="hljs-comment
 
     <span class="hljs-comment"># Hindernis ist links raus? Neues Hindernis!</span>
     <span class="hljs-keyword">if</span> hindernis_x &lt; -hindernis_breite:
-        hindernis_x = WIDTH + random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">200</span>)  <span class="hljs-comment"># Rechts neu starten</span>
+        hindernis_x = WIDTH + random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">200</span>)  <span
+            class="hljs-comment"># Rechts neu starten</span>
         punkte = punkte + <span class="hljs-number">1</span>  <span class="hljs-comment"># Punkt!</span>
 
         <span class="hljs-comment"># Spiel wird schneller</span>
@@ -848,12 +895,13 @@ geschwindigkeit = <span class="hljs-number">6</span>   <span class="hljs-comment
 <h3 id="schritt-5-kollision-prüfen">Schritt 5: Kollision prüfen</h3>
 <p><strong>Ziel:</strong> Erkennen wenn die Box das Hindernis berührt.</p>
 <p><strong>Wie funktioniert Kollision?</strong>
-Zwei Rechtecke überlappen sich wenn:</p>
+    Zwei Rechtecke überlappen sich wenn:</p>
 <ul>
-<li>Sie sich horizontal überlappen UND</li>
-<li>Sie sich vertikal überlappen</li>
+    <li>Sie sich horizontal überlappen UND</li>
+    <li>Sie sich vertikal überlappen</li>
 </ul>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> spiel_laeuft
     <span class="hljs-comment"># (... vorheriger Code ...)</span>
 
@@ -869,7 +917,8 @@ Zwei Rechtecke überlappen sich wenn:</p>
 </code></pre>
 <h3 id="schritt-6-springen-und-neustart">Schritt 6: Springen und Neustart</h3>
 <p><strong>Ziel:</strong> Tippen = Springen (oder Neustart nach Game Over)</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> box_speed_y, spiel_laeuft, punkte, hindernis_x, geschwindigkeit
 
     <span class="hljs-keyword">if</span> spiel_laeuft:
@@ -916,7 +965,8 @@ geschwindigkeit = <span class="hljs-number">6</span>
     screen.fill(<span class="hljs-string">&quot;skyblue&quot;</span>)
 
     <span class="hljs-comment"># Boden</span>
-    screen.draw.filled_rect(Rect(<span class="hljs-number">0</span>, boden_y, WIDTH, <span class="hljs-number">100</span>), <span class="hljs-string">&quot;green&quot;</span>)
+    screen.draw.filled_rect(Rect(<span class="hljs-number">0</span>, boden_y, WIDTH, <span
+            class="hljs-number">100</span>), <span class="hljs-string">&quot;green&quot;</span>)
 
     <span class="hljs-comment"># Box</span>
     screen.draw.filled_rect(
@@ -931,13 +981,22 @@ geschwindigkeit = <span class="hljs-number">6</span>
     )
 
     <span class="hljs-comment"># Punkte</span>
-    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">30</span>)
-    screen.draw.text(<span class="hljs-string">&quot;Tippe zum Springen!&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;gray&quot;</span>, fontsize=<span class="hljs-number">20</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">&quot;Tippe zum Springen!&quot;</span>, (<span
+            class="hljs-number">100</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;gray&quot;</span>, fontsize=<span
+            class="hljs-number">20</span>)
 
     <span class="hljs-comment"># Game Over</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> spiel_laeuft:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER!&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">50</span>)
-        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">80</span>, <span class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER!&quot;</span>, (<span class="hljs-number">100</span>, <span
+            class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">50</span>)
+        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">80</span>, <span
+            class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> box_y, box_speed_y, hindernis_x, punkte, spiel_laeuft, geschwindigkeit
@@ -1008,7 +1067,8 @@ box_y = <span class="hljs-number">300</span>           <span class="hljs-comment
 box_groesse = <span class="hljs-number">30</span>
 box_speed_y = <span class="hljs-number">0</span>       <span class="hljs-comment"># Aktuelle Geschwindigkeit</span>
 schwerkraft = <span class="hljs-number">0.5</span>     <span class="hljs-comment"># Zieht nach unten</span>
-sprung_kraft = -<span class="hljs-number">10</span>    <span class="hljs-comment"># Wie stark nach oben beim Tippen</span>
+sprung_kraft = -<span class="hljs-number">10</span>    <span
+            class="hljs-comment"># Wie stark nach oben beim Tippen</span>
 </code></pre>
 <h3 id="schritt-2-die-röhren">Schritt 2: Die Röhren</h3>
 <p><strong>Ziel:</strong> Zwei Röhren (oben und unten) mit einer Lücke dazwischen.</p>
@@ -1057,15 +1117,23 @@ spiel_laeuft = <span class="hljs-literal">True</span>
     )
 
     <span class="hljs-comment"># Punkte (groß in der Mitte)</span>
-    screen.draw.text(<span class="hljs-string">f&quot;<span class="hljs-subst">{punkte}</span>&quot;</span>, (WIDTH/<span class="hljs-number">2</span> - <span class="hljs-number">20</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">60</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;<span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (WIDTH/<span class="hljs-number">2</span> - <span
+            class="hljs-number">20</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">60</span>)
 
     <span class="hljs-comment"># Game Over</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> spiel_laeuft:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">80</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">50</span>)
-        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">70</span>, <span class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span
+            class="hljs-number">80</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">50</span>)
+        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">70</span>, <span
+            class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 </code></pre>
 <h3 id="schritt-4-bewegung-und-kollision">Schritt 4: Bewegung und Kollision</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> box_y, box_speed_y, roehre_x, luecke_y, punkte, spiel_laeuft
 
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> spiel_laeuft:
@@ -1082,7 +1150,8 @@ spiel_laeuft = <span class="hljs-literal">True</span>
     <span class="hljs-keyword">if</span> roehre_x &lt; -roehre_breite:
         roehre_x = WIDTH
         <span class="hljs-comment"># Lücke an zufälliger Höhe</span>
-        luecke_y = random.randint(<span class="hljs-number">80</span>, HEIGHT - luecke_hoehe - <span class="hljs-number">80</span>)
+        luecke_y = random.randint(<span class="hljs-number">80</span>, HEIGHT - luecke_hoehe - <span
+            class="hljs-number">80</span>)
         punkte = punkte + <span class="hljs-number">1</span>
 
     <span class="hljs-comment"># KOLLISION MIT RÖHREN</span>
@@ -1093,11 +1162,13 @@ spiel_laeuft = <span class="hljs-literal">True</span>
             spiel_laeuft = <span class="hljs-literal">False</span>
 
     <span class="hljs-comment"># Kollision mit Boden oder Decke</span>
-    <span class="hljs-keyword">if</span> box_y &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> box_y + box_groesse &gt; HEIGHT:
+    <span class="hljs-keyword">if</span> box_y &lt; <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> box_y + box_groesse &gt; HEIGHT:
         spiel_laeuft = <span class="hljs-literal">False</span>
 </code></pre>
 <h3 id="schritt-5-steuerung">Schritt 5: Steuerung</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> box_speed_y, spiel_laeuft, box_y, roehre_x, punkte
 
     <span class="hljs-keyword">if</span> spiel_laeuft:
@@ -1163,11 +1234,18 @@ spiel_laeuft = <span class="hljs-literal">True</span>
     )
 
     <span class="hljs-comment"># Punkte</span>
-    screen.draw.text(<span class="hljs-string">f&quot;<span class="hljs-subst">{punkte}</span>&quot;</span>, (WIDTH/<span class="hljs-number">2</span> - <span class="hljs-number">20</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">60</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;<span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (WIDTH/<span class="hljs-number">2</span> - <span
+            class="hljs-number">20</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">60</span>)
 
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> spiel_laeuft:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">80</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">50</span>)
-        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">70</span>, <span class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span
+            class="hljs-number">80</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">50</span>)
+        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">70</span>, <span
+            class="hljs-number">320</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> box_y, box_speed_y, roehre_x, luecke_y, punkte, spiel_laeuft
@@ -1182,14 +1260,16 @@ spiel_laeuft = <span class="hljs-literal">True</span>
 
     <span class="hljs-keyword">if</span> roehre_x &lt; -roehre_breite:
         roehre_x = WIDTH
-        luecke_y = random.randint(<span class="hljs-number">80</span>, HEIGHT - luecke_hoehe - <span class="hljs-number">80</span>)
+        luecke_y = random.randint(<span class="hljs-number">80</span>, HEIGHT - luecke_hoehe - <span
+            class="hljs-number">80</span>)
         punkte = punkte + <span class="hljs-number">1</span>
 
     <span class="hljs-keyword">if</span> box_x + box_groesse &gt; roehre_x <span class="hljs-keyword">and</span> box_x &lt; roehre_x + roehre_breite:
         <span class="hljs-keyword">if</span> box_y &lt; luecke_y <span class="hljs-keyword">or</span> box_y + box_groesse &gt; luecke_y + luecke_hoehe:
             spiel_laeuft = <span class="hljs-literal">False</span>
 
-    <span class="hljs-keyword">if</span> box_y &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> box_y + box_groesse &gt; HEIGHT:
+    <span class="hljs-keyword">if</span> box_y &lt; <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> box_y + box_groesse &gt; HEIGHT:
         spiel_laeuft = <span class="hljs-literal">False</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
@@ -1221,8 +1301,8 @@ spiel_laeuft = <span class="hljs-literal">True</span>
 <h3 id="schritt-1-ball-bewegung">Schritt 1: Ball-Bewegung</h3>
 <p>Der Ball hat zwei Geschwindigkeiten:</p>
 <ul>
-<li><code>ball_speed_x</code> = Bewegung nach links/rechts</li>
-<li><code>ball_speed_y</code> = Bewegung nach oben/unten</li>
+    <li><code>ball_speed_x</code> = Bewegung nach links/rechts</li>
+    <li><code>ball_speed_y</code> = Bewegung nach oben/unten</li>
 </ul>
 <pre><code class="language-python">WIDTH = <span class="hljs-number">400</span>
 HEIGHT = <span class="hljs-number">600</span>
@@ -1244,14 +1324,16 @@ schlaeger_hoehe = <span class="hljs-number">15</span>
 <span class="hljs-comment"># Computer Schläger (oben)</span>
 computer_x = <span class="hljs-number">150</span>
 computer_y = <span class="hljs-number">30</span>
-computer_speed = <span class="hljs-number">4</span>  <span class="hljs-comment"># Wie schnell der Computer reagiert</span>
+computer_speed = <span class="hljs-number">4</span>  <span
+            class="hljs-comment"># Wie schnell der Computer reagiert</span>
 
 <span class="hljs-comment"># Punkte</span>
 spieler_punkte = <span class="hljs-number">0</span>
 computer_punkte = <span class="hljs-number">0</span>
 </code></pre>
 <h3 id="schritt-3-ball-bewegen-und-abprallen">Schritt 3: Ball bewegen und abprallen</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_x, ball_y, ball_speed_x, ball_speed_y
     <span class="hljs-keyword">global</span> spieler_punkte, computer_punkte
 
@@ -1260,12 +1342,13 @@ computer_punkte = <span class="hljs-number">0</span>
     ball_y = ball_y + ball_speed_y
 
     <span class="hljs-comment"># Ball prallt von linker und rechter Wand ab</span>
-    <span class="hljs-keyword">if</span> ball_x &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> ball_x + ball_groesse &gt;= WIDTH:
+    <span class="hljs-keyword">if</span> ball_x &lt;= <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> ball_x + ball_groesse &gt;= WIDTH:
         ball_speed_x = -ball_speed_x  <span class="hljs-comment"># Richtung umkehren!</span>
 </code></pre>
 <p><strong>Was bedeutet <code>-ball_speed_x</code>?</strong>
-Wenn <code>ball_speed_x = 5</code> (nach rechts), dann wird es <code>-5</code> (nach links).
-Der Ball fliegt in die andere Richtung!</p>
+    Wenn <code>ball_speed_x = 5</code> (nach rechts), dann wird es <code>-5</code> (nach links).
+    Der Ball fliegt in die andere Richtung!</p>
 <h3 id="schritt-4-ball-trifft-schläger">Schritt 4: Ball trifft Schläger</h3>
 <pre><code class="language-python">    <span class="hljs-comment"># Ball trifft SPIELER Schläger (unten)</span>
     <span class="hljs-keyword">if</span> ball_y + ball_groesse &gt;= spieler_y:
@@ -1275,14 +1358,15 @@ Der Ball fliegt in die andere Richtung!</p>
 
     <span class="hljs-comment"># Ball trifft COMPUTER Schläger (oben)</span>
     <span class="hljs-keyword">if</span> ball_y &lt;= computer_y + schlaeger_hoehe:
-        <span class="hljs-keyword">if</span> ball_x + ball_groesse &gt;= computer_x <span class="hljs-keyword">and</span> ball_x &lt;= computer_x + schlaeger_breite:
+        <span class="hljs-keyword">if</span> ball_x + ball_groesse &gt;= computer_x <span
+            class="hljs-keyword">and</span> ball_x &lt;= computer_x + schlaeger_breite:
             ball_speed_y = <span class="hljs-built_in">abs</span>(ball_speed_y)  <span class="hljs-comment"># Nach unten fliegen</span>
 </code></pre>
 <p><strong>Was bedeutet <code>abs()</code>?</strong>
-<code>abs()</code> macht eine Zahl immer positiv.</p>
+    <code>abs()</code> macht eine Zahl immer positiv.</p>
 <ul>
-<li><code>abs(-5)</code> = <code>5</code></li>
-<li><code>abs(5)</code> = <code>5</code></li>
+    <li><code>abs(-5)</code> = <code>5</code></li>
+    <li><code>abs(5)</code> = <code>5</code></li>
 </ul>
 <p>So stellen wir sicher, dass der Ball in die richtige Richtung fliegt.</p>
 <h3 id="schritt-5-punkte-vergeben">Schritt 5: Punkte vergeben</h3>
@@ -1312,7 +1396,8 @@ Der Ball fliegt in die andere Richtung!</p>
         computer_x = computer_x + computer_speed
 </code></pre>
 <h3 id="schritt-7-spieler-steuern">Schritt 7: Spieler steuern</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> spieler_x
     spieler_x = pos[<span class="hljs-number">0</span>] - schlaeger_breite / <span class="hljs-number">2</span>
 
@@ -1332,7 +1417,7 @@ Der Ball fliegt in die andere Richtung!</p>
         spieler_x = WIDTH - schlaeger_breite
 </code></pre>
 <p><strong>Was ist <code>on_mouse_move</code>?</strong>
-Diese Funktion wird aufgerufen wenn du deinen Finger über den Bildschirm ziehst (ohne loszulassen).</p>
+    Diese Funktion wird aufgerufen wenn du deinen Finger über den Bildschirm ziehst (ohne loszulassen).</p>
 <h3 id="das-komplette-spiel-3">Das komplette Spiel</h3>
 <pre><code class="language-python"><span class="hljs-comment"># === PING PONG ===</span>
 <span class="hljs-comment"># Spiele gegen den Computer!</span>
@@ -1367,7 +1452,9 @@ computer_punkte = <span class="hljs-number">0</span>
     screen.fill(<span class="hljs-string">&quot;black&quot;</span>)
 
     <span class="hljs-comment"># Mittellinie</span>
-    screen.draw.line((<span class="hljs-number">0</span>, HEIGHT/<span class="hljs-number">2</span>), (WIDTH, HEIGHT/<span class="hljs-number">2</span>), <span class="hljs-string">&quot;gray&quot;</span>)
+    screen.draw.line((<span class="hljs-number">0</span>, HEIGHT/<span
+            class="hljs-number">2</span>), (WIDTH, HEIGHT/<span class="hljs-number">2</span>), <span
+            class="hljs-string">&quot;gray&quot;</span>)
 
     <span class="hljs-comment"># Ball</span>
     screen.draw.filled_rect(
@@ -1388,10 +1475,16 @@ computer_punkte = <span class="hljs-number">0</span>
     )
 
     <span class="hljs-comment"># Punkte</span>
-    screen.draw.text(<span class="hljs-string">f&quot;Computer: <span class="hljs-subst">{computer_punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, HEIGHT/<span class="hljs-number">2</span> - <span class="hljs-number">40</span>),
-                     color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">25</span>)
-    screen.draw.text(<span class="hljs-string">f&quot;Du: <span class="hljs-subst">{spieler_punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, HEIGHT/<span class="hljs-number">2</span> + <span class="hljs-number">10</span>),
-                     color=<span class="hljs-string">&quot;green&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Computer: <span class="hljs-subst">{computer_punkte}</span>&quot;</span>, (<span
+            class="hljs-number">10</span>, HEIGHT/<span class="hljs-number">2</span> - <span
+            class="hljs-number">40</span>),
+                     color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Du: <span class="hljs-subst">{spieler_punkte}</span>&quot;</span>, (<span
+            class="hljs-number">10</span>, HEIGHT/<span class="hljs-number">2</span> + <span
+            class="hljs-number">10</span>),
+                     color=<span class="hljs-string">&quot;green&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_x, ball_y, ball_speed_x, ball_speed_y
@@ -1402,7 +1495,8 @@ computer_punkte = <span class="hljs-number">0</span>
     ball_y = ball_y + ball_speed_y
 
     <span class="hljs-comment"># Ball prallt von Seiten ab</span>
-    <span class="hljs-keyword">if</span> ball_x &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> ball_x + ball_groesse &gt;= WIDTH:
+    <span class="hljs-keyword">if</span> ball_x &lt;= <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> ball_x + ball_groesse &gt;= WIDTH:
         ball_speed_x = -ball_speed_x
 
     <span class="hljs-comment"># Ball trifft Spieler Schläger</span>
@@ -1412,7 +1506,8 @@ computer_punkte = <span class="hljs-number">0</span>
 
     <span class="hljs-comment"># Ball trifft Computer Schläger</span>
     <span class="hljs-keyword">if</span> ball_y &lt;= computer_y + schlaeger_hoehe:
-        <span class="hljs-keyword">if</span> ball_x + ball_groesse &gt;= computer_x <span class="hljs-keyword">and</span> ball_x &lt;= computer_x + schlaeger_breite:
+        <span class="hljs-keyword">if</span> ball_x + ball_groesse &gt;= computer_x <span
+            class="hljs-keyword">and</span> ball_x &lt;= computer_x + schlaeger_breite:
             ball_speed_y = <span class="hljs-built_in">abs</span>(ball_speed_y)
 
     <span class="hljs-comment"># Punkt für Spieler</span>
@@ -1471,14 +1566,21 @@ computer_punkte = <span class="hljs-number">0</span>
 <h3 id="schritt-1-steine-mit-einer-liste">Schritt 1: Steine mit einer Liste</h3>
 <p><strong>Ziel:</strong> Viele Steine erstellen und in einer Liste speichern.</p>
 <p><strong>Was ist eine Liste?</strong>
-Eine Liste speichert viele Dinge zusammen:</p>
-<pre><code class="language-python">meine_zahlen = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
-meine_farben = [<span class="hljs-string">&quot;rot&quot;</span>, <span class="hljs-string">&quot;blau&quot;</span>, <span class="hljs-string">&quot;grün&quot;</span>]
+    Eine Liste speichert viele Dinge zusammen:</p>
+<pre><code class="language-python">meine_zahlen = [<span class="hljs-number">1</span>, <span
+        class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span
+        class="hljs-number">5</span>]
+meine_farben = [<span class="hljs-string">&quot;rot&quot;</span>, <span
+            class="hljs-string">&quot;blau&quot;</span>, <span class="hljs-string">&quot;grün&quot;</span>]
 </code></pre>
 <p>Für die Steine benutzen wir eine Liste mit Dictionaries:</p>
 <pre><code class="language-python">steine = [
-    {<span class="hljs-string">&quot;x&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;y&quot;</span>: <span class="hljs-number">60</span>, <span class="hljs-string">&quot;farbe&quot;</span>: <span class="hljs-string">&quot;red&quot;</span>},
-    {<span class="hljs-string">&quot;x&quot;</span>: <span class="hljs-number">60</span>, <span class="hljs-string">&quot;y&quot;</span>: <span class="hljs-number">60</span>, <span class="hljs-string">&quot;farbe&quot;</span>: <span class="hljs-string">&quot;red&quot;</span>},
+    {<span class="hljs-string">&quot;x&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;y&quot;</span>: <span
+            class="hljs-number">60</span>, <span class="hljs-string">&quot;farbe&quot;</span>: <span
+            class="hljs-string">&quot;red&quot;</span>},
+    {<span class="hljs-string">&quot;x&quot;</span>: <span class="hljs-number">60</span>, <span class="hljs-string">&quot;y&quot;</span>: <span
+            class="hljs-number">60</span>, <span class="hljs-string">&quot;farbe&quot;</span>: <span
+            class="hljs-string">&quot;red&quot;</span>},
     <span class="hljs-comment"># ... und so weiter</span>
 ]
 </code></pre>
@@ -1486,37 +1588,46 @@ meine_farben = [<span class="hljs-string">&quot;rot&quot;</span>, <span class="h
 <pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">erstelle_steine</span>():
     <span class="hljs-keyword">global</span> steine
     steine = []  <span class="hljs-comment"># Leere Liste</span>
-    farben = [<span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>]
+    farben = [<span class="hljs-string">&quot;red&quot;</span>, <span
+            class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span
+            class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>]
 
     <span class="hljs-comment"># 5 Reihen</span>
-    <span class="hljs-keyword">for</span> reihe <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
+    <span class="hljs-keyword">for</span> reihe <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
         <span class="hljs-comment"># 8 Steine pro Reihe</span>
-        <span class="hljs-keyword">for</span> spalte <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">8</span>):
+        <span class="hljs-keyword">for</span> spalte <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span
+            class="hljs-number">8</span>):
             x = spalte * (stein_breite + stein_abstand) + <span class="hljs-number">10</span>
             y = reihe * (stein_hoehe + stein_abstand) + <span class="hljs-number">60</span>
             farbe = farben[reihe]  <span class="hljs-comment"># Jede Reihe andere Farbe</span>
-            steine.append({<span class="hljs-string">&quot;x&quot;</span>: x, <span class="hljs-string">&quot;y&quot;</span>: y, <span class="hljs-string">&quot;farbe&quot;</span>: farbe})
+            steine.append({<span class="hljs-string">&quot;x&quot;</span>: x, <span
+            class="hljs-string">&quot;y&quot;</span>: y, <span class="hljs-string">&quot;farbe&quot;</span>: farbe})
 
 erstelle_steine()  <span class="hljs-comment"># Am Anfang aufrufen!</span>
 </code></pre>
 <p><strong>Was macht <code>for reihe in range(5)</code>?</strong>
-Das macht eine Schleife die 5 mal läuft:</p>
+    Das macht eine Schleife die 5 mal läuft:</p>
 <ul>
-<li>Erstes mal: reihe = 0</li>
-<li>Zweites mal: reihe = 1</li>
-<li>...</li>
-<li>Fünftes mal: reihe = 4</li>
+    <li>Erstes mal: reihe = 0</li>
+    <li>Zweites mal: reihe = 1</li>
+    <li>...</li>
+    <li>Fünftes mal: reihe = 4</li>
 </ul>
 <h3 id="schritt-3-ball-trifft-stein">Schritt 3: Ball trifft Stein</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> punkte, ball_speed_y
     <span class="hljs-comment"># (... Ball-Bewegung Code ...)</span>
 
     <span class="hljs-comment"># Ball trifft Steine</span>
-    <span class="hljs-keyword">for</span> stein <span class="hljs-keyword">in</span> steine[:]:  <span class="hljs-comment"># [:] macht eine Kopie der Liste</span>
+    <span class="hljs-keyword">for</span> stein <span class="hljs-keyword">in</span> steine[:]:  <span
+            class="hljs-comment"># [:] macht eine Kopie der Liste</span>
         <span class="hljs-comment"># Überlappen sich Ball und Stein?</span>
-        <span class="hljs-keyword">if</span> (ball_x + ball_groesse &gt; stein[<span class="hljs-string">&quot;x&quot;</span>] <span class="hljs-keyword">and</span>
-            ball_x - ball_groesse &lt; stein[<span class="hljs-string">&quot;x&quot;</span>] + stein_breite <span class="hljs-keyword">and</span>
+        <span class="hljs-keyword">if</span> (ball_x + ball_groesse &gt; stein[<span
+            class="hljs-string">&quot;x&quot;</span>] <span class="hljs-keyword">and</span>
+            ball_x - ball_groesse &lt; stein[<span class="hljs-string">&quot;x&quot;</span>] + stein_breite <span
+            class="hljs-keyword">and</span>
             ball_y + ball_groesse &gt; stein[<span class="hljs-string">&quot;y&quot;</span>] <span class="hljs-keyword">and</span>
             ball_y - ball_groesse &lt; stein[<span class="hljs-string">&quot;y&quot;</span>] + stein_hoehe):
             <span class="hljs-comment"># Stein getroffen!</span>
@@ -1526,7 +1637,8 @@ Das macht eine Schleife die 5 mal läuft:</p>
             <span class="hljs-keyword">break</span>  <span class="hljs-comment"># Nur ein Stein pro Frame</span>
 </code></pre>
 <p><strong>Warum <code>steine[:]</code>?</strong>
-Wenn du Elemente aus einer Liste entfernst während du durch sie gehst, kann es Probleme geben. <code>steine[:]</code> macht eine Kopie der Liste, damit das nicht passiert.</p>
+    Wenn du Elemente aus einer Liste entfernst während du durch sie gehst, kann es Probleme geben.
+    <code>steine[:]</code> macht eine Kopie der Liste, damit das nicht passiert.</p>
 <h3 id="das-komplette-spiel-4">Das komplette Spiel</h3>
 <pre><code class="language-python"><span class="hljs-comment"># === BREAKOUT ===</span>
 <span class="hljs-comment"># Zerstöre alle Steine!</span>
@@ -1561,14 +1673,19 @@ leben = <span class="hljs-number">3</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">erstelle_steine</span>():
     <span class="hljs-keyword">global</span> steine
     steine = []
-    farben = [<span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>]
+    farben = [<span class="hljs-string">&quot;red&quot;</span>, <span
+            class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span
+            class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>]
 
-    <span class="hljs-keyword">for</span> reihe <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
-        <span class="hljs-keyword">for</span> spalte <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">8</span>):
+    <span class="hljs-keyword">for</span> reihe <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
+        <span class="hljs-keyword">for</span> spalte <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span
+            class="hljs-number">8</span>):
             x = spalte * (stein_breite + stein_abstand) + <span class="hljs-number">10</span>
             y = reihe * (stein_hoehe + stein_abstand) + <span class="hljs-number">60</span>
             farbe = farben[reihe]
-            steine.append({<span class="hljs-string">&quot;x&quot;</span>: x, <span class="hljs-string">&quot;y&quot;</span>: y, <span class="hljs-string">&quot;farbe&quot;</span>: farbe})
+            steine.append({<span class="hljs-string">&quot;x&quot;</span>: x, <span
+            class="hljs-string">&quot;y&quot;</span>: y, <span class="hljs-string">&quot;farbe&quot;</span>: farbe})
 
 erstelle_steine()
 
@@ -1578,7 +1695,8 @@ erstelle_steine()
     <span class="hljs-comment"># Alle Steine zeichnen</span>
     <span class="hljs-keyword">for</span> stein <span class="hljs-keyword">in</span> steine:
         screen.draw.filled_rect(
-            Rect(stein[<span class="hljs-string">&quot;x&quot;</span>], stein[<span class="hljs-string">&quot;y&quot;</span>], stein_breite, stein_hoehe),
+            Rect(stein[<span class="hljs-string">&quot;x&quot;</span>], stein[<span
+            class="hljs-string">&quot;y&quot;</span>], stein_breite, stein_hoehe),
             stein[<span class="hljs-string">&quot;farbe&quot;</span>]
         )
 
@@ -1592,21 +1710,34 @@ erstelle_steine()
     )
 
     <span class="hljs-comment"># Info</span>
-    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">25</span>)
-    screen.draw.text(<span class="hljs-string">f&quot;Leben: <span class="hljs-subst">{leben}</span>&quot;</span>, (<span class="hljs-number">300</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Leben: <span
+            class="hljs-subst">{leben}</span>&quot;</span>, (<span class="hljs-number">300</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
     <span class="hljs-comment"># Gewonnen?</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(steine) == <span class="hljs-number">0</span>:
-        screen.draw.text(<span class="hljs-string">&quot;DU HAST GEWONNEN!&quot;</span>, (<span class="hljs-number">50</span>, <span class="hljs-number">300</span>), color=<span class="hljs-string">&quot;green&quot;</span>, fontsize=<span class="hljs-number">35</span>)
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(steine) == <span
+            class="hljs-number">0</span>:
+        screen.draw.text(<span class="hljs-string">&quot;DU HAST GEWONNEN!&quot;</span>, (<span
+            class="hljs-number">50</span>, <span class="hljs-number">300</span>), color=<span class="hljs-string">&quot;green&quot;</span>, fontsize=<span
+            class="hljs-number">35</span>)
 
     <span class="hljs-comment"># Verloren?</span>
     <span class="hljs-keyword">if</span> leben &lt;= <span class="hljs-number">0</span>:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">300</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">45</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">100</span>, <span
+            class="hljs-number">300</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">45</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> ball_x, ball_y, ball_speed_x, ball_speed_y, punkte, leben
 
-    <span class="hljs-keyword">if</span> leben &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(steine) == <span class="hljs-number">0</span>:
+    <span class="hljs-keyword">if</span> leben &lt;= <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(steine) == <span
+            class="hljs-number">0</span>:
         <span class="hljs-keyword">return</span>
 
     <span class="hljs-comment"># Ball bewegen</span>
@@ -1614,7 +1745,8 @@ erstelle_steine()
     ball_y = ball_y + ball_speed_y
 
     <span class="hljs-comment"># Ball prallt von Wänden ab</span>
-    <span class="hljs-keyword">if</span> ball_x - ball_groesse &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> ball_x + ball_groesse &gt;= WIDTH:
+    <span class="hljs-keyword">if</span> ball_x - ball_groesse &lt;= <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> ball_x + ball_groesse &gt;= WIDTH:
         ball_speed_x = -ball_speed_x
 
     <span class="hljs-comment"># Ball prallt von Decke ab</span>
@@ -1635,8 +1767,10 @@ erstelle_steine()
 
     <span class="hljs-comment"># Ball trifft Steine</span>
     <span class="hljs-keyword">for</span> stein <span class="hljs-keyword">in</span> steine[:]:
-        <span class="hljs-keyword">if</span> (ball_x + ball_groesse &gt; stein[<span class="hljs-string">&quot;x&quot;</span>] <span class="hljs-keyword">and</span>
-            ball_x - ball_groesse &lt; stein[<span class="hljs-string">&quot;x&quot;</span>] + stein_breite <span class="hljs-keyword">and</span>
+        <span class="hljs-keyword">if</span> (ball_x + ball_groesse &gt; stein[<span
+            class="hljs-string">&quot;x&quot;</span>] <span class="hljs-keyword">and</span>
+            ball_x - ball_groesse &lt; stein[<span class="hljs-string">&quot;x&quot;</span>] + stein_breite <span
+            class="hljs-keyword">and</span>
             ball_y + ball_groesse &gt; stein[<span class="hljs-string">&quot;y&quot;</span>] <span class="hljs-keyword">and</span>
             ball_y - ball_groesse &lt; stein[<span class="hljs-string">&quot;y&quot;</span>] + stein_hoehe):
             steine.remove(stein)
@@ -1667,12 +1801,13 @@ erstelle_steine()
 <h3 id="ziel-dieses-kapitels-5">Ziel dieses Kapitels</h3>
 <p>Du lernst Buttons auf den Bildschirm zu zeichnen die du antippen kannst.</p>
 <h3 id="warum-ist-das-nützlich">Warum ist das nützlich?</h3>
-<p>Manchmal willst du Steuerungstasten auf dem Bildschirm haben, zum Beispiel Pfeiltasten für links/rechts/hoch/runter.</p>
+<p>Manchmal willst du Steuerungstasten auf dem Bildschirm haben, zum Beispiel Pfeiltasten für
+    links/rechts/hoch/runter.</p>
 <h3 id="wie-funktioniert-es">Wie funktioniert es?</h3>
 <ol>
-<li><strong>Button als Rechteck definieren</strong> (mit Position und Größe)</li>
-<li><strong>Button zeichnen</strong> (mit <code>filled_rect</code>)</li>
-<li><strong>Prüfen ob getippt wurde</strong> (mit <code>collidepoint</code>)</li>
+    <li><strong>Button als Rechteck definieren</strong> (mit Position und Größe)</li>
+    <li><strong>Button zeichnen</strong> (mit <code>filled_rect</code>)</li>
+    <li><strong>Prüfen ob getippt wurde</strong> (mit <code>collidepoint</code>)</li>
 </ol>
 <h3 id="schritt-für-schritt-beispiel">Schritt-für-Schritt Beispiel</h3>
 <pre><code class="language-python"><span class="hljs-comment"># === SPIEL MIT BUTTONS ===</span>
@@ -1685,10 +1820,14 @@ spieler_x = <span class="hljs-number">180</span>
 spieler_y = <span class="hljs-number">250</span>
 
 <span class="hljs-comment"># Buttons definieren - Rect(x, y, breite, höhe)</span>
-button_links = Rect(<span class="hljs-number">20</span>, <span class="hljs-number">480</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>)
-button_rechts = Rect(<span class="hljs-number">120</span>, <span class="hljs-number">480</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>)
-button_hoch = Rect(<span class="hljs-number">220</span>, <span class="hljs-number">480</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>)
-button_runter = Rect(<span class="hljs-number">300</span>, <span class="hljs-number">480</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>)
+button_links = Rect(<span class="hljs-number">20</span>, <span class="hljs-number">480</span>, <span
+            class="hljs-number">80</span>, <span class="hljs-number">60</span>)
+button_rechts = Rect(<span class="hljs-number">120</span>, <span class="hljs-number">480</span>, <span
+            class="hljs-number">80</span>, <span class="hljs-number">60</span>)
+button_hoch = Rect(<span class="hljs-number">220</span>, <span class="hljs-number">480</span>, <span
+            class="hljs-number">80</span>, <span class="hljs-number">60</span>)
+button_runter = Rect(<span class="hljs-number">300</span>, <span class="hljs-number">480</span>, <span
+            class="hljs-number">80</span>, <span class="hljs-number">60</span>)
 
 speed = <span class="hljs-number">15</span>
 
@@ -1696,10 +1835,12 @@ speed = <span class="hljs-number">15</span>
     screen.fill(<span class="hljs-string">&quot;darkblue&quot;</span>)
 
     <span class="hljs-comment"># Spielbereich</span>
-    screen.draw.rect(Rect(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, WIDTH - <span class="hljs-number">20</span>, <span class="hljs-number">450</span>), <span class="hljs-string">&quot;white&quot;</span>)
+    screen.draw.rect(Rect(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, WIDTH - <span
+            class="hljs-number">20</span>, <span class="hljs-number">450</span>), <span class="hljs-string">&quot;white&quot;</span>)
 
     <span class="hljs-comment"># Spieler</span>
-    screen.draw.filled_rect(Rect(spieler_x, spieler_y, <span class="hljs-number">40</span>, <span class="hljs-number">40</span>), <span class="hljs-string">&quot;red&quot;</span>)
+    screen.draw.filled_rect(Rect(spieler_x, spieler_y, <span class="hljs-number">40</span>, <span
+            class="hljs-number">40</span>), <span class="hljs-string">&quot;red&quot;</span>)
 
     <span class="hljs-comment"># Buttons zeichnen</span>
     screen.draw.filled_rect(button_links, <span class="hljs-string">&quot;gray&quot;</span>)
@@ -1714,10 +1855,18 @@ speed = <span class="hljs-number">15</span>
     screen.draw.rect(button_runter, <span class="hljs-string">&quot;white&quot;</span>)
 
     <span class="hljs-comment"># Button Beschriftungen</span>
-    screen.draw.text(<span class="hljs-string">&quot;←&quot;</span>, (<span class="hljs-number">45</span>, <span class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">35</span>)
-    screen.draw.text(<span class="hljs-string">&quot;→&quot;</span>, (<span class="hljs-number">145</span>, <span class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">35</span>)
-    screen.draw.text(<span class="hljs-string">&quot;↑&quot;</span>, (<span class="hljs-number">248</span>, <span class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">35</span>)
-    screen.draw.text(<span class="hljs-string">&quot;↓&quot;</span>, (<span class="hljs-number">328</span>, <span class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">35</span>)
+    screen.draw.text(<span class="hljs-string">&quot;←&quot;</span>, (<span class="hljs-number">45</span>, <span
+            class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">35</span>)
+    screen.draw.text(<span class="hljs-string">&quot;→&quot;</span>, (<span class="hljs-number">145</span>, <span
+            class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">35</span>)
+    screen.draw.text(<span class="hljs-string">&quot;↑&quot;</span>, (<span class="hljs-number">248</span>, <span
+            class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">35</span>)
+    screen.draw.text(<span class="hljs-string">&quot;↓&quot;</span>, (<span class="hljs-number">328</span>, <span
+            class="hljs-number">495</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">35</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> spieler_x, spieler_y
@@ -1750,112 +1899,111 @@ speed = <span class="hljs-number">15</span>
 <h1 id="zusammenfassung-was-du-gelernt-hast">Zusammenfassung: Was du gelernt hast</h1>
 <h2 id="die-wichtigsten-funktionen">Die wichtigsten Funktionen</h2>
 <table>
-<thead>
-<tr>
-<th>Funktion</th>
-<th>Wann wird sie aufgerufen?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>draw()</code></td>
-<td>Um den Bildschirm zu zeichnen</td>
-</tr>
-<tr>
-<td><code>update()</code></td>
-<td>60 mal pro Sekunde (für Bewegung)</td>
-</tr>
-<tr>
-<td><code>on_mouse_down(pos)</code></td>
-<td>Wenn du auf den Bildschirm tippst</td>
-</tr>
-<tr>
-<td><code>on_mouse_move(pos)</code></td>
-<td>Wenn du den Finger über den Bildschirm ziehst</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Funktion</th>
+        <th>Wann wird sie aufgerufen?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>draw()</code></td>
+        <td>Um den Bildschirm zu zeichnen</td>
+    </tr>
+    <tr>
+        <td><code>update()</code></td>
+        <td>60 mal pro Sekunde (für Bewegung)</td>
+    </tr>
+    <tr>
+        <td><code>on_mouse_down(pos)</code></td>
+        <td>Wenn du auf den Bildschirm tippst</td>
+    </tr>
+    <tr>
+        <td><code>on_mouse_move(pos)</code></td>
+        <td>Wenn du den Finger über den Bildschirm ziehst</td>
+    </tr>
+    </tbody>
 </table>
 <h2 id="die-wichtigsten-zeichenbefehle">Die wichtigsten Zeichenbefehle</h2>
 <table>
-<thead>
-<tr>
-<th>Befehl</th>
-<th>Was es macht</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>screen.fill(&quot;farbe&quot;)</code></td>
-<td>Hintergrund füllen</td>
-</tr>
-<tr>
-<td><code>screen.draw.filled_rect(Rect(...), &quot;farbe&quot;)</code></td>
-<td>Rechteck zeichnen</td>
-</tr>
-<tr>
-<td><code>screen.draw.filled_circle((x,y), radius, &quot;farbe&quot;)</code></td>
-<td>Kreis zeichnen</td>
-</tr>
-<tr>
-<td><code>screen.draw.text(&quot;text&quot;, (x,y), color=&quot;farbe&quot;)</code></td>
-<td>Text schreiben</td>
-</tr>
-<tr>
-<td><code>screen.draw.line((x1,y1), (x2,y2), &quot;farbe&quot;)</code></td>
-<td>Linie zeichnen</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Befehl</th>
+        <th>Was es macht</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>screen.fill(&quot;farbe&quot;)</code></td>
+        <td>Hintergrund füllen</td>
+    </tr>
+    <tr>
+        <td><code>screen.draw.filled_rect(Rect(...), &quot;farbe&quot;)</code></td>
+        <td>Rechteck zeichnen</td>
+    </tr>
+    <tr>
+        <td><code>screen.draw.filled_circle((x,y), radius, &quot;farbe&quot;)</code></td>
+        <td>Kreis zeichnen</td>
+    </tr>
+    <tr>
+        <td><code>screen.draw.text(&quot;text&quot;, (x,y), color=&quot;farbe&quot;)</code></td>
+        <td>Text schreiben</td>
+    </tr>
+    <tr>
+        <td><code>screen.draw.line((x1,y1), (x2,y2), &quot;farbe&quot;)</code></td>
+        <td>Linie zeichnen</td>
+    </tr>
+    </tbody>
 </table>
 <h2 id="wichtige-konzepte">Wichtige Konzepte</h2>
 <ol>
-<li><strong>Koordinaten:</strong> x = links/rechts, y = oben/unten (y=0 ist OBEN!)</li>
-<li><strong>global:</strong> Brauchst du um Variablen in Funktionen zu ändern</li>
-<li><strong>Kollision:</strong> Prüfen ob sich zwei Rechtecke überlappen</li>
-<li><strong>Schwerkraft:</strong> Geschwindigkeit wird immer größer → Objekt fällt schneller</li>
-<li><strong>Listen:</strong> Speichern viele Objekte zusammen (z.B. alle Steine)</li>
+    <li><strong>Koordinaten:</strong> x = links/rechts, y = oben/unten (y=0 ist OBEN!)</li>
+    <li><strong>global:</strong> Brauchst du um Variablen in Funktionen zu ändern</li>
+    <li><strong>Kollision:</strong> Prüfen ob sich zwei Rechtecke überlappen</li>
+    <li><strong>Schwerkraft:</strong> Geschwindigkeit wird immer größer → Objekt fällt schneller</li>
+    <li><strong>Listen:</strong> Speichern viele Objekte zusammen (z.B. alle Steine)</li>
 </ol>
 <hr>
 <h2 id="häufige-fehler-und-lösungen">Häufige Fehler und Lösungen</h2>
 <table>
-<thead>
-<tr>
-<th>Fehler</th>
-<th>Lösung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>NameError: name 'punkte' is not defined</code></td>
-<td>Hast du <code>global punkte</code> vergessen?</td>
-</tr>
-<tr>
-<td>Nichts passiert beim Tippen</td>
-<td>Prüfe ob <code>on_mouse_down(pos)</code> richtig geschrieben ist</td>
-</tr>
-<tr>
-<td>Das Spiel startet nicht</td>
-<td>Hast du die Datei mit <code>.py</code> gespeichert?</td>
-</tr>
-<tr>
-<td>Der Ball geht durch den Schläger</td>
-<td>Prüfe deine Kollisionsabfrage</td>
-</tr>
-<tr>
-<td>Variablen ändern sich nicht</td>
-<td>Hast du alle nötigen Variablen als <code>global</code> markiert?</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Fehler</th>
+        <th>Lösung</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>NameError: name 'punkte' is not defined</code></td>
+        <td>Hast du <code>global punkte</code> vergessen?</td>
+    </tr>
+    <tr>
+        <td>Nichts passiert beim Tippen</td>
+        <td>Prüfe ob <code>on_mouse_down(pos)</code> richtig geschrieben ist</td>
+    </tr>
+    <tr>
+        <td>Das Spiel startet nicht</td>
+        <td>Hast du die Datei mit <code>.py</code> gespeichert?</td>
+    </tr>
+    <tr>
+        <td>Der Ball geht durch den Schläger</td>
+        <td>Prüfe deine Kollisionsabfrage</td>
+    </tr>
+    <tr>
+        <td>Variablen ändern sich nicht</td>
+        <td>Hast du alle nötigen Variablen als <code>global</code> markiert?</td>
+    </tr>
+    </tbody>
 </table>
 <hr>
 <h2 id="nächste-schritte">Nächste Schritte</h2>
 <ol>
-<li><strong>Probiere die Spiele aus</strong> und ändere die Werte (Geschwindigkeit, Größen, Farben)</li>
-<li><strong>Kombiniere Ideen</strong> aus verschiedenen Spielen</li>
-<li><strong>Lies Teil 2</strong> um zu lernen wie man Bilder und Sounds hinzufügt!</li>
+    <li><strong>Probiere die Spiele aus</strong> und ändere die Werte (Geschwindigkeit, Größen, Farben)</li>
+    <li><strong>Kombiniere Ideen</strong> aus verschiedenen Spielen</li>
+    <li><strong>Lies Teil 2</strong> um zu lernen wie man Bilder und Sounds hinzufügt!</li>
 </ol>
 <p><strong>Viel Spaß beim Programmieren!</strong> 🎮</p>
 
-            
-            
-        </body>
-        </html>
+
+</body>
+</html>

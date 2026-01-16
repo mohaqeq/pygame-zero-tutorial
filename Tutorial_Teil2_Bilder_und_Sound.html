@@ -1,163 +1,152 @@
 <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Pygame Zero auf Pydroid - Teil 2&colon; Bilder und Sound&excl; &#x1f3a8;&#x1f50a;</title>
-            <style>
-/* From extension vscode.github */
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pygame Zero auf Pydroid - Teil 2&colon; Bilder und Sound&excl; &#x1f3a8;&#x1f50a;</title>
 
-.vscode-dark img[src$=\#gh-light-mode-only],
-.vscode-light img[src$=\#gh-dark-mode-only],
-.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
-.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
-	display: none;
-}
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+    <style>
+        .task-list-item {
+            list-style-type: none;
+        }
 
-</style>
-            
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-<style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
-                font-size: 14px;
-                line-height: 1.6;
+        .task-list-item-checkbox {
+            margin-left: -20px;
+            vertical-align: middle;
+            pointer-events: none;
+        }
+    </style>
+    <style>
+        :root {
+            --color-note: #0969da;
+            --color-tip: #1a7f37;
+            --color-warning: #9a6700;
+            --color-severe: #bc4c00;
+            --color-caution: #d1242f;
+            --color-important: #8250df;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-note: #2f81f7;
+                --color-tip: #3fb950;
+                --color-warning: #d29922;
+                --color-severe: #db6d28;
+                --color-caution: #f85149;
+                --color-important: #a371f7;
             }
-        </style>
-        <style>
-.task-list-item {
-    list-style-type: none;
-}
+        }
 
-.task-list-item-checkbox {
-    margin-left: -20px;
-    vertical-align: middle;
-    pointer-events: none;
-}
-</style>
-<style>
-:root {
-  --color-note: #0969da;
-  --color-tip: #1a7f37;
-  --color-warning: #9a6700;
-  --color-severe: #bc4c00;
-  --color-caution: #d1242f;
-  --color-important: #8250df;
-}
+    </style>
+    <style>
+        .markdown-alert {
+            padding: 0.5rem 1rem;
+            margin-bottom: 16px;
+            color: inherit;
+            border-left: .25em solid #888;
+        }
 
-</style>
-<style>
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-note: #2f81f7;
-    --color-tip: #3fb950;
-    --color-warning: #d29922;
-    --color-severe: #db6d28;
-    --color-caution: #f85149;
-    --color-important: #a371f7;
-  }
-}
+        .markdown-alert > :first-child {
+            margin-top: 0
+        }
 
-</style>
-<style>
-.markdown-alert {
-  padding: 0.5rem 1rem;
-  margin-bottom: 16px;
-  color: inherit;
-  border-left: .25em solid #888;
-}
+        .markdown-alert > :last-child {
+            margin-bottom: 0
+        }
 
-.markdown-alert>:first-child {
-  margin-top: 0
-}
+        .markdown-alert .markdown-alert-title {
+            display: flex;
+            font-weight: 500;
+            align-items: center;
+            line-height: 1
+        }
 
-.markdown-alert>:last-child {
-  margin-bottom: 0
-}
+        .markdown-alert .markdown-alert-title .octicon {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
 
-.markdown-alert .markdown-alert-title {
-  display: flex;
-  font-weight: 500;
-  align-items: center;
-  line-height: 1
-}
+        .markdown-alert.markdown-alert-note {
+            border-left-color: var(--color-note);
+        }
 
-.markdown-alert .markdown-alert-title .octicon {
-  margin-right: 0.5rem;
-  display: inline-block;
-  overflow: visible !important;
-  vertical-align: text-bottom;
-  fill: currentColor;
-}
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
 
-.markdown-alert.markdown-alert-note {
-  border-left-color: var(--color-note);
-}
+        .markdown-alert.markdown-alert-important {
+            border-left-color: var(--color-important);
+        }
 
-.markdown-alert.markdown-alert-note .markdown-alert-title {
-  color: var(--color-note);
-}
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
 
-.markdown-alert.markdown-alert-important {
-  border-left-color: var(--color-important);
-}
+        .markdown-alert.markdown-alert-warning {
+            border-left-color: var(--color-warning);
+        }
 
-.markdown-alert.markdown-alert-important .markdown-alert-title {
-  color: var(--color-important);
-}
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
 
-.markdown-alert.markdown-alert-warning {
-  border-left-color: var(--color-warning);
-}
+        .markdown-alert.markdown-alert-tip {
+            border-left-color: var(--color-tip);
+        }
 
-.markdown-alert.markdown-alert-warning .markdown-alert-title {
-  color: var(--color-warning);
-}
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
 
-.markdown-alert.markdown-alert-tip {
-  border-left-color: var(--color-tip);
-}
+        .markdown-alert.markdown-alert-caution {
+            border-left-color: var(--color-caution);
+        }
 
-.markdown-alert.markdown-alert-tip .markdown-alert-title {
-  color: var(--color-tip);
-}
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
 
-.markdown-alert.markdown-alert-caution {
-  border-left-color: var(--color-caution);
-}
+    </style>
 
-.markdown-alert.markdown-alert-caution .markdown-alert-title {
-  color: var(--color-caution);
-}
-
-</style>
-        
-        </head>
-        <body class="vscode-body vscode-light">
-            <h1 id="pygame-zero-auf-pydroid---teil-2-bilder-und-sound-">Pygame Zero auf Pydroid - Teil 2: Bilder und Sound! 🎨🔊</h1>
-<p>Super! Du hast Teil 1 geschafft und kannst jetzt einfache Spiele mit Formen machen. In diesem Teil lernst du, wie du deine Spiele mit <strong>echten Bildern</strong> und <strong>Sounds</strong> noch cooler machst!</p>
+</head>
+<body class="vscode-body vscode-light">
+<h1 id="pygame-zero-auf-pydroid---teil-2-bilder-und-sound-">Pygame Zero auf Pydroid - Teil 2: Bilder und Sound! 🎨🔊</h1>
+<p>Super! Du hast Teil 1 geschafft und kannst jetzt einfache Spiele mit Formen machen. In diesem Teil lernst du, wie du
+    deine Spiele mit <strong>echten Bildern</strong> und <strong>Sounds</strong> noch cooler machst!</p>
 <p><strong>Was du am Ende kannst:</strong></p>
 <ul>
-<li>Bilder statt Formen in deinen Spielen benutzen</li>
-<li>Sounds abspielen wenn etwas passiert</li>
-<li>Animationen erstellen</li>
-<li>Deine Spiele professioneller aussehen lassen</li>
+    <li>Bilder statt Formen in deinen Spielen benutzen</li>
+    <li>Sounds abspielen wenn etwas passiert</li>
+    <li>Animationen erstellen</li>
+    <li>Deine Spiele professioneller aussehen lassen</li>
 </ul>
 <p><strong>Was du vorher können musst:</strong></p>
 <ul>
-<li>Teil 1 durchgearbeitet haben</li>
-<li>Ein funktionierendes Spiel (z.B. Flappy Box) haben</li>
+    <li>Teil 1 durchgearbeitet haben</li>
+    <li>Ein funktionierendes Spiel (z.B. Flappy Box) haben</li>
 </ul>
 <hr>
 <h2 id="kapitel-1-vorbereitung---ordner-erstellen">Kapitel 1: Vorbereitung - Ordner erstellen</h2>
 <h3 id="ziel-dieses-kapitels">Ziel dieses Kapitels</h3>
 <p>Du erstellst die Ordnerstruktur die Pygame Zero braucht um Bilder und Sounds zu finden.</p>
 <h3 id="warum-brauchen-wir-spezielle-ordner">Warum brauchen wir spezielle Ordner?</h3>
-<p>Pygame Zero sucht Bilder und Sounds an bestimmten Stellen. Wenn du sie woanders hinlegst, findet das Programm sie nicht!</p>
+<p>Pygame Zero sucht Bilder und Sounds an bestimmten Stellen. Wenn du sie woanders hinlegst, findet das Programm sie
+    nicht!</p>
 <h3 id="so-muss-dein-projekt-aussehen">So muss dein Projekt aussehen</h3>
 <pre><code>MeinSpiel/              ← Dein Hauptordner
 ├── meinspiel.py        ← Dein Python-Code
@@ -172,50 +161,50 @@
 <p><strong>Schritt 1:</strong> Öffne den Datei-Manager auf deinem Handy</p>
 <p><strong>Schritt 2:</strong> Finde den Ordner wo dein Spiel gespeichert ist</p>
 <ul>
-<li>Meistens unter: Interner Speicher → pydroid3</li>
+    <li>Meistens unter: Interner Speicher → pydroid3</li>
 </ul>
 <p><strong>Schritt 3:</strong> Erstelle einen neuen Ordner namens <code>images</code></p>
 <ul>
-<li>WICHTIG: Kleingeschrieben!</li>
-<li>Keine Großbuchstaben!</li>
+    <li>WICHTIG: Kleingeschrieben!</li>
+    <li>Keine Großbuchstaben!</li>
 </ul>
 <p><strong>Schritt 4:</strong> Erstelle einen neuen Ordner namens <code>sounds</code></p>
 <ul>
-<li>Wieder: Kleingeschrieben!</li>
+    <li>Wieder: Kleingeschrieben!</li>
 </ul>
 <p><strong>Fertig!</strong> Jetzt kannst du Bilder und Sounds hinzufügen.</p>
 <h3 id="wichtige-regeln-für-dateinamen">Wichtige Regeln für Dateinamen</h3>
 <table>
-<thead>
-<tr>
-<th>✅ Richtig</th>
-<th>❌ Falsch</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>spieler.png</code></td>
-<td><code>Spieler.png</code> (Großbuchstabe!)</td>
-</tr>
-<tr>
-<td><code>mein_vogel.png</code></td>
-<td><code>mein vogel.png</code> (Leerzeichen!)</td>
-</tr>
-<tr>
-<td><code>feind1.png</code></td>
-<td><code>feind 1.png</code> (Leerzeichen!)</td>
-</tr>
-<tr>
-<td><code>ball.png</code></td>
-<td><code>ball.PNG</code> (Großbuchstaben!)</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>✅ Richtig</th>
+        <th>❌ Falsch</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>spieler.png</code></td>
+        <td><code>Spieler.png</code> (Großbuchstabe!)</td>
+    </tr>
+    <tr>
+        <td><code>mein_vogel.png</code></td>
+        <td><code>mein vogel.png</code> (Leerzeichen!)</td>
+    </tr>
+    <tr>
+        <td><code>feind1.png</code></td>
+        <td><code>feind 1.png</code> (Leerzeichen!)</td>
+    </tr>
+    <tr>
+        <td><code>ball.png</code></td>
+        <td><code>ball.PNG</code> (Großbuchstaben!)</td>
+    </tr>
+    </tbody>
 </table>
 <p><strong>Merke dir:</strong></p>
 <ul>
-<li>Nur <strong>Kleinbuchstaben</strong></li>
-<li>Keine <strong>Leerzeichen</strong> (benutze <code>_</code> stattdessen)</li>
-<li>Keine <strong>Sonderzeichen</strong> wie ä, ö, ü</li>
+    <li>Nur <strong>Kleinbuchstaben</strong></li>
+    <li>Keine <strong>Leerzeichen</strong> (benutze <code>_</code> stattdessen)</li>
+    <li>Keine <strong>Sonderzeichen</strong> wie ä, ö, ü</li>
 </ul>
 <hr>
 <h2 id="kapitel-2-bilder-finden-oder-erstellen">Kapitel 2: Bilder finden oder erstellen</h2>
@@ -225,67 +214,67 @@
 <p><strong>Option 1: Kostenlose Bilder herunterladen</strong></p>
 <p>Diese Webseiten haben kostenlose Spielgrafiken:</p>
 <ol>
-<li>
-<p><strong><a href="http://Kenney.nl">Kenney.nl</a></strong> (am besten für Anfänger!)</p>
-<ul>
-<li>Viele einfache, schöne Bilder</li>
-<li>Alles kostenlos</li>
-<li>Suche nach &quot;Kenney game assets&quot;</li>
-</ul>
-</li>
-<li>
-<p><strong><a href="http://OpenGameArt.org">OpenGameArt.org</a></strong></p>
-<ul>
-<li>Sehr viele Bilder</li>
-<li>Verschiedene Stile</li>
-<li>Achte auf die Lizenz!</li>
-</ul>
-</li>
+    <li>
+        <p><strong><a href="http://Kenney.nl">Kenney.nl</a></strong> (am besten für Anfänger!)</p>
+        <ul>
+            <li>Viele einfache, schöne Bilder</li>
+            <li>Alles kostenlos</li>
+            <li>Suche nach &quot;Kenney game assets&quot;</li>
+        </ul>
+    </li>
+    <li>
+        <p><strong><a href="http://OpenGameArt.org">OpenGameArt.org</a></strong></p>
+        <ul>
+            <li>Sehr viele Bilder</li>
+            <li>Verschiedene Stile</li>
+            <li>Achte auf die Lizenz!</li>
+        </ul>
+    </li>
 </ol>
 <p><strong>Option 2: Selbst malen</strong></p>
 <p>Es gibt Apps um Pixel-Bilder zu malen:</p>
 <ol>
-<li>
-<p><strong>Pixel Studio</strong> (kostenlos im Play Store)</p>
-<ul>
-<li>Einfach zu benutzen</li>
-<li>Perfekt für kleine Spielfiguren</li>
-</ul>
-</li>
-<li>
-<p><strong>Dotpict</strong> (kostenlos)</p>
-<ul>
-<li>Sehr einfach</li>
-<li>Gut für Anfänger</li>
-</ul>
-</li>
+    <li>
+        <p><strong>Pixel Studio</strong> (kostenlos im Play Store)</p>
+        <ul>
+            <li>Einfach zu benutzen</li>
+            <li>Perfekt für kleine Spielfiguren</li>
+        </ul>
+    </li>
+    <li>
+        <p><strong>Dotpict</strong> (kostenlos)</p>
+        <ul>
+            <li>Sehr einfach</li>
+            <li>Gut für Anfänger</li>
+        </ul>
+    </li>
 </ol>
 <h3 id="welche-größe-sollten-bilder-haben">Welche Größe sollten Bilder haben?</h3>
 <table>
-<thead>
-<tr>
-<th>Was</th>
-<th>Empfohlene Größe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Spielfigur</td>
-<td>32x32 oder 64x64 Pixel</td>
-</tr>
-<tr>
-<td>Feind</td>
-<td>32x32 oder 64x64 Pixel</td>
-</tr>
-<tr>
-<td>Münze/Item</td>
-<td>16x16 oder 32x32 Pixel</td>
-</tr>
-<tr>
-<td>Hintergrund</td>
-<td>400x600 Pixel (ganzer Bildschirm)</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Was</th>
+        <th>Empfohlene Größe</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Spielfigur</td>
+        <td>32x32 oder 64x64 Pixel</td>
+    </tr>
+    <tr>
+        <td>Feind</td>
+        <td>32x32 oder 64x64 Pixel</td>
+    </tr>
+    <tr>
+        <td>Münze/Item</td>
+        <td>16x16 oder 32x32 Pixel</td>
+    </tr>
+    <tr>
+        <td>Hintergrund</td>
+        <td>400x600 Pixel (ganzer Bildschirm)</td>
+    </tr>
+    </tbody>
 </table>
 <p><strong>Tipp:</strong> Kleinere Bilder sind besser! Große Bilder machen das Spiel langsam.</p>
 <h3 id="schritt-für-schritt-ein-bild-herunterladen">Schritt-für-Schritt: Ein Bild herunterladen</h3>
@@ -301,17 +290,20 @@
 <h3 id="ziel-dieses-kapitels-2">Ziel dieses Kapitels</h3>
 <p>Du lernst wie man Bilder als Spielfiguren benutzt.</p>
 <h3 id="was-ist-ein-actor">Was ist ein Actor?</h3>
-<p>In Pygame Zero heißen Spielfiguren mit Bildern <strong>&quot;Actors&quot;</strong> (englisch für &quot;Schauspieler&quot;). Ein Actor ist wie ein Rechteck, aber mit einem Bild drauf!</p>
+<p>In Pygame Zero heißen Spielfiguren mit Bildern <strong>&quot;Actors&quot;</strong> (englisch für &quot;Schauspieler&quot;).
+    Ein Actor ist wie ein Rechteck, aber mit einem Bild drauf!</p>
 <h3 id="vergleich-rechteck-vs-actor">Vergleich: Rechteck vs. Actor</h3>
 <p><strong>Vorher (mit Rechteck):</strong></p>
 <pre><code class="language-python">spieler_x = <span class="hljs-number">100</span>
 spieler_y = <span class="hljs-number">300</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
-    screen.draw.filled_rect(Rect(spieler_x, spieler_y, <span class="hljs-number">40</span>, <span class="hljs-number">40</span>), <span class="hljs-string">&quot;red&quot;</span>)
+    screen.draw.filled_rect(Rect(spieler_x, spieler_y, <span class="hljs-number">40</span>, <span
+            class="hljs-number">40</span>), <span class="hljs-string">&quot;red&quot;</span>)
 </code></pre>
 <p><strong>Nachher (mit Actor):</strong></p>
-<pre><code class="language-python">spieler = Actor(<span class="hljs-string">&quot;spieler&quot;</span>)  <span class="hljs-comment"># Lädt images/spieler.png</span>
+<pre><code class="language-python">spieler = Actor(<span class="hljs-string">&quot;spieler&quot;</span>)  <span
+        class="hljs-comment"># Lädt images/spieler.png</span>
 spieler.x = <span class="hljs-number">100</span>
 spieler.y = <span class="hljs-number">300</span>
 
@@ -320,13 +312,14 @@ spieler.y = <span class="hljs-number">300</span>
 </code></pre>
 <p><strong>Was ist besser am Actor?</strong></p>
 <ul>
-<li>Zeigt ein echtes Bild</li>
-<li>Einfacher zu bewegen</li>
-<li>Hat eingebaute Kollisionserkennung</li>
+    <li>Zeigt ein echtes Bild</li>
+    <li>Einfacher zu bewegen</li>
+    <li>Hat eingebaute Kollisionserkennung</li>
 </ul>
 <h3 id="schritt-für-schritt-deinen-ersten-actor-erstellen">Schritt-für-Schritt: Deinen ersten Actor erstellen</h3>
 <p><strong>Ziel:</strong> Ein Bild auf dem Bildschirm anzeigen.</p>
-<p><strong>Vorbereitung:</strong> Du brauchst ein Bild namens <code>spieler.png</code> im <code>images/</code> Ordner.</p>
+<p><strong>Vorbereitung:</strong> Du brauchst ein Bild namens <code>spieler.png</code> im <code>images/</code> Ordner.
+</p>
 <p><strong>Schritt 1:</strong> Actor erstellen</p>
 <pre><code class="language-python"><span class="hljs-comment"># Der Name in Klammern ist der Dateiname OHNE .png</span>
 spieler = Actor(<span class="hljs-string">&quot;spieler&quot;</span>)
@@ -371,49 +364,50 @@ spieler.y = <span class="hljs-number">300</span>
 </code></pre>
 <h3 id="was-du-mit-actors-machen-kannst">Was du mit Actors machen kannst</h3>
 <table>
-<thead>
-<tr>
-<th>Was</th>
-<th>Wie</th>
-<th>Beispiel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Position ändern</td>
-<td><code>.x</code> und <code>.y</code></td>
-<td><code>spieler.x = 100</code></td>
-</tr>
-<tr>
-<td>Bild wechseln</td>
-<td><code>.image</code></td>
-<td><code>spieler.image = &quot;spieler_springt&quot;</code></td>
-</tr>
-<tr>
-<td>Drehen</td>
-<td><code>.angle</code></td>
-<td><code>spieler.angle = 45</code></td>
-</tr>
-<tr>
-<td>Größe ändern</td>
-<td><code>.scale</code></td>
-<td><code>spieler.scale = 2</code></td>
-</tr>
-<tr>
-<td>Breite abfragen</td>
-<td><code>.width</code></td>
-<td><code>print(spieler.width)</code></td>
-</tr>
-<tr>
-<td>Höhe abfragen</td>
-<td><code>.height</code></td>
-<td><code>print(spieler.height)</code></td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Was</th>
+        <th>Wie</th>
+        <th>Beispiel</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Position ändern</td>
+        <td><code>.x</code> und <code>.y</code></td>
+        <td><code>spieler.x = 100</code></td>
+    </tr>
+    <tr>
+        <td>Bild wechseln</td>
+        <td><code>.image</code></td>
+        <td><code>spieler.image = &quot;spieler_springt&quot;</code></td>
+    </tr>
+    <tr>
+        <td>Drehen</td>
+        <td><code>.angle</code></td>
+        <td><code>spieler.angle = 45</code></td>
+    </tr>
+    <tr>
+        <td>Größe ändern</td>
+        <td><code>.scale</code></td>
+        <td><code>spieler.scale = 2</code></td>
+    </tr>
+    <tr>
+        <td>Breite abfragen</td>
+        <td><code>.width</code></td>
+        <td><code>print(spieler.width)</code></td>
+    </tr>
+    <tr>
+        <td>Höhe abfragen</td>
+        <td><code>.height</code></td>
+        <td><code>print(spieler.height)</code></td>
+    </tr>
+    </tbody>
 </table>
 <h3 id="bild-wechseln-für-animationen">Bild wechseln (für Animationen)</h3>
 <p><strong>Ziel:</strong> Der Spieler sieht anders aus wenn er springt.</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     spieler.image = <span class="hljs-string">&quot;spieler_springt&quot;</span>  <span class="hljs-comment"># Bild wechseln</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
@@ -422,8 +416,8 @@ spieler.y = <span class="hljs-number">300</span>
 </code></pre>
 <p><strong>Du brauchst dafür:</strong></p>
 <ul>
-<li><code>images/spieler.png</code> (normales Bild)</li>
-<li><code>images/spieler_springt.png</code> (Sprung-Bild)</li>
+    <li><code>images/spieler.png</code> (normales Bild)</li>
+    <li><code>images/spieler_springt.png</code> (Sprung-Bild)</li>
 </ul>
 <hr>
 <h2 id="kapitel-4-kollisionen-mit-actors">Kapitel 4: Kollisionen mit Actors</h2>
@@ -447,7 +441,8 @@ spieler.y = <span class="hljs-number">300</span>
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Spieler berührt Feind!&quot;</span>)
 </code></pre>
 <p><strong>2. collidepoint() - Wurde angeklickt/getippt?</strong></p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-keyword">if</span> spieler.collidepoint(pos):
         <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Spieler wurde angetippt!&quot;</span>)
 </code></pre>
@@ -470,7 +465,10 @@ muenze_da = <span class="hljs-literal">True</span>
     spieler.draw()
     <span class="hljs-keyword">if</span> muenze_da:
         muenze.draw()
-    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> punkte, muenze_da
@@ -492,68 +490,69 @@ muenze_da = <span class="hljs-literal">True</span>
 <h3 id="sound-dateien-vorbereiten">Sound-Dateien vorbereiten</h3>
 <p><strong>Welche Formate funktionieren?</strong></p>
 <ul>
-<li><code>.wav</code> (am besten!)</li>
-<li><code>.ogg</code> (auch gut)</li>
+    <li><code>.wav</code> (am besten!)</li>
+    <li><code>.ogg</code> (auch gut)</li>
 </ul>
 <p><strong>MP3 funktioniert NICHT immer!</strong> Konvertiere MP3 zu WAV.</p>
 <h3 id="woher-bekomme-ich-sounds">Woher bekomme ich Sounds?</h3>
 <ol>
-<li><strong><a href="http://Freesound.org">Freesound.org</a></strong> - Viele kostenlose Sounds</li>
-<li><strong><a href="http://OpenGameArt.org">OpenGameArt.org</a></strong> - Auch Sounds für Spiele</li>
-<li><strong>Selber aufnehmen</strong> - Mit dem Handy!</li>
+    <li><strong><a href="http://Freesound.org">Freesound.org</a></strong> - Viele kostenlose Sounds</li>
+    <li><strong><a href="http://OpenGameArt.org">OpenGameArt.org</a></strong> - Auch Sounds für Spiele</li>
+    <li><strong>Selber aufnehmen</strong> - Mit dem Handy!</li>
 </ol>
 <h3 id="schritt-für-schritt-einen-sound-hinzufügen">Schritt-für-Schritt: Einen Sound hinzufügen</h3>
 <p><strong>Ziel:</strong> Einen &quot;Sprung&quot; Sound abspielen.</p>
 <p><strong>Schritt 1:</strong> Sound-Datei finden</p>
 <ul>
-<li>Suche nach &quot;jump sound effect free wav&quot;</li>
-<li>Lade eine .wav Datei herunter</li>
+    <li>Suche nach &quot;jump sound effect free wav&quot;</li>
+    <li>Lade eine .wav Datei herunter</li>
 </ul>
 <p><strong>Schritt 2:</strong> Datei umbenennen</p>
 <ul>
-<li>Nenne sie <code>sprung.wav</code> (kleingeschrieben!)</li>
+    <li>Nenne sie <code>sprung.wav</code> (kleingeschrieben!)</li>
 </ul>
 <p><strong>Schritt 3:</strong> In sounds/ Ordner verschieben</p>
 <ul>
-<li>Die Datei muss in <code>sounds/sprung.wav</code> sein</li>
+    <li>Die Datei muss in <code>sounds/sprung.wav</code> sein</li>
 </ul>
 <p><strong>Schritt 4:</strong> Im Code abspielen</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     sounds.sprung.play()  <span class="hljs-comment"># Das ist alles!</span>
 </code></pre>
 <h3 id="wichtig-wie-sounds-benannt-werden">Wichtig: Wie Sounds benannt werden</h3>
 <p>Der Dateiname wird zum Befehl:</p>
 <table>
-<thead>
-<tr>
-<th>Dateiname</th>
-<th>Befehl im Code</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sounds/sprung.wav</code></td>
-<td><code>sounds.sprung.play()</code></td>
-</tr>
-<tr>
-<td><code>sounds/punkt.wav</code></td>
-<td><code>sounds.punkt.play()</code></td>
-</tr>
-<tr>
-<td><code>sounds/game_over.wav</code></td>
-<td><code>sounds.game_over.play()</code></td>
-</tr>
-<tr>
-<td><code>sounds/muenze_sammel.wav</code></td>
-<td><code>sounds.muenze_sammel.play()</code></td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Dateiname</th>
+        <th>Befehl im Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>sounds/sprung.wav</code></td>
+        <td><code>sounds.sprung.play()</code></td>
+    </tr>
+    <tr>
+        <td><code>sounds/punkt.wav</code></td>
+        <td><code>sounds.punkt.play()</code></td>
+    </tr>
+    <tr>
+        <td><code>sounds/game_over.wav</code></td>
+        <td><code>sounds.game_over.play()</code></td>
+    </tr>
+    <tr>
+        <td><code>sounds/muenze_sammel.wav</code></td>
+        <td><code>sounds.muenze_sammel.play()</code></td>
+    </tr>
+    </tbody>
 </table>
 <p><strong>Achte auf:</strong></p>
 <ul>
-<li>Kleinbuchstaben</li>
-<li>Unterstriche statt Leerzeichen</li>
-<li>Keine Bindestriche (-)</li>
+    <li>Kleinbuchstaben</li>
+    <li>Unterstriche statt Leerzeichen</li>
+    <li>Keine Bindestriche (-)</li>
 </ul>
 <h3 id="beispiel-spiel-mit-sounds">Beispiel: Spiel mit Sounds</h3>
 <pre><code class="language-python">WIDTH = <span class="hljs-number">400</span>
@@ -568,10 +567,15 @@ spiel_vorbei = <span class="hljs-literal">False</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
     screen.fill(<span class="hljs-string">&quot;skyblue&quot;</span>)
     spieler.draw()
-    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Punkte: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
 
     <span class="hljs-keyword">if</span> spiel_vorbei:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">50</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">100</span>, <span
+            class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">50</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> punkte, spiel_vorbei
@@ -593,9 +597,9 @@ spiel_vorbei = <span class="hljs-literal">False</span>
 <p><strong>Problem:</strong> <code>AttributeError: 'module' object has no attribute 'sprung'</code></p>
 <p><strong>Lösung:</strong></p>
 <ol>
-<li>Prüfe ob die Datei im <code>sounds/</code> Ordner ist</li>
-<li>Prüfe ob der Name kleingeschrieben ist</li>
-<li>Prüfe ob es <code>.wav</code> oder <code>.ogg</code> ist (nicht <code>.mp3</code>)</li>
+    <li>Prüfe ob die Datei im <code>sounds/</code> Ordner ist</li>
+    <li>Prüfe ob der Name kleingeschrieben ist</li>
+    <li>Prüfe ob es <code>.wav</code> oder <code>.ogg</code> ist (nicht <code>.mp3</code>)</li>
 </ol>
 <hr>
 <h2 id="kapitel-6-flappy-bird-mit-bildern-und-sound">Kapitel 6: Flappy Bird mit Bildern und Sound</h2>
@@ -604,15 +608,15 @@ spiel_vorbei = <span class="hljs-literal">False</span>
 <h3 id="was-du-brauchst">Was du brauchst</h3>
 <p><strong>Bilder (in <code>images/</code> Ordner):</strong></p>
 <ul>
-<li><code>vogel.png</code> - Dein Vogel (ca. 40x30 Pixel)</li>
-<li><code>roehre_oben.png</code> - Röhre von oben</li>
-<li><code>roehre_unten.png</code> - Röhre von unten</li>
+    <li><code>vogel.png</code> - Dein Vogel (ca. 40x30 Pixel)</li>
+    <li><code>roehre_oben.png</code> - Röhre von oben</li>
+    <li><code>roehre_unten.png</code> - Röhre von unten</li>
 </ul>
 <p><strong>Sounds (in <code>sounds/</code> Ordner):</strong></p>
 <ul>
-<li><code>flap.wav</code> - Flügelschlag beim Tippen</li>
-<li><code>punkt.wav</code> - Wenn du durch eine Röhre kommst</li>
-<li><code>game_over.wav</code> - Wenn du stirbst</li>
+    <li><code>flap.wav</code> - Flügelschlag beim Tippen</li>
+    <li><code>punkt.wav</code> - Wenn du durch eine Röhre kommst</li>
+    <li><code>game_over.wav</code> - Wenn du stirbst</li>
 </ul>
 <h3 id="schritt-1-actors-statt-rechtecke">Schritt 1: Actors statt Rechtecke</h3>
 <p><strong>Vorher (Box):</strong></p>
@@ -620,7 +624,8 @@ spiel_vorbei = <span class="hljs-literal">False</span>
 box_y = <span class="hljs-number">300</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
-    screen.draw.filled_rect(Rect(box_x, box_y, <span class="hljs-number">30</span>, <span class="hljs-number">30</span>), <span class="hljs-string">&quot;yellow&quot;</span>)
+    screen.draw.filled_rect(Rect(box_x, box_y, <span class="hljs-number">30</span>, <span class="hljs-number">30</span>), <span
+            class="hljs-string">&quot;yellow&quot;</span>)
 </code></pre>
 <p><strong>Nachher (Vogel Actor):</strong></p>
 <pre><code class="language-python">vogel = Actor(<span class="hljs-string">&quot;vogel&quot;</span>)
@@ -642,23 +647,26 @@ roehre_unten = Actor(<span class="hljs-string">&quot;roehre_unten&quot;</span>)
 </code></pre>
 <p><strong>Was ist <code>midbottom</code> und <code>midtop</code>?</strong></p>
 <ul>
-<li><code>midbottom</code> = Die Mitte der Unterkante</li>
-<li><code>midtop</code> = Die Mitte der Oberkante</li>
+    <li><code>midbottom</code> = Die Mitte der Unterkante</li>
+    <li><code>midtop</code> = Die Mitte der Oberkante</li>
 </ul>
 <p>Das macht das Positionieren einfacher!</p>
 <h3 id="schritt-3-kollision-mit-actors">Schritt 3: Kollision mit Actors</h3>
 <p><strong>Vorher (kompliziert):</strong></p>
-<pre><code class="language-python"><span class="hljs-keyword">if</span> box_x + box_groesse &gt; roehre_x <span class="hljs-keyword">and</span> box_x &lt; roehre_x + roehre_breite:
+<pre><code class="language-python"><span class="hljs-keyword">if</span> box_x + box_groesse &gt; roehre_x <span
+        class="hljs-keyword">and</span> box_x &lt; roehre_x + roehre_breite:
     <span class="hljs-keyword">if</span> box_y &lt; luecke_y <span class="hljs-keyword">or</span> box_y + box_groesse &gt; luecke_y + luecke_hoehe:
         spiel_laeuft = <span class="hljs-literal">False</span>
 </code></pre>
 <p><strong>Nachher (einfach):</strong></p>
-<pre><code class="language-python"><span class="hljs-keyword">if</span> vogel.colliderect(roehre_oben) <span class="hljs-keyword">or</span> vogel.colliderect(roehre_unten):
+<pre><code class="language-python"><span class="hljs-keyword">if</span> vogel.colliderect(roehre_oben) <span
+        class="hljs-keyword">or</span> vogel.colliderect(roehre_unten):
     spiel_laeuft = <span class="hljs-literal">False</span>
     sounds.game_over.play()
 </code></pre>
 <h3 id="schritt-4-sound-beim-flügelschlag">Schritt 4: Sound beim Flügelschlag</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span
+        class="hljs-params">pos</span>):
     <span class="hljs-keyword">global</span> vogel_speed
 
     <span class="hljs-keyword">if</span> spiel_laeuft:
@@ -667,7 +675,8 @@ roehre_unten = Actor(<span class="hljs-string">&quot;roehre_unten&quot;</span>)
 </code></pre>
 <h3 id="schritt-5-vogel-dreht-sich">Schritt 5: Vogel dreht sich</h3>
 <p>Der Vogel soll nach oben zeigen wenn er steigt und nach unten wenn er fällt:</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-comment"># ... andere Code ...</span>
 
     <span class="hljs-comment"># Vogel dreht sich basierend auf Geschwindigkeit</span>
@@ -720,9 +729,12 @@ setze_roehren_position()
     screen.fill(<span class="hljs-string">&quot;skyblue&quot;</span>)
 
     <span class="hljs-comment"># Wolken (Dekoration)</span>
-    screen.draw.filled_circle((<span class="hljs-number">100</span>, <span class="hljs-number">80</span>), <span class="hljs-number">30</span>, <span class="hljs-string">&quot;white&quot;</span>)
-    screen.draw.filled_circle((<span class="hljs-number">130</span>, <span class="hljs-number">80</span>), <span class="hljs-number">40</span>, <span class="hljs-string">&quot;white&quot;</span>)
-    screen.draw.filled_circle((<span class="hljs-number">160</span>, <span class="hljs-number">80</span>), <span class="hljs-number">30</span>, <span class="hljs-string">&quot;white&quot;</span>)
+    screen.draw.filled_circle((<span class="hljs-number">100</span>, <span class="hljs-number">80</span>), <span
+            class="hljs-number">30</span>, <span class="hljs-string">&quot;white&quot;</span>)
+    screen.draw.filled_circle((<span class="hljs-number">130</span>, <span class="hljs-number">80</span>), <span
+            class="hljs-number">40</span>, <span class="hljs-string">&quot;white&quot;</span>)
+    screen.draw.filled_circle((<span class="hljs-number">160</span>, <span class="hljs-number">80</span>), <span
+            class="hljs-number">30</span>, <span class="hljs-string">&quot;white&quot;</span>)
 
     <span class="hljs-comment"># Röhren</span>
     roehre_oben.draw()
@@ -732,12 +744,19 @@ setze_roehren_position()
     vogel.draw()
 
     <span class="hljs-comment"># Punkte</span>
-    screen.draw.text(<span class="hljs-string">f&quot;<span class="hljs-subst">{punkte}</span>&quot;</span>, (WIDTH/<span class="hljs-number">2</span> - <span class="hljs-number">20</span>, <span class="hljs-number">30</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">60</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;<span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (WIDTH/<span class="hljs-number">2</span> - <span
+            class="hljs-number">20</span>, <span class="hljs-number">30</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">60</span>)
 
     <span class="hljs-comment"># Game Over</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> spiel_laeuft:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">80</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">50</span>)
-        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">70</span>, <span class="hljs-number">320</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span
+            class="hljs-number">80</span>, <span class="hljs-number">250</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">50</span>)
+        screen.draw.text(<span class="hljs-string">&quot;Tippe zum Neustarten&quot;</span>, (<span class="hljs-number">70</span>, <span
+            class="hljs-number">320</span>), color=<span class="hljs-string">&quot;white&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> vogel_speed, roehre_x, luecke_y, punkte, spiel_laeuft
@@ -762,7 +781,8 @@ setze_roehren_position()
     <span class="hljs-comment"># Neue Röhren</span>
     <span class="hljs-keyword">if</span> roehre_x &lt; -<span class="hljs-number">50</span>:
         roehre_x = WIDTH + <span class="hljs-number">50</span>
-        luecke_y = random.randint(<span class="hljs-number">100</span>, HEIGHT - luecke_hoehe - <span class="hljs-number">100</span>)
+        luecke_y = random.randint(<span class="hljs-number">100</span>, HEIGHT - luecke_hoehe - <span
+            class="hljs-number">100</span>)
         punkte = punkte + <span class="hljs-number">1</span>
         sounds.punkt.play()
 
@@ -772,7 +792,8 @@ setze_roehren_position()
         sounds.game_over.play()
 
     <span class="hljs-comment"># Kollision mit Rand</span>
-    <span class="hljs-keyword">if</span> vogel.y &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> vogel.y &gt; HEIGHT:
+    <span class="hljs-keyword">if</span> vogel.y &lt; <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> vogel.y &gt; HEIGHT:
         spiel_laeuft = <span class="hljs-literal">False</span>
         sounds.game_over.play()
 
@@ -797,14 +818,14 @@ setze_roehren_position()
 <h3 id="was-du-brauchst-1">Was du brauchst</h3>
 <p><strong>Bilder:</strong></p>
 <ul>
-<li><code>spieler.png</code> - Deine Spielfigur</li>
-<li><code>muenze.png</code> - Eine Münze</li>
-<li><code>feind.png</code> - Ein Feind/Monster</li>
+    <li><code>spieler.png</code> - Deine Spielfigur</li>
+    <li><code>muenze.png</code> - Eine Münze</li>
+    <li><code>feind.png</code> - Ein Feind/Monster</li>
 </ul>
 <p><strong>Sounds:</strong></p>
 <ul>
-<li><code>muenze.wav</code> - Wenn Münze gesammelt</li>
-<li><code>autsch.wav</code> - Wenn Feind berührt</li>
+    <li><code>muenze.wav</code> - Wenn Münze gesammelt</li>
+    <li><code>autsch.wav</code> - Wenn Feind berührt</li>
 </ul>
 <h3 id="das-spielkonzept">Das Spielkonzept</h3>
 <pre><code>┌─────────────────────────────────────────┐
@@ -821,7 +842,8 @@ setze_roehren_position()
 
 <span class="hljs-comment"># Münzen-Liste erstellen</span>
 muenzen = []
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):  <span class="hljs-comment"># 5 Münzen</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):  <span class="hljs-comment"># 5 Münzen</span>
     muenze = Actor(<span class="hljs-string">&quot;muenze&quot;</span>)
     muenze.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span class="hljs-number">30</span>)
     muenze.y = random.randint(<span class="hljs-number">50</span>, <span class="hljs-number">400</span>)
@@ -829,15 +851,17 @@ muenzen = []
 
 <span class="hljs-comment"># Feinde-Liste erstellen</span>
 feinde = []
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):  <span class="hljs-comment"># 3 Feinde</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):  <span class="hljs-comment"># 3 Feinde</span>
     feind = Actor(<span class="hljs-string">&quot;feind&quot;</span>)
     feind.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span class="hljs-number">30</span>)
     feind.y = random.randint(<span class="hljs-number">100</span>, <span class="hljs-number">300</span>)
-    feind.speed_x = random.choice([-<span class="hljs-number">3</span>, <span class="hljs-number">3</span>])  <span class="hljs-comment"># Links oder rechts</span>
+    feind.speed_x = random.choice([-<span class="hljs-number">3</span>, <span class="hljs-number">3</span>])  <span
+            class="hljs-comment"># Links oder rechts</span>
     feinde.append(feind)
 </code></pre>
 <p><strong>Was macht <code>random.choice([-3, 3])</code>?</strong>
-Es wählt zufällig einen Wert aus der Liste. Also entweder -3 (nach links) oder 3 (nach rechts).</p>
+    Es wählt zufällig einen Wert aus der Liste. Also entweder -3 (nach links) oder 3 (nach rechts).</p>
 <h3 id="schritt-2-alle-actors-zeichnen">Schritt 2: Alle Actors zeichnen</h3>
 <pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
     screen.fill(<span class="hljs-string">&quot;darkgreen&quot;</span>)
@@ -854,22 +878,26 @@ Es wählt zufällig einen Wert aus der Liste. Also entweder -3 (nach links) oder
     spieler.draw()
 </code></pre>
 <h3 id="schritt-3-feinde-bewegen">Schritt 3: Feinde bewegen</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-comment"># Feinde hin und her bewegen</span>
     <span class="hljs-keyword">for</span> feind <span class="hljs-keyword">in</span> feinde:
         feind.x = feind.x + feind.speed_x
 
         <span class="hljs-comment"># Am Rand umdrehen</span>
-        <span class="hljs-keyword">if</span> feind.x &lt; <span class="hljs-number">30</span> <span class="hljs-keyword">or</span> feind.x &gt; WIDTH - <span class="hljs-number">30</span>:
+        <span class="hljs-keyword">if</span> feind.x &lt; <span class="hljs-number">30</span> <span
+            class="hljs-keyword">or</span> feind.x &gt; WIDTH - <span class="hljs-number">30</span>:
             feind.speed_x = -feind.speed_x  <span class="hljs-comment"># Richtung umkehren</span>
 </code></pre>
 <h3 id="schritt-4-münzen-sammeln">Schritt 4: Münzen sammeln</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> punkte
     <span class="hljs-comment"># ... Feinde-Code ...</span>
 
     <span class="hljs-comment"># Münzen sammeln</span>
-    <span class="hljs-keyword">for</span> muenze <span class="hljs-keyword">in</span> muenzen[:]:  <span class="hljs-comment"># [:] macht eine Kopie!</span>
+    <span class="hljs-keyword">for</span> muenze <span class="hljs-keyword">in</span> muenzen[:]:  <span
+            class="hljs-comment"># [:] macht eine Kopie!</span>
         <span class="hljs-keyword">if</span> spieler.colliderect(muenze):
             muenzen.remove(muenze)  <span class="hljs-comment"># Münze entfernen</span>
             punkte = punkte + <span class="hljs-number">1</span>
@@ -877,14 +905,16 @@ Es wählt zufällig einen Wert aus der Liste. Also entweder -3 (nach links) oder
 
             <span class="hljs-comment"># Neue Münze erstellen</span>
             neue_muenze = Actor(<span class="hljs-string">&quot;muenze&quot;</span>)
-            neue_muenze.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span class="hljs-number">30</span>)
+            neue_muenze.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span
+            class="hljs-number">30</span>)
             neue_muenze.y = random.randint(<span class="hljs-number">50</span>, <span class="hljs-number">400</span>)
             muenzen.append(neue_muenze)
 </code></pre>
 <h3 id="schritt-5-unverwundbarkeit-nach-treffer">Schritt 5: Unverwundbarkeit nach Treffer</h3>
 <p><strong>Problem:</strong> Wenn du einen Feind berührst, verlierst du sofort alle Leben!</p>
 <p><strong>Lösung:</strong> Nach einem Treffer bist du kurz unverwundbar.</p>
-<pre><code class="language-python">unverwundbar = <span class="hljs-number">0</span>  <span class="hljs-comment"># Timer</span>
+<pre><code class="language-python">unverwundbar = <span class="hljs-number">0</span>  <span
+        class="hljs-comment"># Timer</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> leben, unverwundbar
@@ -903,7 +933,9 @@ Es wählt zufällig einen Wert aus der Liste. Also entweder -3 (nach links) oder
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
     <span class="hljs-comment"># Spieler blinkt wenn unverwundbar</span>
-    <span class="hljs-keyword">if</span> unverwundbar &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> unverwundbar % <span class="hljs-number">10</span> &lt; <span class="hljs-number">5</span>:
+    <span class="hljs-keyword">if</span> unverwundbar &lt;= <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> unverwundbar % <span class="hljs-number">10</span> &lt; <span
+            class="hljs-number">5</span>:
         spieler.draw()
 </code></pre>
 <h3 id="das-komplette-spiel-1">Das komplette Spiel</h3>
@@ -922,7 +954,8 @@ spieler.y = <span class="hljs-number">500</span>
 
 <span class="hljs-comment"># Münzen erstellen</span>
 muenzen = []
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
     muenze = Actor(<span class="hljs-string">&quot;muenze&quot;</span>)
     muenze.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span class="hljs-number">30</span>)
     muenze.y = random.randint(<span class="hljs-number">50</span>, <span class="hljs-number">400</span>)
@@ -930,7 +963,8 @@ muenzen = []
 
 <span class="hljs-comment"># Feinde erstellen</span>
 feinde = []
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):
     feind = Actor(<span class="hljs-string">&quot;feind&quot;</span>)
     feind.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span class="hljs-number">30</span>)
     feind.y = random.randint(<span class="hljs-number">100</span>, <span class="hljs-number">300</span>)
@@ -946,10 +980,16 @@ unverwundbar = <span class="hljs-number">0</span>
     screen.fill(<span class="hljs-string">&quot;darkgreen&quot;</span>)
 
     <span class="hljs-comment"># Gras-Muster</span>
-    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, WIDTH, <span class="hljs-number">20</span>):
-        <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, HEIGHT, <span class="hljs-number">20</span>):
-            <span class="hljs-keyword">if</span> (x + y) % <span class="hljs-number">40</span> == <span class="hljs-number">0</span>:
-                screen.draw.filled_rect(Rect(x, y, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>), <span class="hljs-string">&quot;green&quot;</span>)
+    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, WIDTH, <span
+            class="hljs-number">20</span>):
+        <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, HEIGHT, <span
+            class="hljs-number">20</span>):
+            <span class="hljs-keyword">if</span> (x + y) % <span class="hljs-number">40</span> == <span
+            class="hljs-number">0</span>:
+                screen.draw.filled_rect(Rect(x, y, <span class="hljs-number">20</span>, <span
+            class="hljs-number">20</span>), <span class="hljs-string">&quot;green&quot;</span>)
 
     <span class="hljs-comment"># Münzen</span>
     <span class="hljs-keyword">for</span> muenze <span class="hljs-keyword">in</span> muenzen:
@@ -960,15 +1000,25 @@ unverwundbar = <span class="hljs-number">0</span>
         feind.draw()
 
     <span class="hljs-comment"># Spieler (blinkt wenn unverwundbar)</span>
-    <span class="hljs-keyword">if</span> unverwundbar &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> unverwundbar % <span class="hljs-number">10</span> &lt; <span class="hljs-number">5</span>:
+    <span class="hljs-keyword">if</span> unverwundbar &lt;= <span class="hljs-number">0</span> <span
+            class="hljs-keyword">or</span> unverwundbar % <span class="hljs-number">10</span> &lt; <span
+            class="hljs-number">5</span>:
         spieler.draw()
 
     <span class="hljs-comment"># Info</span>
-    screen.draw.text(<span class="hljs-string">f&quot;Münzen: <span class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), color=<span class="hljs-string">&quot;yellow&quot;</span>, fontsize=<span class="hljs-number">30</span>)
-    screen.draw.text(<span class="hljs-string">f&quot;Leben: <span class="hljs-subst">{leben}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span class="hljs-number">50</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Münzen: <span
+            class="hljs-subst">{punkte}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">10</span>), color=<span class="hljs-string">&quot;yellow&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
+    screen.draw.text(<span class="hljs-string">f&quot;Leben: <span
+            class="hljs-subst">{leben}</span>&quot;</span>, (<span class="hljs-number">10</span>, <span
+            class="hljs-number">50</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">30</span>)
 
     <span class="hljs-keyword">if</span> leben &lt;= <span class="hljs-number">0</span>:
-        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">280</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span class="hljs-number">45</span>)
+        screen.draw.text(<span class="hljs-string">&quot;GAME OVER&quot;</span>, (<span class="hljs-number">100</span>, <span
+            class="hljs-number">280</span>), color=<span class="hljs-string">&quot;red&quot;</span>, fontsize=<span
+            class="hljs-number">45</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> punkte, leben, unverwundbar
@@ -983,7 +1033,8 @@ unverwundbar = <span class="hljs-number">0</span>
     <span class="hljs-comment"># Feinde bewegen</span>
     <span class="hljs-keyword">for</span> feind <span class="hljs-keyword">in</span> feinde:
         feind.x = feind.x + feind.speed_x
-        <span class="hljs-keyword">if</span> feind.x &lt; <span class="hljs-number">30</span> <span class="hljs-keyword">or</span> feind.x &gt; WIDTH - <span class="hljs-number">30</span>:
+        <span class="hljs-keyword">if</span> feind.x &lt; <span class="hljs-number">30</span> <span
+            class="hljs-keyword">or</span> feind.x &gt; WIDTH - <span class="hljs-number">30</span>:
             feind.speed_x = -feind.speed_x
 
     <span class="hljs-comment"># Münzen sammeln</span>
@@ -994,7 +1045,8 @@ unverwundbar = <span class="hljs-number">0</span>
             sounds.muenze.play()
 
             neue_muenze = Actor(<span class="hljs-string">&quot;muenze&quot;</span>)
-            neue_muenze.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span class="hljs-number">30</span>)
+            neue_muenze.x = random.randint(<span class="hljs-number">30</span>, WIDTH - <span
+            class="hljs-number">30</span>)
             neue_muenze.y = random.randint(<span class="hljs-number">50</span>, <span class="hljs-number">400</span>)
             muenzen.append(neue_muenze)
 
@@ -1012,10 +1064,14 @@ unverwundbar = <span class="hljs-number">0</span>
         spieler.y = pos[<span class="hljs-number">1</span>]
 
         <span class="hljs-comment"># Grenzen</span>
-        <span class="hljs-keyword">if</span> spieler.x &lt; <span class="hljs-number">20</span>: spieler.x = <span class="hljs-number">20</span>
-        <span class="hljs-keyword">if</span> spieler.x &gt; WIDTH - <span class="hljs-number">20</span>: spieler.x = WIDTH - <span class="hljs-number">20</span>
-        <span class="hljs-keyword">if</span> spieler.y &lt; <span class="hljs-number">20</span>: spieler.y = <span class="hljs-number">20</span>
-        <span class="hljs-keyword">if</span> spieler.y &gt; HEIGHT - <span class="hljs-number">20</span>: spieler.y = HEIGHT - <span class="hljs-number">20</span>
+        <span class="hljs-keyword">if</span> spieler.x &lt; <span class="hljs-number">20</span>: spieler.x = <span
+            class="hljs-number">20</span>
+        <span class="hljs-keyword">if</span> spieler.x &gt; WIDTH - <span class="hljs-number">20</span>: spieler.x = WIDTH - <span
+            class="hljs-number">20</span>
+        <span class="hljs-keyword">if</span> spieler.y &lt; <span class="hljs-number">20</span>: spieler.y = <span
+            class="hljs-number">20</span>
+        <span class="hljs-keyword">if</span> spieler.y &gt; HEIGHT - <span class="hljs-number">20</span>: spieler.y = HEIGHT - <span
+            class="hljs-number">20</span>
 </code></pre>
 <hr>
 <h2 id="kapitel-8-animationen">Kapitel 8: Animationen</h2>
@@ -1033,19 +1089,22 @@ Bild 3:  🚶      (Bein vorne)
 <h3 id="bilder-für-animation-vorbereiten">Bilder für Animation vorbereiten</h3>
 <p>Du brauchst mehrere Bilder mit Nummern:</p>
 <ul>
-<li><code>images/laufen1.png</code></li>
-<li><code>images/laufen2.png</code></li>
-<li><code>images/laufen3.png</code></li>
-<li><code>images/laufen4.png</code></li>
+    <li><code>images/laufen1.png</code></li>
+    <li><code>images/laufen2.png</code></li>
+    <li><code>images/laufen3.png</code></li>
+    <li><code>images/laufen4.png</code></li>
 </ul>
 <h3 id="schritt-für-schritt-einfache-animation">Schritt-für-Schritt: Einfache Animation</h3>
 <p><strong>Schritt 1:</strong> Liste mit Bildnamen</p>
-<pre><code class="language-python">animation_bilder = [<span class="hljs-string">&quot;laufen1&quot;</span>, <span class="hljs-string">&quot;laufen2&quot;</span>, <span class="hljs-string">&quot;laufen3&quot;</span>, <span class="hljs-string">&quot;laufen4&quot;</span>]
+<pre><code class="language-python">animation_bilder = [<span class="hljs-string">&quot;laufen1&quot;</span>, <span
+        class="hljs-string">&quot;laufen2&quot;</span>, <span class="hljs-string">&quot;laufen3&quot;</span>, <span
+        class="hljs-string">&quot;laufen4&quot;</span>]
 animation_frame = <span class="hljs-number">0</span>  <span class="hljs-comment"># Welches Bild gerade?</span>
 animation_timer = <span class="hljs-number">0</span>  <span class="hljs-comment"># Zähler für Bildwechsel</span>
 </code></pre>
 <p><strong>Schritt 2:</strong> In update() Bilder wechseln</p>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span
+        class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> animation_timer, animation_frame
 
     animation_timer = animation_timer + <span class="hljs-number">1</span>
@@ -1074,7 +1133,8 @@ animation_timer = <span class="hljs-number">0</span>  <span class="hljs-comment"
         animation_timer = animation_timer + <span class="hljs-number">1</span>
         <span class="hljs-keyword">if</span> animation_timer &gt;= <span class="hljs-number">10</span>:
             animation_timer = <span class="hljs-number">0</span>
-            animation_frame = (animation_frame + <span class="hljs-number">1</span>) % <span class="hljs-built_in">len</span>(animation_bilder)
+            animation_frame = (animation_frame + <span class="hljs-number">1</span>) % <span
+            class="hljs-built_in">len</span>(animation_bilder)
             spieler.image = animation_bilder[animation_frame]
     <span class="hljs-keyword">else</span>:
         <span class="hljs-comment"># Stehendes Bild zeigen</span>
@@ -1091,7 +1151,9 @@ spieler = Actor(<span class="hljs-string">&quot;laufen1&quot;</span>)
 spieler.pos = (<span class="hljs-number">200</span>, <span class="hljs-number">300</span>)
 
 <span class="hljs-comment"># Animation</span>
-animation_bilder = [<span class="hljs-string">&quot;laufen1&quot;</span>, <span class="hljs-string">&quot;laufen2&quot;</span>, <span class="hljs-string">&quot;laufen3&quot;</span>, <span class="hljs-string">&quot;laufen4&quot;</span>]
+animation_bilder = [<span class="hljs-string">&quot;laufen1&quot;</span>, <span
+            class="hljs-string">&quot;laufen2&quot;</span>, <span class="hljs-string">&quot;laufen3&quot;</span>, <span
+            class="hljs-string">&quot;laufen4&quot;</span>]
 animation_frame = <span class="hljs-number">0</span>
 animation_timer = <span class="hljs-number">0</span>
 
@@ -1102,9 +1164,12 @@ ist_am_laufen = <span class="hljs-literal">False</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">draw</span>():
     screen.fill(<span class="hljs-string">&quot;lightblue&quot;</span>)
-    screen.draw.filled_rect(Rect(<span class="hljs-number">0</span>, <span class="hljs-number">450</span>, WIDTH, <span class="hljs-number">150</span>), <span class="hljs-string">&quot;green&quot;</span>)
+    screen.draw.filled_rect(Rect(<span class="hljs-number">0</span>, <span class="hljs-number">450</span>, WIDTH, <span
+            class="hljs-number">150</span>), <span class="hljs-string">&quot;green&quot;</span>)
     spieler.draw()
-    screen.draw.text(<span class="hljs-string">&quot;Tippe irgendwo!&quot;</span>, (<span class="hljs-number">100</span>, <span class="hljs-number">30</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span class="hljs-number">25</span>)
+    screen.draw.text(<span class="hljs-string">&quot;Tippe irgendwo!&quot;</span>, (<span class="hljs-number">100</span>, <span
+            class="hljs-number">30</span>), color=<span class="hljs-string">&quot;black&quot;</span>, fontsize=<span
+            class="hljs-number">25</span>)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>():
     <span class="hljs-keyword">global</span> animation_timer, animation_frame, ist_am_laufen
@@ -1116,12 +1181,14 @@ ist_am_laufen = <span class="hljs-literal">False</span>
         diff_y = ziel_y - spieler.y
 
         <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(diff_x) &gt; speed:
-            spieler.x = spieler.x + (speed <span class="hljs-keyword">if</span> diff_x &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> -speed)
+            spieler.x = spieler.x + (speed <span class="hljs-keyword">if</span> diff_x &gt; <span
+            class="hljs-number">0</span> <span class="hljs-keyword">else</span> -speed)
         <span class="hljs-keyword">else</span>:
             spieler.x = ziel_x
 
         <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(diff_y) &gt; speed:
-            spieler.y = spieler.y + (speed <span class="hljs-keyword">if</span> diff_y &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> -speed)
+            spieler.y = spieler.y + (speed <span class="hljs-keyword">if</span> diff_y &gt; <span
+            class="hljs-number">0</span> <span class="hljs-keyword">else</span> -speed)
         <span class="hljs-keyword">else</span>:
             spieler.y = ziel_y
 
@@ -1134,7 +1201,8 @@ ist_am_laufen = <span class="hljs-literal">False</span>
         animation_timer = animation_timer + <span class="hljs-number">1</span>
         <span class="hljs-keyword">if</span> animation_timer &gt;= <span class="hljs-number">8</span>:
             animation_timer = <span class="hljs-number">0</span>
-            animation_frame = (animation_frame + <span class="hljs-number">1</span>) % <span class="hljs-built_in">len</span>(animation_bilder)
+            animation_frame = (animation_frame + <span class="hljs-number">1</span>) % <span
+            class="hljs-built_in">len</span>(animation_bilder)
             spieler.image = animation_bilder[animation_frame]
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_mouse_down</span>(<span class="hljs-params">pos</span>):
@@ -1149,33 +1217,46 @@ ist_am_laufen = <span class="hljs-literal">False</span>
 <p>Kleine Teilchen die bei Aktionen erscheinen machen Spiele lebendiger!</p>
 <pre><code class="language-python">partikel = []
 
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">erstelle_partikel</span>(<span class="hljs-params">x, y, farbe</span>):
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">erstelle_partikel</span>(<span
+            class="hljs-params">x, y, farbe</span>):
     <span class="hljs-keyword">import</span> random
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span
+            class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
         p = {
             <span class="hljs-string">&quot;x&quot;</span>: x,
             <span class="hljs-string">&quot;y&quot;</span>: y,
-            <span class="hljs-string">&quot;speed_x&quot;</span>: random.uniform(-<span class="hljs-number">5</span>, <span class="hljs-number">5</span>),
-            <span class="hljs-string">&quot;speed_y&quot;</span>: random.uniform(-<span class="hljs-number">5</span>, <span class="hljs-number">5</span>),
-            <span class="hljs-string">&quot;size&quot;</span>: random.randint(<span class="hljs-number">3</span>, <span class="hljs-number">8</span>),
+            <span class="hljs-string">&quot;speed_x&quot;</span>: random.uniform(-<span
+            class="hljs-number">5</span>, <span class="hljs-number">5</span>),
+            <span class="hljs-string">&quot;speed_y&quot;</span>: random.uniform(-<span
+            class="hljs-number">5</span>, <span class="hljs-number">5</span>),
+            <span class="hljs-string">&quot;size&quot;</span>: random.randint(<span class="hljs-number">3</span>, <span
+            class="hljs-number">8</span>),
             <span class="hljs-string">&quot;farbe&quot;</span>: farbe,
-            <span class="hljs-string">&quot;leben&quot;</span>: <span class="hljs-number">30</span>  <span class="hljs-comment"># Wie lange sichtbar</span>
+            <span class="hljs-string">&quot;leben&quot;</span>: <span class="hljs-number">30</span>  <span
+            class="hljs-comment"># Wie lange sichtbar</span>
         }
         partikel.append(p)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">update_partikel</span>():
     <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> partikel[:]:
-        p[<span class="hljs-string">&quot;x&quot;</span>] = p[<span class="hljs-string">&quot;x&quot;</span>] + p[<span class="hljs-string">&quot;speed_x&quot;</span>]
-        p[<span class="hljs-string">&quot;y&quot;</span>] = p[<span class="hljs-string">&quot;y&quot;</span>] + p[<span class="hljs-string">&quot;speed_y&quot;</span>]
-        p[<span class="hljs-string">&quot;size&quot;</span>] = p[<span class="hljs-string">&quot;size&quot;</span>] * <span class="hljs-number">0.95</span>  <span class="hljs-comment"># Wird kleiner</span>
-        p[<span class="hljs-string">&quot;leben&quot;</span>] = p[<span class="hljs-string">&quot;leben&quot;</span>] - <span class="hljs-number">1</span>
-        <span class="hljs-keyword">if</span> p[<span class="hljs-string">&quot;leben&quot;</span>] &lt;= <span class="hljs-number">0</span>:
+        p[<span class="hljs-string">&quot;x&quot;</span>] = p[<span class="hljs-string">&quot;x&quot;</span>] + p[<span
+            class="hljs-string">&quot;speed_x&quot;</span>]
+        p[<span class="hljs-string">&quot;y&quot;</span>] = p[<span class="hljs-string">&quot;y&quot;</span>] + p[<span
+            class="hljs-string">&quot;speed_y&quot;</span>]
+        p[<span class="hljs-string">&quot;size&quot;</span>] = p[<span
+            class="hljs-string">&quot;size&quot;</span>] * <span class="hljs-number">0.95</span>  <span
+            class="hljs-comment"># Wird kleiner</span>
+        p[<span class="hljs-string">&quot;leben&quot;</span>] = p[<span class="hljs-string">&quot;leben&quot;</span>] - <span
+            class="hljs-number">1</span>
+        <span class="hljs-keyword">if</span> p[<span class="hljs-string">&quot;leben&quot;</span>] &lt;= <span
+            class="hljs-number">0</span>:
             partikel.remove(p)
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">draw_partikel</span>():
     <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> partikel:
         screen.draw.filled_circle(
-            (<span class="hljs-built_in">int</span>(p[<span class="hljs-string">&quot;x&quot;</span>]), <span class="hljs-built_in">int</span>(p[<span class="hljs-string">&quot;y&quot;</span>])),
+            (<span class="hljs-built_in">int</span>(p[<span class="hljs-string">&quot;x&quot;</span>]), <span
+            class="hljs-built_in">int</span>(p[<span class="hljs-string">&quot;y&quot;</span>])),
             <span class="hljs-built_in">int</span>(p[<span class="hljs-string">&quot;size&quot;</span>]),
             p[<span class="hljs-string">&quot;farbe&quot;</span>]
         )
@@ -1188,16 +1269,19 @@ erstelle_partikel(muenze.x, muenze.y, <span class="hljs-string">&quot;yellow&quo
 erstelle_partikel(spieler.x, spieler.y, <span class="hljs-string">&quot;red&quot;</span>)
 </code></pre>
 <h3 id="highscore-speichern">Highscore speichern</h3>
-<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">speichere_highscore</span>(<span class="hljs-params">punkte</span>):
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">speichere_highscore</span>(<span
+        class="hljs-params">punkte</span>):
     <span class="hljs-keyword">try</span>:
-        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;highscore.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> datei:
+        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;highscore.txt&quot;</span>, <span
+            class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> datei:
             datei.write(<span class="hljs-built_in">str</span>(punkte))
     <span class="hljs-keyword">except</span>:
         <span class="hljs-keyword">pass</span>  <span class="hljs-comment"># Ignoriere Fehler</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">lade_highscore</span>():
     <span class="hljs-keyword">try</span>:
-        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;highscore.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> datei:
+        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;highscore.txt&quot;</span>, <span
+            class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> datei:
             <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(datei.read())
     <span class="hljs-keyword">except</span>:
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>  <span class="hljs-comment"># Kein Highscore vorhanden</span>
@@ -1225,52 +1309,67 @@ hintergrund.pos = (WIDTH/<span class="hljs-number">2</span>, HEIGHT/<span class=
 <h2 id="zusammenfassung">Zusammenfassung</h2>
 <h3 id="was-du-gelernt-hast">Was du gelernt hast</h3>
 <table>
-<thead>
-<tr>
-<th>Thema</th>
-<th>Was du jetzt kannst</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Ordner</td>
-<td><code>images/</code> und <code>sounds/</code> Ordner erstellen</td>
-</tr>
-<tr>
-<td>Actors</td>
-<td>Bilder als Spielfiguren benutzen</td>
-</tr>
-<tr>
-<td>Kollision</td>
-<td><code>colliderect()</code> für einfache Kollisionsprüfung</td>
-</tr>
-<tr>
-<td>Sounds</td>
-<td><code>sounds.name.play()</code> für Sound-Effekte</td>
-</tr>
-<tr>
-<td>Animation</td>
-<td>Bilder wechseln für Bewegungseffekte</td>
-</tr>
-<tr>
-<td>Listen</td>
-<td>Mehrere Actors verwalten</td>
-</tr>
-</tbody>
+    <thead>
+    <tr>
+        <th>Thema</th>
+        <th>Was du jetzt kannst</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Ordner</td>
+        <td><code>images/</code> und <code>sounds/</code> Ordner erstellen</td>
+    </tr>
+    <tr>
+        <td>Actors</td>
+        <td>Bilder als Spielfiguren benutzen</td>
+    </tr>
+    <tr>
+        <td>Kollision</td>
+        <td><code>colliderect()</code> für einfache Kollisionsprüfung</td>
+    </tr>
+    <tr>
+        <td>Sounds</td>
+        <td><code>sounds.name.play()</code> für Sound-Effekte</td>
+    </tr>
+    <tr>
+        <td>Animation</td>
+        <td>Bilder wechseln für Bewegungseffekte</td>
+    </tr>
+    <tr>
+        <td>Listen</td>
+        <td>Mehrere Actors verwalten</td>
+    </tr>
+    </tbody>
 </table>
 <h3 id="checkliste-für-ein-fertiges-spiel">Checkliste für ein fertiges Spiel</h3>
 <ul class="contains-task-list">
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Spieler kann sich bewegen</li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Es gibt ein Ziel (Punkte, überleben, etc.)</li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Es gibt Hindernisse oder Feinde</li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Punkte werden angezeigt</li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Game Over wenn man verliert</li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Möglichkeit zum Neustarten</li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <strong>Bilder für alle Elemente</strong></li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <strong>Sounds für Aktionen</strong></li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <strong>(Bonus) Animationen</strong></li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <strong>(Bonus) Partikel-Effekte</strong></li>
-<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <strong>(Bonus) Highscore speichern</strong></li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> Spieler kann sich bewegen
+    </li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> Es gibt ein Ziel (Punkte,
+        überleben, etc.)
+    </li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> Es gibt Hindernisse oder
+        Feinde
+    </li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> Punkte werden angezeigt
+    </li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> Game Over wenn man
+        verliert
+    </li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> Möglichkeit zum
+        Neustarten
+    </li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> <strong>Bilder für alle
+        Elemente</strong></li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> <strong>Sounds für
+        Aktionen</strong></li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> <strong>(Bonus)
+        Animationen</strong></li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> <strong>(Bonus)
+        Partikel-Effekte</strong></li>
+    <li class="task-list-item enabled"><input class="task-list-item-checkbox" type="checkbox"> <strong>(Bonus) Highscore
+        speichern</strong></li>
 </ul>
 <hr>
 <h2 id="problemlösungen">Problemlösungen</h2>
@@ -1279,18 +1378,18 @@ hintergrund.pos = (WIDTH/<span class="hljs-number">2</span>, HEIGHT/<span class=
 </code></pre>
 <p><strong>Lösung:</strong></p>
 <ol>
-<li>Existiert <code>images/spieler.png</code>?</li>
-<li>Ist der Name kleingeschrieben?</li>
-<li>Ist die Endung <code>.png</code> (nicht <code>.PNG</code>)?</li>
+    <li>Existiert <code>images/spieler.png</code>?</li>
+    <li>Ist der Name kleingeschrieben?</li>
+    <li>Ist die Endung <code>.png</code> (nicht <code>.PNG</code>)?</li>
 </ol>
 <h3 id="sound-spielt-nicht">Sound spielt nicht</h3>
 <pre><code>AttributeError: 'module' object has no attribute 'sprung'
 </code></pre>
 <p><strong>Lösung:</strong></p>
 <ol>
-<li>Existiert <code>sounds/sprung.wav</code>?</li>
-<li>Ist es <code>.wav</code> oder <code>.ogg</code> (nicht <code>.mp3</code>)?</li>
-<li>Ist der Name kleingeschrieben?</li>
+    <li>Existiert <code>sounds/sprung.wav</code>?</li>
+    <li>Ist es <code>.wav</code> oder <code>.ogg</code> (nicht <code>.mp3</code>)?</li>
+    <li>Ist der Name kleingeschrieben?</li>
 </ol>
 <h3 id="bild-ist-zu-großklein">Bild ist zu groß/klein</h3>
 <p><strong>Lösung:</strong></p>
@@ -1299,10 +1398,11 @@ spieler.scale = <span class="hljs-number">2</span>    <span class="hljs-comment"
 </code></pre>
 <hr>
 <p><strong>Super gemacht!</strong> 🎉</p>
-<p>Du kannst jetzt richtig professionelle Spiele machen mit Bildern, Sounds und Animationen. Zeig deinen Freunden was du programmiert hast!</p>
-<p><strong>Tipp:</strong> Du kannst deine Spiele teilen! Schicke die <code>.py</code> Datei und die <code>images/</code> und <code>sounds/</code> Ordner zu deinen Freunden. Sie können dann dein Spiel auf ihrem Handy spielen!</p>
+<p>Du kannst jetzt richtig professionelle Spiele machen mit Bildern, Sounds und Animationen. Zeig deinen Freunden was du
+    programmiert hast!</p>
+<p><strong>Tipp:</strong> Du kannst deine Spiele teilen! Schicke die <code>.py</code> Datei und die <code>images/</code>
+    und <code>sounds/</code> Ordner zu deinen Freunden. Sie können dann dein Spiel auf ihrem Handy spielen!</p>
 
-            
-            
-        </body>
-        </html>
+
+</body>
+</html>

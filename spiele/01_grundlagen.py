@@ -1,6 +1,9 @@
 # === GRUNDLAGEN - FORMEN ZEICHNEN ===
 # Lerne wie man Formen auf den Bildschirm malt
 
+import pgzrun
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -28,3 +31,6 @@ def draw():
     # Text schreiben
     screen.draw.text("Hallo!", (150, 80), color="white", fontsize=50)
     screen.draw.text("Das sind Formen!", (100, 550), color="pink", fontsize=25)
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

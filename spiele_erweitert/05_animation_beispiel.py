@@ -9,6 +9,10 @@
 #
 # Alle Bilder sollten gleich groß sein (z.B. 40x40 Pixel)
 
+import pgzrun
+from pgzero.builtins import Actor
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -97,3 +101,6 @@ def on_mouse_down(pos):
     ziel_x = pos[0]
     ziel_y = pos[1]
     ist_am_laufen = True
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

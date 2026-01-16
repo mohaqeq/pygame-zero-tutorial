@@ -2,6 +2,9 @@
 # Lerne wie man Bildschirm-Buttons erstellt
 # Tippe auf die Buttons um die Box zu bewegen
 
+import pgzrun
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -73,3 +76,6 @@ def on_mouse_down(pos):
         spieler_y = 15
     if spieler_y > 410:
         spieler_y = 410
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

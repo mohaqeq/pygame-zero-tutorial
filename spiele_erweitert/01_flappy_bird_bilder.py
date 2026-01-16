@@ -8,6 +8,8 @@
 #
 # Falls du keine Bilder hast, benutze das einfache Flappy Box Spiel!
 
+import pgzrun
+from pgzero.builtins import Actor
 import random
 
 WIDTH = 400
@@ -119,3 +121,6 @@ def on_mouse_down(pos):
         vogel_speed = 0
         roehre_x = 400
         punkte = 0
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

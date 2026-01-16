@@ -6,6 +6,9 @@
 # - alien.png (die Aliens)
 # - schuss.png (der Laserstrahl)
 
+import pgzrun
+from pgzero.builtins import Actor
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -114,7 +117,7 @@ def on_mouse_down(pos):
     if leben <= 0:
         return
 
-    # Rakete bewegen (linke Hälfte des Bildschirms)
+    # Rakete bewegen (obere Hälfte des Bildschirms)
     if pos[1] < HEIGHT - 100:
         rakete.x = pos[0]
 
@@ -129,3 +132,6 @@ def on_mouse_down(pos):
 def on_mouse_move(pos):
     if leben > 0 and pos[1] < HEIGHT - 100:
         rakete.x = pos[0]
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

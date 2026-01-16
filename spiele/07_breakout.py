@@ -2,6 +2,9 @@
 # Zerstöre alle Steine mit dem Ball!
 # Tippe oder ziehe um den Schläger zu bewegen.
 
+import pgzrun
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -134,3 +137,6 @@ def on_mouse_move(pos):
         schlaeger_x = 0
     if schlaeger_x > WIDTH - schlaeger_breite:
         schlaeger_x = WIDTH - schlaeger_breite
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

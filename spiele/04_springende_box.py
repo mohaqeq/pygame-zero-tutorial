@@ -1,6 +1,8 @@
 # === SPRINGENDE BOX ===
 # Eine Box springt über Hindernisse. Tippe um zu springen!
 
+import pgzrun
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -101,3 +103,6 @@ def on_mouse_down(pos):
         punkte = 0
         hindernis_x = 400
         geschwindigkeit = 6
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

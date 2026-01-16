@@ -2,6 +2,8 @@
 # Ein Ball fällt runter und du musst ihn fangen!
 # Tippe um den Fänger zu bewegen.
 
+import pgzrun
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -66,3 +68,6 @@ def on_mouse_down(pos):
     global faenger_x
     # Fänger bewegt sich dahin wo du tippst
     faenger_x = pos[0] - faenger_breite / 2
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

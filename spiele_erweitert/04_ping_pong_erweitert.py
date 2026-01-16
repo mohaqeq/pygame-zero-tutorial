@@ -10,6 +10,11 @@
 # - treffer.wav (wenn Ball Schläger trifft)
 # - punkt.wav (wenn jemand punktet)
 
+import pgzrun
+from pgzero.builtins import Actor
+from pygame import Rect
+import random
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -59,7 +64,6 @@ def draw():
                      color="green", fontsize=50)
 
 def erstelle_partikel(x, y, farbe):
-    import random
     for i in range(10):
         p = {
             "x": x,
@@ -130,3 +134,6 @@ def on_mouse_down(pos):
 
 def on_mouse_move(pos):
     spieler.x = pos[0]
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

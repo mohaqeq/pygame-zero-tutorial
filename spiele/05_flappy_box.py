@@ -1,6 +1,8 @@
 # === FLAPPY BOX ===
 # Wie Flappy Bird, aber mit einer Box! Tippe um nach oben zu fliegen.
 
+import pgzrun
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -98,3 +100,6 @@ def on_mouse_down(pos):
         box_speed_y = 0
         roehre_x = 400
         punkte = 0
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

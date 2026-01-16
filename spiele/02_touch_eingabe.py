@@ -1,6 +1,8 @@
 # === TOUCH EINGABE ===
 # Lerne wie man Touch-Eingaben verarbeitet
 
+import pgzrun
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -29,3 +31,6 @@ def on_mouse_down(pos):
     finger_x = pos[0]  # x-Position
     finger_y = pos[1]  # y-Position
     anzahl_tipps = anzahl_tipps + 1
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

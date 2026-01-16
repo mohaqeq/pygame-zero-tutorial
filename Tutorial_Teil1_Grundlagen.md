@@ -71,6 +71,8 @@ Jedes Spiel das du machst hat drei wichtige Teile:
 ### Das einfachste Spiel
 
 ```python
+import pgzrun
+
 # TEIL 1: EINSTELLUNGEN
 # Hier sagen wir wie groß das Fenster sein soll
 WIDTH = 400   # Breite in Pixeln (links nach rechts)
@@ -85,6 +87,9 @@ def draw():
 # Diese Funktion wird immer wieder aufgerufen
 def update():
     pass  # "pass" bedeutet: mach nichts
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ### So startest du dein Spiel
@@ -181,6 +186,9 @@ screen.draw.text("Hallo!", (150, 100), color="white", fontsize=40)
 **Ziel:** Verschiedene Formen und Text auf einem blauen Hintergrund zeigen.
 
 ```python
+import pgzrun
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -205,6 +213,9 @@ def draw():
 
     # Schritt 7: Text schreiben
     screen.draw.text("Hallo!", (150, 80), color="white", fontsize=50)
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ### Übung für dich
@@ -306,6 +317,8 @@ def on_mouse_down(pos):
 
 **Das komplette Programm:**
 ```python
+import pgzrun
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -333,6 +346,9 @@ def on_mouse_down(pos):
     kreis_x = pos[0]
     kreis_y = pos[1]
     anzahl_tipps = anzahl_tipps + 1
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ### Was du gelernt hast
@@ -400,6 +416,8 @@ def update():
 
 **Das komplette Programm:**
 ```python
+import pgzrun
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -418,6 +436,9 @@ def update():
 
     if ball_x > WIDTH + 20:
         ball_x = -20
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ### Schwerkraft simulieren
@@ -593,6 +614,8 @@ def on_mouse_down(pos):
 # Fange den Ball mit deinem Fänger!
 # Tippe um den Fänger zu bewegen.
 
+import pgzrun
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -653,6 +676,9 @@ def update():
 def on_mouse_down(pos):
     global faenger_x
     faenger_x = pos[0] - faenger_breite / 2
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ### Ideen zum Verbessern
@@ -851,6 +877,8 @@ def on_mouse_down(pos):
 # Springe über die Hindernisse!
 # Tippe um zu springen.
 
+import pgzrun
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -944,6 +972,9 @@ def on_mouse_down(pos):
         punkte = 0
         hindernis_x = 400
         geschwindigkeit = 6
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -1106,6 +1137,8 @@ def on_mouse_down(pos):
 # Fliege durch die Lücken!
 # Tippe um nach oben zu fliegen.
 
+import pgzrun
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -1193,6 +1226,9 @@ def on_mouse_down(pos):
         box_speed_y = 0
         roehre_x = 400
         punkte = 0
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -1360,6 +1396,9 @@ Diese Funktion wird aufgerufen wenn du deinen Finger über den Bildschirm ziehst
 # Spiele gegen den Computer!
 # Tippe oder ziehe um deinen Schläger zu bewegen.
 
+import pgzrun
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -1475,6 +1514,9 @@ def on_mouse_move(pos):
         spieler_x = 0
     if spieler_x > WIDTH - schlaeger_breite:
         spieler_x = WIDTH - schlaeger_breite
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -1574,6 +1616,9 @@ Wenn du Elemente aus einer Liste entfernst während du durch sie gehst, kann es 
 # === BREAKOUT ===
 # Zerstöre alle Steine!
 # Tippe oder ziehe um den Schläger zu bewegen.
+
+import pgzrun
+from pygame import Rect
 
 WIDTH = 400
 HEIGHT = 600
@@ -1704,6 +1749,9 @@ def on_mouse_move(pos):
         schlaeger_x = 0
     if schlaeger_x > WIDTH - schlaeger_breite:
         schlaeger_x = WIDTH - schlaeger_breite
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -1726,6 +1774,9 @@ Manchmal willst du Steuerungstasten auf dem Bildschirm haben, zum Beispiel Pfeil
 
 ```python
 # === SPIEL MIT BUTTONS ===
+
+import pgzrun
+from pygame import Rect
 
 WIDTH = 400
 HEIGHT = 600
@@ -1795,6 +1846,9 @@ def on_mouse_down(pos):
         spieler_y = 15
     if spieler_y > 410:
         spieler_y = 410
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -1834,11 +1888,30 @@ def on_mouse_down(pos):
 
 | Fehler | Lösung |
 |--------|--------|
+| `NameError: name 'Rect' is not defined` | Füge `from pygame import Rect` am Anfang hinzu |
 | `NameError: name 'punkte' is not defined` | Hast du `global punkte` vergessen? |
 | Nichts passiert beim Tippen | Prüfe ob `on_mouse_down(pos)` richtig geschrieben ist |
-| Das Spiel startet nicht | Hast du die Datei mit `.py` gespeichert? |
+| Das Spiel startet nicht | Hast du `import pgzrun` und `pgzrun.go()` am Ende? |
 | Der Ball geht durch den Schläger | Prüfe deine Kollisionsabfrage |
 | Variablen ändern sich nicht | Hast du alle nötigen Variablen als `global` markiert? |
+
+### Wichtig für Pydroid!
+
+In Pydroid 3 musst du IMMER diese Zeilen in deinem Code haben:
+
+**Am Anfang der Datei:**
+```python
+import pgzrun
+from pgzero.builtins import Actor  # Wenn du Actor benutzt (Teil 2)!
+from pygame import Rect  # Wenn du Rect benutzt!
+```
+
+**Am Ende der Datei:**
+```python
+pgzrun.go()
+```
+
+Ohne diese Zeilen bekommst du Fehler wie `NameError: name 'Rect' is not defined`!
 
 ---
 

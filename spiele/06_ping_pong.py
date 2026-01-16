@@ -2,6 +2,9 @@
 # Klassisches Ping Pong! Du spielst gegen den Computer.
 # Tippe oder ziehe um deinen Schläger zu bewegen.
 
+import pgzrun
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -120,3 +123,6 @@ def on_mouse_move(pos):
         spieler_x = 0
     if spieler_x > WIDTH - schlaeger_breite:
         spieler_x = WIDTH - schlaeger_breite
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

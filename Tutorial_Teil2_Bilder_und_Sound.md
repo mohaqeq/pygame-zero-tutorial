@@ -194,6 +194,9 @@ def draw():
 ```python
 # === MEIN ERSTER ACTOR ===
 
+import pgzrun
+from pgzero.builtins import Actor
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -219,6 +222,9 @@ def on_mouse_down(pos):
     # Actor springt zu Fingerposition
     spieler.x = pos[0]
     spieler.y = pos[1]
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ### Was du mit Actors machen kannst
@@ -293,6 +299,9 @@ def on_mouse_down(pos):
 **Ziel:** Wenn der Spieler eine Münze berührt, verschwindet sie.
 
 ```python
+import pgzrun
+from pgzero.builtins import Actor
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -324,6 +333,9 @@ def update():
 def on_mouse_down(pos):
     spieler.x = pos[0]
     spieler.y = pos[1]
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -386,6 +398,9 @@ Der Dateiname wird zum Befehl:
 ### Beispiel: Spiel mit Sounds
 
 ```python
+import pgzrun
+from pgzero.builtins import Actor
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -418,6 +433,9 @@ def on_mouse_down(pos):
     if punkte >= 10:
         spiel_vorbei = True
         sounds.game_over.play()
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ### Wenn Sounds nicht funktionieren
@@ -537,6 +555,8 @@ def update():
 # Benötigte Bilder: vogel.png, roehre_oben.png, roehre_unten.png
 # Benötigte Sounds: flap.wav, punkt.wav, game_over.wav
 
+import pgzrun
+from pgzero.builtins import Actor
 import random
 
 WIDTH = 400
@@ -645,6 +665,9 @@ def on_mouse_down(pos):
         vogel_speed = 0
         roehre_x = 400
         punkte = 0
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -793,6 +816,9 @@ def draw():
 # === MÜNZEN SAMMELN ===
 # Sammle Münzen und weiche Feinden aus!
 
+import pgzrun
+from pgzero.builtins import Actor
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -899,6 +925,9 @@ def on_mouse_down(pos):
         if spieler.x > WIDTH - 20: spieler.x = WIDTH - 20
         if spieler.y < 20: spieler.y = 20
         if spieler.y > HEIGHT - 20: spieler.y = HEIGHT - 20
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -985,6 +1014,10 @@ def update():
 ```python
 # === ANIMATION BEISPIEL ===
 
+import pgzrun
+from pgzero.builtins import Actor
+from pygame import Rect
+
 WIDTH = 400
 HEIGHT = 600
 
@@ -1044,6 +1077,9 @@ def on_mouse_down(pos):
     ziel_x = pos[0]
     ziel_y = pos[1]
     ist_am_laufen = True
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()
 ```
 
 ---
@@ -1173,6 +1209,25 @@ def draw():
 
 ## Problemlösungen
 
+### Wichtig für Pydroid!
+
+In Pydroid 3 musst du IMMER diese Zeilen in deinem Code haben:
+
+**Am Anfang der Datei:**
+```python
+import pgzrun
+from pgzero.builtins import Actor  # Wenn du Actor benutzt!
+from pygame import Rect  # Wenn du Rect benutzt!
+```
+
+**Am Ende der Datei:**
+```python
+pgzrun.go()
+```
+
+### "NameError: name 'Rect' is not defined"
+**Lösung:** Füge `from pygame import Rect` am Anfang deiner Datei hinzu.
+
 ### "Actor not found" Fehler
 ```
 Actor 'spieler' not found
@@ -1190,6 +1245,11 @@ AttributeError: 'module' object has no attribute 'sprung'
 1. Existiert `sounds/sprung.wav`?
 2. Ist es `.wav` oder `.ogg` (nicht `.mp3`)?
 3. Ist der Name kleingeschrieben?
+
+### Das Spiel startet nicht
+**Lösung:**
+1. Hast du `import pgzrun` am Anfang?
+2. Hast du `pgzrun.go()` am Ende?
 
 ### Bild ist zu groß/klein
 **Lösung:**

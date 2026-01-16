@@ -6,6 +6,9 @@
 # - muenze.png (ca. 30x30 Pixel)
 # - feind.png (ca. 40x40 Pixel)
 
+import pgzrun
+from pgzero.builtins import Actor
+from pygame import Rect
 import random
 
 WIDTH = 400
@@ -124,3 +127,6 @@ def on_mouse_down(pos):
             spieler.y = 20
         if spieler.y > HEIGHT - 20:
             spieler.y = HEIGHT - 20
+
+# Diese Zeile startet das Spiel!
+pgzrun.go()

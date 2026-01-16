@@ -1,232 +1,596 @@
 # Pygame Zero auf Pydroid - Teil 2: Bilder und Sound! 🎨🔊
 
-Super! Du hast Teil 1 geschafft und kannst jetzt einfache Spiele machen. In diesem Teil lernst du, wie du deine Spiele mit **Bildern** und **Sounds** noch cooler machst!
+Super! Du hast Teil 1 geschafft und kannst jetzt einfache Spiele mit Formen machen. In diesem Teil lernst du, wie du deine Spiele mit **echten Bildern** und **Sounds** noch cooler machst!
+
+**Was du am Ende kannst:**
+- Bilder statt Formen in deinen Spielen benutzen
+- Sounds abspielen wenn etwas passiert
+- Animationen erstellen
+- Deine Spiele professioneller aussehen lassen
+
+**Was du vorher können musst:**
+- Teil 1 durchgearbeitet haben
+- Ein funktionierendes Spiel (z.B. Flappy Box) haben
 
 ---
 
-## Ordnerstruktur vorbereiten
+## Kapitel 1: Vorbereitung - Ordner erstellen
 
-Pygame Zero braucht spezielle Ordner für Bilder und Sounds. So erstellst du sie:
+### Ziel dieses Kapitels
+Du erstellst die Ordnerstruktur die Pygame Zero braucht um Bilder und Sounds zu finden.
 
-### Schritt 1: Ordner erstellen
-1. Öffne den Datei-Manager auf deinem Handy
-2. Gehe zu dem Ordner wo dein Spiel gespeichert ist
-3. Erstelle zwei neue Ordner:
-   - `images` (für Bilder)
-   - `sounds` (für Sounds)
+### Warum brauchen wir spezielle Ordner?
+Pygame Zero sucht Bilder und Sounds an bestimmten Stellen. Wenn du sie woanders hinlegst, findet das Programm sie nicht!
 
-**Wichtig:** Die Ordner müssen genau so heißen! Kleingeschrieben!
+### So muss dein Projekt aussehen
 
 ```
-Dein_Spielordner/
-├── meinspiel.py
-├── images/
+MeinSpiel/              ← Dein Hauptordner
+├── meinspiel.py        ← Dein Python-Code
+├── images/             ← Ordner für BILDER
 │   ├── spieler.png
 │   └── feind.png
-└── sounds/
+└── sounds/             ← Ordner für SOUNDS
     ├── sprung.wav
     └── punkt.wav
 ```
 
+### Schritt-für-Schritt: Ordner erstellen
+
+**Schritt 1:** Öffne den Datei-Manager auf deinem Handy
+
+**Schritt 2:** Finde den Ordner wo dein Spiel gespeichert ist
+- Meistens unter: Interner Speicher → pydroid3
+
+**Schritt 3:** Erstelle einen neuen Ordner namens `images`
+- WICHTIG: Kleingeschrieben!
+- Keine Großbuchstaben!
+
+**Schritt 4:** Erstelle einen neuen Ordner namens `sounds`
+- Wieder: Kleingeschrieben!
+
+**Fertig!** Jetzt kannst du Bilder und Sounds hinzufügen.
+
+### Wichtige Regeln für Dateinamen
+
+| ✅ Richtig | ❌ Falsch |
+|-----------|----------|
+| `spieler.png` | `Spieler.png` (Großbuchstabe!) |
+| `mein_vogel.png` | `mein vogel.png` (Leerzeichen!) |
+| `feind1.png` | `feind 1.png` (Leerzeichen!) |
+| `ball.png` | `ball.PNG` (Großbuchstaben!) |
+
+**Merke dir:**
+- Nur **Kleinbuchstaben**
+- Keine **Leerzeichen** (benutze `_` stattdessen)
+- Keine **Sonderzeichen** wie ä, ö, ü
+
 ---
 
-## Bilder verwenden
+## Kapitel 2: Bilder finden oder erstellen
 
-### Bilder finden oder erstellen
+### Ziel dieses Kapitels
+Du findest oder erstellst Bilder für deine Spiele.
 
-Du kannst:
-1. **Kostenlose Bilder herunterladen** von:
-   - [OpenGameArt.org](https://opengameart.org)
-   - [Kenney.nl](https://kenney.nl/assets) (super für Anfänger!)
+### Woher bekomme ich Bilder?
 
-2. **Selbst malen** mit Apps wie:
-   - Pixel Studio (kostenlos im Play Store)
-   - Dotpict
+**Option 1: Kostenlose Bilder herunterladen**
 
-**Tipp:** Bilder sollten `.png` Format haben und nicht zu groß sein (32x32 bis 128x128 Pixel sind gut)
+Diese Webseiten haben kostenlose Spielgrafiken:
 
-### Bilder benennen
+1. **Kenney.nl** (am besten für Anfänger!)
+   - Viele einfache, schöne Bilder
+   - Alles kostenlos
+   - Suche nach "Kenney game assets"
 
-- Nur **Kleinbuchstaben** verwenden!
-- Keine Leerzeichen (benutze `_` statt Leerzeichen)
-- Beispiele: `spieler.png`, `vogel_blau.png`, `hindernis.png`
+2. **OpenGameArt.org**
+   - Sehr viele Bilder
+   - Verschiedene Stile
+   - Achte auf die Lizenz!
+
+**Option 2: Selbst malen**
+
+Es gibt Apps um Pixel-Bilder zu malen:
+
+1. **Pixel Studio** (kostenlos im Play Store)
+   - Einfach zu benutzen
+   - Perfekt für kleine Spielfiguren
+
+2. **Dotpict** (kostenlos)
+   - Sehr einfach
+   - Gut für Anfänger
+
+### Welche Größe sollten Bilder haben?
+
+| Was | Empfohlene Größe |
+|-----|-----------------|
+| Spielfigur | 32x32 oder 64x64 Pixel |
+| Feind | 32x32 oder 64x64 Pixel |
+| Münze/Item | 16x16 oder 32x32 Pixel |
+| Hintergrund | 400x600 Pixel (ganzer Bildschirm) |
+
+**Tipp:** Kleinere Bilder sind besser! Große Bilder machen das Spiel langsam.
+
+### Schritt-für-Schritt: Ein Bild herunterladen
+
+**Ziel:** Ein Vogel-Bild für Flappy Bird herunterladen.
+
+**Schritt 1:** Öffne den Browser auf deinem Handy
+
+**Schritt 2:** Suche nach "kenney bird sprite png"
+
+**Schritt 3:** Finde ein Bild das dir gefällt
+
+**Schritt 4:** Tippe lange auf das Bild → "Bild speichern"
+
+**Schritt 5:** Benenne es um zu `vogel.png` (kleingeschrieben!)
+
+**Schritt 6:** Verschiebe es in deinen `images/` Ordner
 
 ---
 
-## Actors - Spielfiguren mit Bildern
+## Kapitel 3: Actors - Spielfiguren mit Bildern
 
-In Pygame Zero heißen Spielfiguren mit Bildern **"Actors"** (Schauspieler).
+### Ziel dieses Kapitels
+Du lernst wie man Bilder als Spielfiguren benutzt.
 
-### Grundlagen
+### Was ist ein Actor?
+
+In Pygame Zero heißen Spielfiguren mit Bildern **"Actors"** (englisch für "Schauspieler"). Ein Actor ist wie ein Rechteck, aber mit einem Bild drauf!
+
+### Vergleich: Rechteck vs. Actor
+
+**Vorher (mit Rechteck):**
+```python
+spieler_x = 100
+spieler_y = 300
+
+def draw():
+    screen.draw.filled_rect(Rect(spieler_x, spieler_y, 40, 40), "red")
+```
+
+**Nachher (mit Actor):**
+```python
+spieler = Actor("spieler")  # Lädt images/spieler.png
+spieler.x = 100
+spieler.y = 300
+
+def draw():
+    spieler.draw()
+```
+
+**Was ist besser am Actor?**
+- Zeigt ein echtes Bild
+- Einfacher zu bewegen
+- Hat eingebaute Kollisionserkennung
+
+### Schritt-für-Schritt: Deinen ersten Actor erstellen
+
+**Ziel:** Ein Bild auf dem Bildschirm anzeigen.
+
+**Vorbereitung:** Du brauchst ein Bild namens `spieler.png` im `images/` Ordner.
+
+**Schritt 1:** Actor erstellen
+```python
+# Der Name in Klammern ist der Dateiname OHNE .png
+spieler = Actor("spieler")
+```
+
+**Schritt 2:** Position setzen
+```python
+spieler.x = 200  # Horizontal (links/rechts)
+spieler.y = 300  # Vertikal (oben/unten)
+```
+
+**Schritt 3:** Actor zeichnen
+```python
+def draw():
+    screen.fill("skyblue")
+    spieler.draw()  # Das ist alles!
+```
+
+### Komplettes Beispiel
 
 ```python
-# === ACTOR GRUNDLAGEN ===
+# === MEIN ERSTER ACTOR ===
 
 WIDTH = 400
 HEIGHT = 600
 
-# Actor erstellen - das Bild muss in /images/ sein!
-# Ohne .png Endung schreiben!
+# Actor erstellen
+# WICHTIG: "spieler" bedeutet → images/spieler.png muss existieren!
 spieler = Actor("spieler")
-
-# Position setzen
 spieler.x = 200
 spieler.y = 300
 
 def draw():
     screen.fill("skyblue")
-    spieler.draw()  # Actor zeichnen
+    spieler.draw()
 
 def update():
-    # Actor bewegen
+    # Actor nach rechts bewegen
     spieler.x = spieler.x + 2
 
-    # Wenn er rechts raus ist, links wieder rein
+    # Wenn rechts raus, links wieder rein
     if spieler.x > WIDTH + 50:
         spieler.x = -50
 
 def on_mouse_down(pos):
-    # Position ändern wenn getippt wird
+    # Actor springt zu Fingerposition
     spieler.x = pos[0]
     spieler.y = pos[1]
 ```
 
-**Erklärung:**
-- `Actor("spieler")` lädt das Bild `images/spieler.png`
-- `spieler.draw()` zeichnet den Actor auf den Bildschirm
-- `spieler.x` und `spieler.y` sind die Position
+### Was du mit Actors machen kannst
 
-### Nützliche Actor-Eigenschaften
+| Was | Wie | Beispiel |
+|-----|-----|----------|
+| Position ändern | `.x` und `.y` | `spieler.x = 100` |
+| Bild wechseln | `.image` | `spieler.image = "spieler_springt"` |
+| Drehen | `.angle` | `spieler.angle = 45` |
+| Größe ändern | `.scale` | `spieler.scale = 2` |
+| Breite abfragen | `.width` | `print(spieler.width)` |
+| Höhe abfragen | `.height` | `print(spieler.height)` |
+
+### Bild wechseln (für Animationen)
+
+**Ziel:** Der Spieler sieht anders aus wenn er springt.
 
 ```python
-# Position
-spieler.x = 100          # Horizontale Position
-spieler.y = 200          # Vertikale Position
-spieler.pos = (100, 200) # Beide zusammen
+def on_mouse_down(pos):
+    spieler.image = "spieler_springt"  # Bild wechseln
 
-# Bild wechseln
-spieler.image = "spieler_springt"  # Lädt images/spieler_springt.png
-
-# Größe herausfinden
-breite = spieler.width
-hoehe = spieler.height
-
-# Drehen
-spieler.angle = 45  # 45 Grad drehen
-
-# Spiegeln/Skalieren
-spieler.scale = 2  # Doppelt so groß
+def update():
+    # ... wenn auf dem Boden ...
+    spieler.image = "spieler"  # Zurück zum normalen Bild
 ```
 
-### Kollisionen prüfen
+**Du brauchst dafür:**
+- `images/spieler.png` (normales Bild)
+- `images/spieler_springt.png` (Sprung-Bild)
 
+---
+
+## Kapitel 4: Kollisionen mit Actors
+
+### Ziel dieses Kapitels
+Du lernst wie man prüft ob sich zwei Actors berühren.
+
+### Warum ist das einfacher als vorher?
+
+**Vorher (Teil 1) - Kompliziert:**
 ```python
-# Prüfen ob zwei Actors sich berühren
+# Manuell prüfen ob sich Rechtecke überlappen
+if spieler_x + spieler_breite > feind_x and spieler_x < feind_x + feind_breite:
+    if spieler_y + spieler_hoehe > feind_y and spieler_y < feind_y + feind_hoehe:
+        print("Getroffen!")
+```
+
+**Mit Actors - Einfach:**
+```python
+# Ein Befehl!
 if spieler.colliderect(feind):
     print("Getroffen!")
+```
 
-# Prüfen ob Actor einen Punkt berührt
-if spieler.collidepoint(pos):
-    print("Angeklickt!")
+### Die wichtigsten Kollisions-Befehle
+
+**1. colliderect() - Berührt einen anderen Actor?**
+```python
+if spieler.colliderect(feind):
+    print("Spieler berührt Feind!")
+```
+
+**2. collidepoint() - Wurde angeklickt/getippt?**
+```python
+def on_mouse_down(pos):
+    if spieler.collidepoint(pos):
+        print("Spieler wurde angetippt!")
+```
+
+### Beispiel: Münzen sammeln
+
+**Ziel:** Wenn der Spieler eine Münze berührt, verschwindet sie.
+
+```python
+WIDTH = 400
+HEIGHT = 600
+
+spieler = Actor("spieler")
+spieler.pos = (200, 500)
+
+muenze = Actor("muenze")
+muenze.pos = (200, 200)
+
+punkte = 0
+muenze_da = True
+
+def draw():
+    screen.fill("darkgreen")
+    spieler.draw()
+    if muenze_da:
+        muenze.draw()
+    screen.draw.text(f"Punkte: {punkte}", (10, 10), color="white", fontsize=30)
+
+def update():
+    global punkte, muenze_da
+
+    # Prüfen ob Spieler Münze berührt
+    if muenze_da and spieler.colliderect(muenze):
+        punkte = punkte + 1
+        muenze_da = False
+        # Hier könnte man auch: sounds.muenze.play()
+
+def on_mouse_down(pos):
+    spieler.x = pos[0]
+    spieler.y = pos[1]
 ```
 
 ---
 
-## Sounds verwenden
+## Kapitel 5: Sounds hinzufügen
+
+### Ziel dieses Kapitels
+Du lernst wie man Sounds in dein Spiel einbaut.
 
 ### Sound-Dateien vorbereiten
 
-- Sounds müssen `.wav` oder `.ogg` Format haben
-- In den `sounds/` Ordner legen
-- Kleinbuchstaben und keine Leerzeichen!
+**Welche Formate funktionieren?**
+- `.wav` (am besten!)
+- `.ogg` (auch gut)
 
-### Kostenlose Sounds finden
+**MP3 funktioniert NICHT immer!** Konvertiere MP3 zu WAV.
 
-- [Freesound.org](https://freesound.org)
-- [OpenGameArt.org](https://opengameart.org)
+### Woher bekomme ich Sounds?
 
-### Sounds abspielen
+1. **Freesound.org** - Viele kostenlose Sounds
+2. **OpenGameArt.org** - Auch Sounds für Spiele
+3. **Selber aufnehmen** - Mit dem Handy!
+
+### Schritt-für-Schritt: Einen Sound hinzufügen
+
+**Ziel:** Einen "Sprung" Sound abspielen.
+
+**Schritt 1:** Sound-Datei finden
+- Suche nach "jump sound effect free wav"
+- Lade eine .wav Datei herunter
+
+**Schritt 2:** Datei umbenennen
+- Nenne sie `sprung.wav` (kleingeschrieben!)
+
+**Schritt 3:** In sounds/ Ordner verschieben
+- Die Datei muss in `sounds/sprung.wav` sein
+
+**Schritt 4:** Im Code abspielen
+```python
+def on_mouse_down(pos):
+    sounds.sprung.play()  # Das ist alles!
+```
+
+### Wichtig: Wie Sounds benannt werden
+
+Der Dateiname wird zum Befehl:
+
+| Dateiname | Befehl im Code |
+|-----------|---------------|
+| `sounds/sprung.wav` | `sounds.sprung.play()` |
+| `sounds/punkt.wav` | `sounds.punkt.play()` |
+| `sounds/game_over.wav` | `sounds.game_over.play()` |
+| `sounds/muenze_sammel.wav` | `sounds.muenze_sammel.play()` |
+
+**Achte auf:**
+- Kleinbuchstaben
+- Unterstriche statt Leerzeichen
+- Keine Bindestriche (-)
+
+### Beispiel: Spiel mit Sounds
 
 ```python
-# Sound abspielen (muss in sounds/ Ordner sein)
-sounds.sprung.play()      # Spielt sounds/sprung.wav
-sounds.punkt.play()       # Spielt sounds/punkt.wav
-sounds.game_over.play()   # Spielt sounds/game_over.wav
+WIDTH = 400
+HEIGHT = 600
+
+spieler = Actor("spieler")
+spieler.pos = (100, 500)
+
+punkte = 0
+spiel_vorbei = False
+
+def draw():
+    screen.fill("skyblue")
+    spieler.draw()
+    screen.draw.text(f"Punkte: {punkte}", (10, 10), color="black", fontsize=30)
+
+    if spiel_vorbei:
+        screen.draw.text("GAME OVER", (100, 250), color="red", fontsize=50)
+
+def on_mouse_down(pos):
+    global punkte, spiel_vorbei
+
+    if not spiel_vorbei:
+        # Sprung-Sound abspielen
+        sounds.sprung.play()
+        spieler.x = pos[0]
+
+        # Punkt sammeln (Beispiel)
+        punkte = punkte + 1
+        sounds.punkt.play()
+
+    if punkte >= 10:
+        spiel_vorbei = True
+        sounds.game_over.play()
 ```
+
+### Wenn Sounds nicht funktionieren
+
+**Problem:** `AttributeError: 'module' object has no attribute 'sprung'`
+
+**Lösung:**
+1. Prüfe ob die Datei im `sounds/` Ordner ist
+2. Prüfe ob der Name kleingeschrieben ist
+3. Prüfe ob es `.wav` oder `.ogg` ist (nicht `.mp3`)
 
 ---
 
-# Spiel 1: Flappy Bird mit Bildern 🐦
+## Kapitel 6: Flappy Bird mit Bildern und Sound
 
-Jetzt machen wir Flappy Bird mit echten Bildern!
+### Ziel dieses Kapitels
+Du baust das Flappy Box Spiel zu einem echten Flappy Bird um!
 
-### Benötigte Bilder
-Erstelle oder lade diese Bilder herunter und speichere sie in `images/`:
-- `vogel.png` - Ein Vogel (ca. 40x30 Pixel)
-- `roehre_oben.png` - Röhre die nach unten zeigt
-- `roehre_unten.png` - Röhre die nach oben zeigt
+### Was du brauchst
 
-**Oder:** Benutze einfache Quadrate als Platzhalter!
+**Bilder (in `images/` Ordner):**
+- `vogel.png` - Dein Vogel (ca. 40x30 Pixel)
+- `roehre_oben.png` - Röhre von oben
+- `roehre_unten.png` - Röhre von unten
+
+**Sounds (in `sounds/` Ordner):**
+- `flap.wav` - Flügelschlag beim Tippen
+- `punkt.wav` - Wenn du durch eine Röhre kommst
+- `game_over.wav` - Wenn du stirbst
+
+### Schritt 1: Actors statt Rechtecke
+
+**Vorher (Box):**
+```python
+box_x = 100
+box_y = 300
+
+def draw():
+    screen.draw.filled_rect(Rect(box_x, box_y, 30, 30), "yellow")
+```
+
+**Nachher (Vogel Actor):**
+```python
+vogel = Actor("vogel")
+vogel.x = 100
+vogel.y = 300
+
+def draw():
+    vogel.draw()
+```
+
+### Schritt 2: Röhren als Actors
 
 ```python
-# === FLAPPY BIRD MIT BILDERN ===
+roehre_oben = Actor("roehre_oben")
+roehre_unten = Actor("roehre_unten")
+
+def setze_roehren_position():
+    # Obere Röhre: Unterkante bei luecke_y
+    roehre_oben.midbottom = (roehre_x, luecke_y)
+    # Untere Röhre: Oberkante bei luecke_y + luecke_hoehe
+    roehre_unten.midtop = (roehre_x, luecke_y + luecke_hoehe)
+```
+
+**Was ist `midbottom` und `midtop`?**
+- `midbottom` = Die Mitte der Unterkante
+- `midtop` = Die Mitte der Oberkante
+
+Das macht das Positionieren einfacher!
+
+### Schritt 3: Kollision mit Actors
+
+**Vorher (kompliziert):**
+```python
+if box_x + box_groesse > roehre_x and box_x < roehre_x + roehre_breite:
+    if box_y < luecke_y or box_y + box_groesse > luecke_y + luecke_hoehe:
+        spiel_laeuft = False
+```
+
+**Nachher (einfach):**
+```python
+if vogel.colliderect(roehre_oben) or vogel.colliderect(roehre_unten):
+    spiel_laeuft = False
+    sounds.game_over.play()
+```
+
+### Schritt 4: Sound beim Flügelschlag
+
+```python
+def on_mouse_down(pos):
+    global vogel_speed
+
+    if spiel_laeuft:
+        vogel_speed = sprung_kraft
+        sounds.flap.play()  # Flügelschlag-Sound!
+```
+
+### Schritt 5: Vogel dreht sich
+
+Der Vogel soll nach oben zeigen wenn er steigt und nach unten wenn er fällt:
+
+```python
+def update():
+    # ... andere Code ...
+
+    # Vogel dreht sich basierend auf Geschwindigkeit
+    if vogel_speed < 0:
+        vogel.angle = 15   # Nach oben schauen
+    else:
+        vogel.angle = -15  # Nach unten schauen
+```
+
+### Das komplette Spiel
+
+```python
+# === FLAPPY BIRD MIT BILDERN UND SOUND ===
+# Benötigte Bilder: vogel.png, roehre_oben.png, roehre_unten.png
+# Benötigte Sounds: flap.wav, punkt.wav, game_over.wav
+
 import random
 
 WIDTH = 400
 HEIGHT = 600
 
-# Vogel Actor
-vogel = Actor("vogel")  # Lädt images/vogel.png
+# === DER VOGEL ===
+vogel = Actor("vogel")
 vogel.x = 100
 vogel.y = 300
 
-# Bewegung
 vogel_speed = 0
 schwerkraft = 0.5
 sprung_kraft = -10
 
-# Röhren (wir benutzen Actors)
+# === DIE RÖHREN ===
 roehre_oben = Actor("roehre_oben")
 roehre_unten = Actor("roehre_unten")
 
-# Röhren Position
 roehre_x = 400
 luecke_y = 250
 luecke_hoehe = 180
 roehre_speed = 4
 
-# Spielstand
+# === SPIELSTAND ===
 punkte = 0
 spiel_laeuft = True
 
-def setze_roehren():
-    # Röhren an die richtige Position setzen
+def setze_roehren_position():
     roehre_oben.midbottom = (roehre_x, luecke_y)
     roehre_unten.midtop = (roehre_x, luecke_y + luecke_hoehe)
 
-setze_roehren()
+# Am Anfang positionieren
+setze_roehren_position()
 
 def draw():
+    # Himmel
     screen.fill("skyblue")
 
-    # Wolken zeichnen (nur Deko)
+    # Wolken (Dekoration)
     screen.draw.filled_circle((100, 80), 30, "white")
     screen.draw.filled_circle((130, 80), 40, "white")
     screen.draw.filled_circle((160, 80), 30, "white")
 
-    screen.draw.filled_circle((300, 120), 25, "white")
-    screen.draw.filled_circle((330, 120), 35, "white")
-
-    # Röhren zeichnen
+    # Röhren
     roehre_oben.draw()
     roehre_unten.draw()
 
-    # Vogel zeichnen
+    # Vogel
     vogel.draw()
 
     # Punkte
     screen.draw.text(f"{punkte}", (WIDTH/2 - 20, 30), color="white", fontsize=60)
 
+    # Game Over
     if not spiel_laeuft:
         screen.draw.text("GAME OVER", (80, 250), color="red", fontsize=50)
         screen.draw.text("Tippe zum Neustarten", (70, 320), color="white", fontsize=25)
@@ -241,39 +605,39 @@ def update():
     vogel_speed = vogel_speed + schwerkraft
     vogel.y = vogel.y + vogel_speed
 
-    # Vogel dreht sich basierend auf Geschwindigkeit
+    # Vogel dreht sich
     if vogel_speed < 0:
-        vogel.angle = 20  # Nach oben zeigen
+        vogel.angle = 15
     else:
-        vogel.angle = -20  # Nach unten zeigen
+        vogel.angle = -15
 
     # Röhren bewegen
     roehre_x = roehre_x - roehre_speed
-    setze_roehren()
+    setze_roehren_position()
 
     # Neue Röhren
     if roehre_x < -50:
         roehre_x = WIDTH + 50
         luecke_y = random.randint(100, HEIGHT - luecke_hoehe - 100)
         punkte = punkte + 1
-        # Sound abspielen (wenn du einen hast)
-        # sounds.punkt.play()
+        sounds.punkt.play()
 
     # Kollision mit Röhren
     if vogel.colliderect(roehre_oben) or vogel.colliderect(roehre_unten):
         spiel_laeuft = False
-        # sounds.game_over.play()
+        sounds.game_over.play()
 
     # Kollision mit Rand
     if vogel.y < 0 or vogel.y > HEIGHT:
         spiel_laeuft = False
+        sounds.game_over.play()
 
 def on_mouse_down(pos):
     global vogel_speed, spiel_laeuft, roehre_x, punkte
 
     if spiel_laeuft:
         vogel_speed = sprung_kraft
-        # sounds.sprung.play()
+        sounds.flap.play()
     else:
         # Neustart
         spiel_laeuft = True
@@ -285,17 +649,150 @@ def on_mouse_down(pos):
 
 ---
 
-# Spiel 2: Sammle die Münzen 💰
+## Kapitel 7: Münzen sammeln Spiel
 
-Ein Spiel wo du Münzen sammeln musst!
+### Ziel dieses Kapitels
+Du baust ein Spiel wo du Münzen sammelst und Feinden ausweichst.
 
-### Benötigte Bilder
-- `spieler.png` - Deine Spielfigur (ca. 40x40 Pixel)
-- `muenze.png` - Eine Münze (ca. 30x30 Pixel)
-- `feind.png` - Ein Hindernis/Feind (ca. 40x40 Pixel)
+### Was du brauchst
+
+**Bilder:**
+- `spieler.png` - Deine Spielfigur
+- `muenze.png` - Eine Münze
+- `feind.png` - Ein Feind/Monster
+
+**Sounds:**
+- `muenze.wav` - Wenn Münze gesammelt
+- `autsch.wav` - Wenn Feind berührt
+
+### Das Spielkonzept
+
+```
+┌─────────────────────────────────────────┐
+│  • Spieler folgt deinem Finger          │
+│  • Sammle Münzen = Punkte               │
+│  • Feinde bewegen sich hin und her      │
+│  • Berührst du einen Feind = Leben weg  │
+│  • 3 Leben, dann Game Over              │
+└─────────────────────────────────────────┘
+```
+
+### Schritt 1: Listen von Actors
+
+**Ziel:** Mehrere Münzen und Feinde erstellen.
+
+```python
+import random
+
+# Münzen-Liste erstellen
+muenzen = []
+for i in range(5):  # 5 Münzen
+    muenze = Actor("muenze")
+    muenze.x = random.randint(30, WIDTH - 30)
+    muenze.y = random.randint(50, 400)
+    muenzen.append(muenze)
+
+# Feinde-Liste erstellen
+feinde = []
+for i in range(3):  # 3 Feinde
+    feind = Actor("feind")
+    feind.x = random.randint(30, WIDTH - 30)
+    feind.y = random.randint(100, 300)
+    feind.speed_x = random.choice([-3, 3])  # Links oder rechts
+    feinde.append(feind)
+```
+
+**Was macht `random.choice([-3, 3])`?**
+Es wählt zufällig einen Wert aus der Liste. Also entweder -3 (nach links) oder 3 (nach rechts).
+
+### Schritt 2: Alle Actors zeichnen
+
+```python
+def draw():
+    screen.fill("darkgreen")
+
+    # Alle Münzen zeichnen
+    for muenze in muenzen:
+        muenze.draw()
+
+    # Alle Feinde zeichnen
+    for feind in feinde:
+        feind.draw()
+
+    # Spieler
+    spieler.draw()
+```
+
+### Schritt 3: Feinde bewegen
+
+```python
+def update():
+    # Feinde hin und her bewegen
+    for feind in feinde:
+        feind.x = feind.x + feind.speed_x
+
+        # Am Rand umdrehen
+        if feind.x < 30 or feind.x > WIDTH - 30:
+            feind.speed_x = -feind.speed_x  # Richtung umkehren
+```
+
+### Schritt 4: Münzen sammeln
+
+```python
+def update():
+    global punkte
+    # ... Feinde-Code ...
+
+    # Münzen sammeln
+    for muenze in muenzen[:]:  # [:] macht eine Kopie!
+        if spieler.colliderect(muenze):
+            muenzen.remove(muenze)  # Münze entfernen
+            punkte = punkte + 1
+            sounds.muenze.play()
+
+            # Neue Münze erstellen
+            neue_muenze = Actor("muenze")
+            neue_muenze.x = random.randint(30, WIDTH - 30)
+            neue_muenze.y = random.randint(50, 400)
+            muenzen.append(neue_muenze)
+```
+
+### Schritt 5: Unverwundbarkeit nach Treffer
+
+**Problem:** Wenn du einen Feind berührst, verlierst du sofort alle Leben!
+
+**Lösung:** Nach einem Treffer bist du kurz unverwundbar.
+
+```python
+unverwundbar = 0  # Timer
+
+def update():
+    global leben, unverwundbar
+
+    # Timer runterzählen
+    if unverwundbar > 0:
+        unverwundbar = unverwundbar - 1
+
+    # Feind-Kollision nur wenn nicht unverwundbar
+    if unverwundbar <= 0:
+        for feind in feinde:
+            if spieler.colliderect(feind):
+                leben = leben - 1
+                unverwundbar = 120  # 2 Sekunden unverwundbar (60 FPS × 2)
+                sounds.autsch.play()
+
+def draw():
+    # Spieler blinkt wenn unverwundbar
+    if unverwundbar <= 0 or unverwundbar % 10 < 5:
+        spieler.draw()
+```
+
+### Das komplette Spiel
 
 ```python
 # === MÜNZEN SAMMELN ===
+# Sammle Münzen und weiche Feinden aus!
+
 import random
 
 WIDTH = 400
@@ -306,7 +803,7 @@ spieler = Actor("spieler")
 spieler.x = 200
 spieler.y = 500
 
-# Münzen Liste
+# Münzen erstellen
 muenzen = []
 for i in range(5):
     muenze = Actor("muenze")
@@ -314,19 +811,19 @@ for i in range(5):
     muenze.y = random.randint(50, 400)
     muenzen.append(muenze)
 
-# Feinde Liste
+# Feinde erstellen
 feinde = []
 for i in range(3):
     feind = Actor("feind")
     feind.x = random.randint(30, WIDTH - 30)
     feind.y = random.randint(100, 300)
-    feind.speed_x = random.choice([-3, 3])  # Links oder rechts
+    feind.speed_x = random.choice([-3, 3])
     feinde.append(feind)
 
 # Spielstand
 punkte = 0
 leben = 3
-unverwundbar = 0  # Timer für Unverwundbarkeit
+unverwundbar = 0
 
 def draw():
     screen.fill("darkgreen")
@@ -337,43 +834,38 @@ def draw():
             if (x + y) % 40 == 0:
                 screen.draw.filled_rect(Rect(x, y, 20, 20), "green")
 
-    # Münzen zeichnen
+    # Münzen
     for muenze in muenzen:
         muenze.draw()
 
-    # Feinde zeichnen
+    # Feinde
     for feind in feinde:
         feind.draw()
 
-    # Spieler zeichnen (blinkt wenn unverwundbar)
+    # Spieler (blinkt wenn unverwundbar)
     if unverwundbar <= 0 or unverwundbar % 10 < 5:
         spieler.draw()
 
-    # Info anzeigen
+    # Info
     screen.draw.text(f"Münzen: {punkte}", (10, 10), color="yellow", fontsize=30)
     screen.draw.text(f"Leben: {leben}", (10, 50), color="red", fontsize=30)
 
     if leben <= 0:
         screen.draw.text("GAME OVER", (100, 280), color="red", fontsize=45)
 
-    if len(muenzen) == 0:
-        screen.draw.text("GEWONNEN!", (110, 280), color="yellow", fontsize=50)
-
 def update():
     global punkte, leben, unverwundbar
 
-    if leben <= 0 or len(muenzen) == 0:
+    if leben <= 0:
         return
 
-    # Unverwundbarkeits-Timer
+    # Unverwundbar-Timer
     if unverwundbar > 0:
         unverwundbar = unverwundbar - 1
 
     # Feinde bewegen
     for feind in feinde:
         feind.x = feind.x + feind.speed_x
-
-        # Am Rand umdrehen
         if feind.x < 30 or feind.x > WIDTH - 30:
             feind.speed_x = -feind.speed_x
 
@@ -382,9 +874,8 @@ def update():
         if spieler.colliderect(muenze):
             muenzen.remove(muenze)
             punkte = punkte + 1
-            # sounds.muenze.play()
+            sounds.muenze.play()
 
-            # Neue Münze erstellen
             neue_muenze = Actor("muenze")
             neue_muenze.x = random.randint(30, WIDTH - 30)
             neue_muenze.y = random.randint(50, 400)
@@ -395,231 +886,176 @@ def update():
         for feind in feinde:
             if spieler.colliderect(feind):
                 leben = leben - 1
-                unverwundbar = 120  # 2 Sekunden unverwundbar
-                # sounds.autsch.play()
+                unverwundbar = 120
+                sounds.autsch.play()
 
 def on_mouse_down(pos):
-    global spieler
-
-    if leben > 0 and len(muenzen) > 0:
+    if leben > 0:
         spieler.x = pos[0]
         spieler.y = pos[1]
 
-        # Nicht aus dem Bildschirm
-        if spieler.x < 20:
-            spieler.x = 20
-        if spieler.x > WIDTH - 20:
-            spieler.x = WIDTH - 20
-        if spieler.y < 20:
-            spieler.y = 20
-        if spieler.y > HEIGHT - 20:
-            spieler.y = HEIGHT - 20
+        # Grenzen
+        if spieler.x < 20: spieler.x = 20
+        if spieler.x > WIDTH - 20: spieler.x = WIDTH - 20
+        if spieler.y < 20: spieler.y = 20
+        if spieler.y > HEIGHT - 20: spieler.y = HEIGHT - 20
 ```
 
 ---
 
-# Spiel 3: Space Shooter 🚀
+## Kapitel 8: Animationen
 
-Schieße auf Aliens!
+### Ziel dieses Kapitels
+Du lernst wie man Bilder wechselt um Animationen zu erstellen.
 
-### Benötigte Bilder
-- `rakete.png` - Dein Raumschiff
-- `alien.png` - Die Aliens
-- `schuss.png` - Ein kleiner Laserstrahl
+### Was ist eine Animation?
+
+Eine Animation ist, wenn Bilder schnell hintereinander gezeigt werden:
+
+```
+Bild 1:  🚶      (Bein vorne)
+Bild 2:  🚶      (Bein hinten)
+Bild 3:  🚶      (Bein vorne)
+... und so weiter
+
+→ Sieht aus wie Laufen!
+```
+
+### Bilder für Animation vorbereiten
+
+Du brauchst mehrere Bilder mit Nummern:
+- `images/laufen1.png`
+- `images/laufen2.png`
+- `images/laufen3.png`
+- `images/laufen4.png`
+
+### Schritt-für-Schritt: Einfache Animation
+
+**Schritt 1:** Liste mit Bildnamen
+```python
+animation_bilder = ["laufen1", "laufen2", "laufen3", "laufen4"]
+animation_frame = 0  # Welches Bild gerade?
+animation_timer = 0  # Zähler für Bildwechsel
+```
+
+**Schritt 2:** In update() Bilder wechseln
+```python
+def update():
+    global animation_timer, animation_frame
+
+    animation_timer = animation_timer + 1
+
+    # Alle 10 Frames Bild wechseln
+    if animation_timer >= 10:
+        animation_timer = 0
+        animation_frame = animation_frame + 1
+
+        # Zurück zum ersten Bild wenn am Ende
+        if animation_frame >= len(animation_bilder):
+            animation_frame = 0
+
+        # Bild des Actors ändern
+        spieler.image = animation_bilder[animation_frame]
+```
+
+### Animation nur beim Bewegen
+
+**Ziel:** Animation läuft nur wenn der Spieler sich bewegt.
 
 ```python
-# === SPACE SHOOTER ===
-import random
-
-WIDTH = 400
-HEIGHT = 600
-
-# Raumschiff
-rakete = Actor("rakete")
-rakete.x = 200
-rakete.midbottom = (200, HEIGHT - 20)
-
-# Schüsse
-schuesse = []
-
-# Aliens
-aliens = []
-alien_timer = 0
-
-# Spielstand
-punkte = 0
-leben = 3
-
-def erstelle_alien():
-    alien = Actor("alien")
-    alien.x = random.randint(50, WIDTH - 50)
-    alien.y = -30
-    alien.speed = random.uniform(2, 5)  # Zufällige Geschwindigkeit
-    aliens.append(alien)
-
-def draw():
-    # Weltraum-Hintergrund
-    screen.fill("black")
-
-    # Sterne
-    import random
-    random.seed(42)  # Immer gleiche Sterne
-    for i in range(50):
-        x = random.randint(0, WIDTH)
-        y = random.randint(0, HEIGHT)
-        screen.draw.filled_circle((x, y), 1, "white")
-
-    # Schüsse zeichnen
-    for schuss in schuesse:
-        schuss.draw()
-
-    # Aliens zeichnen
-    for alien in aliens:
-        alien.draw()
-
-    # Rakete zeichnen
-    rakete.draw()
-
-    # Info
-    screen.draw.text(f"Punkte: {punkte}", (10, 10), color="white", fontsize=30)
-    screen.draw.text(f"Leben: {leben}", (10, 50), color="red", fontsize=30)
-
-    # Schieß-Button
-    screen.draw.filled_rect(Rect(WIDTH/2 - 50, HEIGHT - 80, 100, 50), "red")
-    screen.draw.text("FEUER!", (WIDTH/2 - 35, HEIGHT - 70), color="white", fontsize=25)
-
-    if leben <= 0:
-        screen.draw.text("GAME OVER", (100, 280), color="red", fontsize=45)
+ist_am_laufen = False
 
 def update():
-    global alien_timer, punkte, leben
+    global animation_timer, animation_frame
 
-    if leben <= 0:
-        return
-
-    # Neue Aliens erstellen
-    alien_timer = alien_timer + 1
-    if alien_timer > 60:  # Alle 60 Frames
-        erstelle_alien()
-        alien_timer = 0
-
-    # Schüsse bewegen
-    for schuss in schuesse[:]:
-        schuss.y = schuss.y - 10
-
-        # Schuss aus dem Bildschirm?
-        if schuss.y < -20:
-            schuesse.remove(schuss)
-
-    # Aliens bewegen
-    for alien in aliens[:]:
-        alien.y = alien.y + alien.speed
-
-        # Alien unten angekommen?
-        if alien.y > HEIGHT + 30:
-            aliens.remove(alien)
-            leben = leben - 1
-            # sounds.autsch.play()
-
-    # Treffer prüfen
-    for schuss in schuesse[:]:
-        for alien in aliens[:]:
-            if schuss.colliderect(alien):
-                if schuss in schuesse:
-                    schuesse.remove(schuss)
-                aliens.remove(alien)
-                punkte = punkte + 10
-                # sounds.explosion.play()
-                break
-
-def on_mouse_down(pos):
-    global rakete
-
-    if leben <= 0:
-        return
-
-    # Rakete bewegen (linke Hälfte des Bildschirms)
-    if pos[1] < HEIGHT - 100:
-        rakete.x = pos[0]
-
-    # Schieß-Button gedrückt?
-    feuer_button = Rect(WIDTH/2 - 50, HEIGHT - 80, 100, 50)
-    if feuer_button.collidepoint(pos):
-        schuss = Actor("schuss")
-        schuss.midbottom = rakete.midtop
-        schuesse.append(schuss)
-        # sounds.schuss.play()
-
-def on_mouse_move(pos):
-    if leben > 0 and pos[1] < HEIGHT - 100:
-        rakete.x = pos[0]
+    if ist_am_laufen:
+        # Animation abspielen
+        animation_timer = animation_timer + 1
+        if animation_timer >= 10:
+            animation_timer = 0
+            animation_frame = (animation_frame + 1) % len(animation_bilder)
+            spieler.image = animation_bilder[animation_frame]
+    else:
+        # Stehendes Bild zeigen
+        spieler.image = "spieler_stehen"
 ```
 
----
-
-# Spiel 4: Verbessertes Ping Pong 🏓
-
-Ping Pong mit Bildern und Sounds!
-
-### Benötigte Bilder
-- `schlaeger_gruen.png` - Dein Schläger
-- `schlaeger_rot.png` - Computer-Schläger
-- `ball.png` - Der Ball
-
-### Benötigte Sounds
-- `treffer.wav` - Wenn Ball Schläger trifft
-- `punkt.wav` - Wenn jemand punktet
+### Komplettes Animationsbeispiel
 
 ```python
-# === VERBESSERTES PING PONG ===
+# === ANIMATION BEISPIEL ===
 
 WIDTH = 400
 HEIGHT = 600
 
-# Ball
-ball = Actor("ball")
-ball.x = 200
-ball.y = 300
-ball_speed_x = 5
-ball_speed_y = 5
+# Spieler
+spieler = Actor("laufen1")
+spieler.pos = (200, 300)
 
-# Spieler Schläger
-spieler = Actor("schlaeger_gruen")
-spieler.midbottom = (200, HEIGHT - 20)
+# Animation
+animation_bilder = ["laufen1", "laufen2", "laufen3", "laufen4"]
+animation_frame = 0
+animation_timer = 0
 
-# Computer Schläger
-computer = Actor("schlaeger_rot")
-computer.midtop = (200, 20)
-computer_speed = 4
-
-# Punkte
-spieler_punkte = 0
-computer_punkte = 0
-
-# Partikel für Effekte
-partikel = []
+# Bewegung
+ziel_x = 200
+ziel_y = 300
+ist_am_laufen = False
 
 def draw():
-    screen.fill("black")
-
-    # Spielfeld
-    screen.draw.line((0, HEIGHT/2), (WIDTH, HEIGHT/2), "gray")
-    screen.draw.rect(Rect(5, 5, WIDTH-10, HEIGHT-10), "white")
-
-    # Partikel zeichnen
-    for p in partikel:
-        screen.draw.filled_circle((int(p["x"]), int(p["y"])), int(p["size"]), p["farbe"])
-
-    # Schläger und Ball
-    computer.draw()
+    screen.fill("lightblue")
+    screen.draw.filled_rect(Rect(0, 450, WIDTH, 150), "green")
     spieler.draw()
-    ball.draw()
+    screen.draw.text("Tippe irgendwo!", (100, 30), color="black", fontsize=25)
 
-    # Punkte
-    screen.draw.text(f"{computer_punkte}", (WIDTH/2 - 50, HEIGHT/2 - 60),
-                     color="red", fontsize=50)
-    screen.draw.text(f"{spieler_punkte}", (WIDTH/2 - 50, HEIGHT/2 + 20),
-                     color="green", fontsize=50)
+def update():
+    global animation_timer, animation_frame, ist_am_laufen
+
+    if ist_am_laufen:
+        # Zum Ziel bewegen
+        speed = 4
+        diff_x = ziel_x - spieler.x
+        diff_y = ziel_y - spieler.y
+
+        if abs(diff_x) > speed:
+            spieler.x = spieler.x + (speed if diff_x > 0 else -speed)
+        else:
+            spieler.x = ziel_x
+
+        if abs(diff_y) > speed:
+            spieler.y = spieler.y + (speed if diff_y > 0 else -speed)
+        else:
+            spieler.y = ziel_y
+
+        # Angekommen?
+        if spieler.x == ziel_x and spieler.y == ziel_y:
+            ist_am_laufen = False
+            spieler.image = animation_bilder[0]
+
+        # Animation
+        animation_timer = animation_timer + 1
+        if animation_timer >= 8:
+            animation_timer = 0
+            animation_frame = (animation_frame + 1) % len(animation_bilder)
+            spieler.image = animation_bilder[animation_frame]
+
+def on_mouse_down(pos):
+    global ziel_x, ziel_y, ist_am_laufen
+    ziel_x = pos[0]
+    ziel_y = pos[1]
+    ist_am_laufen = True
+```
+
+---
+
+## Kapitel 9: Tipps für bessere Spiele
+
+### Partikel-Effekte
+
+Kleine Teilchen die bei Aktionen erscheinen machen Spiele lebendiger!
+
+```python
+partikel = []
 
 def erstelle_partikel(x, y, farbe):
     import random
@@ -631,277 +1067,141 @@ def erstelle_partikel(x, y, farbe):
             "speed_y": random.uniform(-5, 5),
             "size": random.randint(3, 8),
             "farbe": farbe,
-            "leben": 30
+            "leben": 30  # Wie lange sichtbar
         }
         partikel.append(p)
 
-def update():
-    global ball_speed_x, ball_speed_y, spieler_punkte, computer_punkte
-
-    # Ball bewegen
-    ball.x = ball.x + ball_speed_x
-    ball.y = ball.y + ball_speed_y
-
-    # Partikel bewegen
+def update_partikel():
     for p in partikel[:]:
         p["x"] = p["x"] + p["speed_x"]
         p["y"] = p["y"] + p["speed_y"]
+        p["size"] = p["size"] * 0.95  # Wird kleiner
         p["leben"] = p["leben"] - 1
-        p["size"] = p["size"] * 0.95
         if p["leben"] <= 0:
             partikel.remove(p)
 
-    # Ball prallt von Seiten ab
-    if ball.x <= 20 or ball.x >= WIDTH - 20:
-        ball_speed_x = -ball_speed_x
-        erstelle_partikel(ball.x, ball.y, "white")
-
-    # Ball trifft Spieler
-    if ball.colliderect(spieler):
-        ball_speed_y = -abs(ball_speed_y)
-        erstelle_partikel(ball.x, ball.y, "green")
-        # sounds.treffer.play()
-
-    # Ball trifft Computer
-    if ball.colliderect(computer):
-        ball_speed_y = abs(ball_speed_y)
-        erstelle_partikel(ball.x, ball.y, "red")
-        # sounds.treffer.play()
-
-    # Punkt für Spieler
-    if ball.y < 0:
-        spieler_punkte = spieler_punkte + 1
-        ball.x = 200
-        ball.y = 300
-        # sounds.punkt.play()
-
-    # Punkt für Computer
-    if ball.y > HEIGHT:
-        computer_punkte = computer_punkte + 1
-        ball.x = 200
-        ball.y = 300
-        # sounds.punkt.play()
-
-    # Computer KI
-    if ball.x < computer.x - 10:
-        computer.x = computer.x - computer_speed
-    elif ball.x > computer.x + 10:
-        computer.x = computer.x + computer_speed
-
-def on_mouse_down(pos):
-    spieler.x = pos[0]
-
-def on_mouse_move(pos):
-    spieler.x = pos[0]
+def draw_partikel():
+    for p in partikel:
+        screen.draw.filled_circle(
+            (int(p["x"]), int(p["y"])),
+            int(p["size"]),
+            p["farbe"]
+        )
 ```
 
----
-
-# Animationen erstellen 🎬
-
-Du kannst Bilder wechseln um Animationen zu machen!
-
-### Benötigte Bilder
-Erstelle mehrere Bilder mit Nummern:
-- `laufen1.png`
-- `laufen2.png`
-- `laufen3.png`
-- `laufen4.png`
-
+**Benutzen:**
 ```python
-# === ANIMATION BEISPIEL ===
+# Bei Münze sammeln:
+erstelle_partikel(muenze.x, muenze.y, "yellow")
 
-WIDTH = 400
-HEIGHT = 600
-
-# Spieler mit Animation
-spieler = Actor("laufen1")
-spieler.pos = (200, 300)
-
-# Animation Variablen
-animation_frame = 0
-animation_timer = 0
-animation_bilder = ["laufen1", "laufen2", "laufen3", "laufen4"]
-
-def draw():
-    screen.fill("lightblue")
-    spieler.draw()
-    screen.draw.text("Tippe zum Bewegen!", (100, 50), color="black", fontsize=25)
-
-def update():
-    global animation_timer, animation_frame
-
-    # Animation abspielen
-    animation_timer = animation_timer + 1
-
-    if animation_timer >= 10:  # Alle 10 Frames wechseln
-        animation_timer = 0
-        animation_frame = animation_frame + 1
-
-        if animation_frame >= len(animation_bilder):
-            animation_frame = 0
-
-        # Bild wechseln
-        spieler.image = animation_bilder[animation_frame]
-
-def on_mouse_down(pos):
-    spieler.x = pos[0]
-    spieler.y = pos[1]
+# Bei Treffer:
+erstelle_partikel(spieler.x, spieler.y, "red")
 ```
 
----
-
-## Eigene Bilder erstellen (ohne App!)
-
-Du kannst auch Bilder direkt im Code erstellen und speichern. Hier ist ein Hilfsprogramm:
+### Highscore speichern
 
 ```python
-# === BILD-ERSTELLER ===
-# Dieses Programm erstellt einfache Bilder für deine Spiele
-
-WIDTH = 400
-HEIGHT = 500
-
-# Die Pixel-Daten für einen Vogel (8x8)
-# 0 = durchsichtig, 1 = gelb, 2 = orange, 3 = schwarz, 4 = weiß
-vogel_daten = [
-    [0, 0, 1, 1, 1, 0, 0, 0],
-    [0, 1, 1, 3, 1, 1, 0, 0],
-    [2, 2, 1, 1, 1, 1, 1, 0],
-    [2, 2, 1, 1, 1, 1, 1, 1],
-    [0, 1, 1, 4, 1, 1, 1, 0],
-    [0, 0, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-]
-
-farben = {
-    0: None,  # Durchsichtig
-    1: "yellow",
-    2: "orange",
-    3: "black",
-    4: "white",
-}
-
-def draw():
-    screen.fill("gray")
-
-    screen.draw.text("Vogel-Vorschau (vergrößert):", (20, 20), color="white")
-
-    # Vogel groß zeichnen
-    pixel_groesse = 20
-    start_x = 100
-    start_y = 80
-
-    for y, reihe in enumerate(vogel_daten):
-        for x, pixel in enumerate(reihe):
-            if farben[pixel] is not None:
-                screen.draw.filled_rect(
-                    Rect(start_x + x * pixel_groesse,
-                         start_y + y * pixel_groesse,
-                         pixel_groesse, pixel_groesse),
-                    farben[pixel]
-                )
-
-    screen.draw.text("So erstellst du deine eigenen Bilder:", (20, 280), color="white")
-    screen.draw.text("1. Benutze eine App wie 'Pixel Studio'", (20, 320), color="lightgray")
-    screen.draw.text("2. Male ein kleines Bild (32x32)", (20, 350), color="lightgray")
-    screen.draw.text("3. Speichere es als PNG in /images/", (20, 380), color="lightgray")
-```
-
----
-
-## Sound-Tipps
-
-### Sounds in Pydroid
-
-1. **Sounds herunterladen:**
-   - Suche nach "free game sounds wav"
-   - Oder nimm eigene Sounds mit dem Handy auf
-
-2. **Sound konvertieren:**
-   - Sounds müssen `.wav` oder `.ogg` sein
-   - Benutze eine Konverter-App wenn nötig
-
-3. **Sound im Code:**
-```python
-# Sound abspielen
-sounds.mein_sound.play()
-
-# Sound mit Lautstärke (0.0 bis 1.0)
-sounds.mein_sound.play()
-# Leider geht Lautstärke nicht direkt in pgzero,
-# aber du kannst leisere Sounds erstellen
-```
-
----
-
-## Tipps für bessere Spiele
-
-### 1. Hintergrund-Bilder
-```python
-hintergrund = Actor("hintergrund")
-hintergrund.pos = (WIDTH/2, HEIGHT/2)
-
-def draw():
-    hintergrund.draw()  # Zuerst Hintergrund
-    spieler.draw()      # Dann Spieler
-```
-
-### 2. Mehrere Level
-```python
-level = 1
-level_hintergruende = ["level1", "level2", "level3"]
-
-def draw():
-    bg = Actor(level_hintergruende[level - 1])
-    bg.draw()
-```
-
-### 3. Punkte speichern
-```python
-# Highscore speichern
 def speichere_highscore(punkte):
-    with open("highscore.txt", "w") as datei:
-        datei.write(str(punkte))
+    try:
+        with open("highscore.txt", "w") as datei:
+            datei.write(str(punkte))
+    except:
+        pass  # Ignoriere Fehler
 
-# Highscore laden
 def lade_highscore():
     try:
         with open("highscore.txt", "r") as datei:
             return int(datei.read())
     except:
-        return 0
+        return 0  # Kein Highscore vorhanden
+```
+
+**Benutzen:**
+```python
+highscore = lade_highscore()
+
+def update():
+    global punkte, highscore
+    # ... Spiel-Code ...
+
+    if punkte > highscore:
+        highscore = punkte
+        speichere_highscore(highscore)
+```
+
+### Hintergrundbild
+
+```python
+hintergrund = Actor("hintergrund")
+hintergrund.pos = (WIDTH/2, HEIGHT/2)
+
+def draw():
+    hintergrund.draw()  # ZUERST Hintergrund!
+    spieler.draw()      # DANN andere Dinge
 ```
 
 ---
 
-## Deine Aufgaben
+## Zusammenfassung
 
-1. **Füge Bilder hinzu** zu den Spielen aus Teil 1
-2. **Erstelle eigene Pixel-Art** mit einer App
-3. **Füge Sounds hinzu** wenn Punkte gesammelt werden
-4. **Mache Animationen** für deinen Spieler
-5. **Erstelle einen Hintergrund** für dein Spiel
+### Was du gelernt hast
 
----
+| Thema | Was du jetzt kannst |
+|-------|-------------------|
+| Ordner | `images/` und `sounds/` Ordner erstellen |
+| Actors | Bilder als Spielfiguren benutzen |
+| Kollision | `colliderect()` für einfache Kollisionsprüfung |
+| Sounds | `sounds.name.play()` für Sound-Effekte |
+| Animation | Bilder wechseln für Bewegungseffekte |
+| Listen | Mehrere Actors verwalten |
 
-## Checkliste für ein fertiges Spiel
+### Checkliste für ein fertiges Spiel
 
 - [ ] Spieler kann sich bewegen
-- [ ] Es gibt ein Ziel (Punkte sammeln, überleben, etc.)
+- [ ] Es gibt ein Ziel (Punkte, überleben, etc.)
 - [ ] Es gibt Hindernisse oder Feinde
 - [ ] Punkte werden angezeigt
 - [ ] Game Over wenn man verliert
 - [ ] Möglichkeit zum Neustarten
-- [ ] (Bonus) Bilder für alle Elemente
-- [ ] (Bonus) Sounds für Aktionen
-- [ ] (Bonus) Highscore speichern
+- [ ] **Bilder für alle Elemente**
+- [ ] **Sounds für Aktionen**
+- [ ] **(Bonus) Animationen**
+- [ ] **(Bonus) Partikel-Effekte**
+- [ ] **(Bonus) Highscore speichern**
+
+---
+
+## Problemlösungen
+
+### "Actor not found" Fehler
+```
+Actor 'spieler' not found
+```
+**Lösung:**
+1. Existiert `images/spieler.png`?
+2. Ist der Name kleingeschrieben?
+3. Ist die Endung `.png` (nicht `.PNG`)?
+
+### Sound spielt nicht
+```
+AttributeError: 'module' object has no attribute 'sprung'
+```
+**Lösung:**
+1. Existiert `sounds/sprung.wav`?
+2. Ist es `.wav` oder `.ogg` (nicht `.mp3`)?
+3. Ist der Name kleingeschrieben?
+
+### Bild ist zu groß/klein
+**Lösung:**
+```python
+spieler.scale = 0.5  # Halb so groß
+spieler.scale = 2    # Doppelt so groß
+```
 
 ---
 
 **Super gemacht!** 🎉
 
-Jetzt kannst du richtig coole Spiele machen. Zeig deinen Freunden was du programmiert hast!
+Du kannst jetzt richtig professionelle Spiele machen mit Bildern, Sounds und Animationen. Zeig deinen Freunden was du programmiert hast!
 
-**Tipp:** Teile deine Spiele! Du kannst die `.py` Datei und den `images/` Ordner zu deinen Freunden schicken, und sie können dein Spiel auf ihrem Handy spielen!
+**Tipp:** Du kannst deine Spiele teilen! Schicke die `.py` Datei und die `images/` und `sounds/` Ordner zu deinen Freunden. Sie können dann dein Spiel auf ihrem Handy spielen!

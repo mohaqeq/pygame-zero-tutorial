@@ -1,11 +1,12 @@
-# === MÜNZEN SAMMELN ===
-# Sammle Münzen und weiche Feinden aus!
+# === MUENZEN SAMMELN ===
+# Sammle Muenzen und weiche Feinden aus!
 #
 # WICHTIG: Du brauchst diese Bilder im Ordner "images/":
 # - spieler.png (ca. 40x40 Pixel)
 # - muenze.png (ca. 30x30 Pixel)
 # - feind.png (ca. 40x40 Pixel)
 
+import pygame
 import pgzrun
 from pgzero.builtins import Actor
 from pygame import Rect
@@ -16,15 +17,15 @@ HEIGHT = 600
 
 # Spieler
 spieler = Actor("spieler")
-spieler.x = 200
-spieler.y = 500
+spieler.x = WIDTH // 2
+spieler.y = HEIGHT - 100
 
-# Münzen Liste
+# Muenzen Liste
 muenzen = []
 for i in range(5):
     muenze = Actor("muenze")
     muenze.x = random.randint(30, WIDTH - 30)
-    muenze.y = random.randint(50, 400)
+    muenze.y = random.randint(50, HEIGHT * 2 // 3)
     muenzen.append(muenze)
 
 # Feinde Liste
@@ -32,14 +33,14 @@ feinde = []
 for i in range(3):
     feind = Actor("feind")
     feind.x = random.randint(30, WIDTH - 30)
-    feind.y = random.randint(100, 300)
+    feind.y = random.randint(100, HEIGHT // 2)
     feind.speed_x = random.choice([-3, 3])  # Links oder rechts
     feinde.append(feind)
 
 # Spielstand
 punkte = 0
 leben = 3
-unverwundbar = 0  # Timer für Unverwundbarkeit
+unverwundbar = 0  # Timer fuer Unverwundbarkeit
 
 def draw():
     screen.fill("darkgreen")
@@ -50,7 +51,7 @@ def draw():
             if (x + y) % 40 == 0:
                 screen.draw.filled_rect(Rect(x, y, 20, 20), "green")
 
-    # Münzen zeichnen
+    # Muenzen zeichnen
     for muenze in muenzen:
         muenze.draw()
 
@@ -63,14 +64,14 @@ def draw():
         spieler.draw()
 
     # Info anzeigen
-    screen.draw.text(f"Münzen: {punkte}", (10, 10), color="yellow", fontsize=30)
+    screen.draw.text(f"Muenzen: {punkte}", (10, 10), color="yellow", fontsize=30)
     screen.draw.text(f"Leben: {leben}", (10, 50), color="red", fontsize=30)
 
     if leben <= 0:
-        screen.draw.text("GAME OVER", (100, 280), color="red", fontsize=45)
+        screen.draw.text("GAME OVER", (WIDTH // 4, HEIGHT // 2 - 20), color="red", fontsize=45)
 
     if len(muenzen) == 0:
-        screen.draw.text("GEWONNEN!", (110, 280), color="yellow", fontsize=50)
+        screen.draw.text("GEWONNEN!", (WIDTH // 4, HEIGHT // 2 - 20), color="yellow", fontsize=50)
 
 def update():
     global punkte, leben, unverwundbar
@@ -90,17 +91,17 @@ def update():
         if feind.x < 30 or feind.x > WIDTH - 30:
             feind.speed_x = -feind.speed_x
 
-    # Münzen sammeln
+    # Muenzen sammeln
     for muenze in muenzen[:]:
         if spieler.colliderect(muenze):
             muenzen.remove(muenze)
             punkte = punkte + 1
-            # sounds.muenze.play()
+            sounds.muenze.play()
 
-            # Neue Münze erstellen
+            # Neue Muenze erstellen
             neue_muenze = Actor("muenze")
             neue_muenze.x = random.randint(30, WIDTH - 30)
-            neue_muenze.y = random.randint(50, 400)
+            neue_muenze.y = random.randint(50, HEIGHT * 2 // 3)
             muenzen.append(neue_muenze)
 
     # Feind-Kollision
@@ -109,7 +110,7 @@ def update():
             if spieler.colliderect(feind):
                 leben = leben - 1
                 unverwundbar = 120  # 2 Sekunden unverwundbar
-                # sounds.autsch.play()
+                sounds.autsch.play()
 
 def on_mouse_down(pos):
     global spieler

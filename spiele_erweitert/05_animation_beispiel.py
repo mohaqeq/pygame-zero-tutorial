@@ -7,8 +7,9 @@
 # - laufen3.png
 # - laufen4.png
 #
-# Alle Bilder sollten gleich groß sein (z.B. 40x40 Pixel)
+# Alle Bilder sollten gleich gross sein (z.B. 40x40 Pixel)
 
+import pygame
 import pgzrun
 from pgzero.builtins import Actor
 from pygame import Rect
@@ -18,7 +19,7 @@ HEIGHT = 600
 
 # Spieler mit Animation
 spieler = Actor("laufen1")
-spieler.pos = (200, 300)
+spieler.pos = (WIDTH // 2, HEIGHT // 2)
 
 # Animation Variablen
 animation_frame = 0
@@ -27,23 +28,23 @@ animation_bilder = ["laufen1", "laufen2", "laufen3", "laufen4"]
 
 # Bewegung
 ist_am_laufen = False
-ziel_x = 200
-ziel_y = 300
+ziel_x = WIDTH // 2
+ziel_y = HEIGHT // 2
 
 def draw():
     screen.fill("lightblue")
 
     # Boden
-    screen.draw.filled_rect(Rect(0, 450, WIDTH, 150), "green")
+    screen.draw.filled_rect(Rect(0, HEIGHT * 3 // 4, WIDTH, HEIGHT // 4), "green")
 
     # Spieler
     spieler.draw()
 
     # Anleitung
-    screen.draw.text("Tippe irgendwo zum Laufen!", (70, 30), color="black", fontsize=25)
+    screen.draw.text("Tippe irgendwo zum Laufen!", (WIDTH // 6, 30), color="black", fontsize=25)
 
     # Position anzeigen
-    screen.draw.text(f"Frame: {animation_frame + 1}", (10, 550), color="white", fontsize=20)
+    screen.draw.text(f"Frame: {animation_frame + 1}", (10, HEIGHT - 50), color="white", fontsize=20)
 
 def update():
     global animation_timer, animation_frame, ist_am_laufen

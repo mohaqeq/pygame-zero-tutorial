@@ -1,14 +1,15 @@
 # === TOUCH EINGABE ===
 # Lerne wie man Touch-Eingaben verarbeitet
 
+import pygame
 import pgzrun
 
 WIDTH = 400
 HEIGHT = 600
 
 # Hier speichern wir wo getippt wurde
-finger_x = 200
-finger_y = 300
+finger_x = WIDTH // 2
+finger_y = HEIGHT // 2
 anzahl_tipps = 0
 
 def draw():
@@ -18,12 +19,12 @@ def draw():
     screen.draw.filled_circle((finger_x, finger_y), 40, "red")
 
     # Zeige Anleitung
-    screen.draw.text("Tippe irgendwo!", (100, 50), color="white", fontsize=30)
+    screen.draw.text("Tippe irgendwo!", (WIDTH // 4, 50), color="white", fontsize=30)
 
     # Zeige die Position
-    screen.draw.text(f"X: {finger_x}", (20, 520), color="yellow", fontsize=25)
-    screen.draw.text(f"Y: {finger_y}", (20, 550), color="yellow", fontsize=25)
-    screen.draw.text(f"Tipps: {anzahl_tipps}", (250, 535), color="green", fontsize=25)
+    screen.draw.text(f"X: {finger_x}", (20, HEIGHT - 80), color="yellow", fontsize=25)
+    screen.draw.text(f"Y: {finger_y}", (20, HEIGHT - 50), color="yellow", fontsize=25)
+    screen.draw.text(f"Tipps: {anzahl_tipps}", (WIDTH - 150, HEIGHT - 65), color="green", fontsize=25)
 
 def on_mouse_down(pos):
     # pos ist eine Liste mit [x, y] Position

@@ -2,14 +2,15 @@
 # Ping Pong mit Bildern und Partikel-Effekten!
 #
 # WICHTIG: Du brauchst diese Bilder im Ordner "images/":
-# - schlaeger_gruen.png (dein Schläger)
-# - schlaeger_rot.png (Computer-Schläger)
+# - schlaeger_gruen.png (dein Schlaeger)
+# - schlaeger_rot.png (Computer-Schlaeger)
 # - ball.png (der Ball)
 #
 # Und diese Sounds im Ordner "sounds/":
-# - treffer.wav (wenn Ball Schläger trifft)
+# - treffer.wav (wenn Ball Schlaeger trifft)
 # - punkt.wav (wenn jemand punktet)
 
+import pygame
 import pgzrun
 from pgzero.builtins import Actor
 from pygame import Rect
@@ -20,47 +21,47 @@ HEIGHT = 600
 
 # Ball
 ball = Actor("ball")
-ball.x = 200
-ball.y = 300
+ball.x = WIDTH // 2
+ball.y = HEIGHT // 2
 ball_speed_x = 5
 ball_speed_y = 5
 
-# Spieler Schläger
+# Spieler Schlaeger
 spieler = Actor("schlaeger_gruen")
-spieler.midbottom = (200, HEIGHT - 20)
+spieler.midbottom = (WIDTH // 2, HEIGHT - 20)
 
-# Computer Schläger
+# Computer Schlaeger
 computer = Actor("schlaeger_rot")
-computer.midtop = (200, 20)
+computer.midtop = (WIDTH // 2, 20)
 computer_speed = 4
 
 # Punkte
 spieler_punkte = 0
 computer_punkte = 0
 
-# Partikel für Effekte
+# Partikel fuer Effekte
 partikel = []
 
 def draw():
     screen.fill("black")
 
     # Spielfeld
-    screen.draw.line((0, HEIGHT/2), (WIDTH, HEIGHT/2), "gray")
-    screen.draw.rect(Rect(5, 5, WIDTH-10, HEIGHT-10), "white")
+    screen.draw.line((0, HEIGHT // 2), (WIDTH, HEIGHT // 2), "gray")
+    screen.draw.rect(Rect(5, 5, WIDTH - 10, HEIGHT - 10), "white")
 
     # Partikel zeichnen
     for p in partikel:
         screen.draw.filled_circle((int(p["x"]), int(p["y"])), int(p["size"]), p["farbe"])
 
-    # Schläger und Ball
+    # Schlaeger und Ball
     computer.draw()
     spieler.draw()
     ball.draw()
 
     # Punkte
-    screen.draw.text(f"{computer_punkte}", (WIDTH/2 - 50, HEIGHT/2 - 60),
+    screen.draw.text(f"{computer_punkte}", (WIDTH // 2 - 50, HEIGHT // 2 - 60),
                      color="red", fontsize=50)
-    screen.draw.text(f"{spieler_punkte}", (WIDTH/2 - 50, HEIGHT/2 + 20),
+    screen.draw.text(f"{spieler_punkte}", (WIDTH // 2 - 50, HEIGHT // 2 + 20),
                      color="green", fontsize=50)
 
 def erstelle_partikel(x, y, farbe):
@@ -101,27 +102,27 @@ def update():
     if ball.colliderect(spieler):
         ball_speed_y = -abs(ball_speed_y)
         erstelle_partikel(ball.x, ball.y, "green")
-        # sounds.treffer.play()
+        sounds.treffer.play()
 
     # Ball trifft Computer
     if ball.colliderect(computer):
         ball_speed_y = abs(ball_speed_y)
         erstelle_partikel(ball.x, ball.y, "red")
-        # sounds.treffer.play()
+        sounds.treffer.play()
 
-    # Punkt für Spieler
+    # Punkt fuer Spieler
     if ball.y < 0:
         spieler_punkte = spieler_punkte + 1
-        ball.x = 200
-        ball.y = 300
-        # sounds.punkt.play()
+        ball.x = WIDTH // 2
+        ball.y = HEIGHT // 2
+        sounds.punkt.play()
 
-    # Punkt für Computer
+    # Punkt fuer Computer
     if ball.y > HEIGHT:
         computer_punkte = computer_punkte + 1
-        ball.x = 200
-        ball.y = 300
-        # sounds.punkt.play()
+        ball.x = WIDTH // 2
+        ball.y = HEIGHT // 2
+        sounds.punkt.play()
 
     # Computer KI
     if ball.x < computer.x - 10:

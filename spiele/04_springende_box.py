@@ -1,6 +1,7 @@
 # === SPRINGENDE BOX ===
-# Eine Box springt über Hindernisse. Tippe um zu springen!
+# Eine Box springt ueber Hindernisse. Tippe um zu springen!
 
+import pygame
 import pgzrun
 from pygame import Rect
 import random
@@ -9,16 +10,16 @@ WIDTH = 400
 HEIGHT = 600
 
 # Die Box (der Spieler)
-box_x = 80
-box_y = 450
 box_breite = 40
 box_hoehe = 40
+box_x = WIDTH // 5
+boden_y = HEIGHT - 100
+box_y = boden_y - box_hoehe
 box_speed_y = 0  # Geschwindigkeit nach oben/unten
 schwerkraft = 0.8
-boden_y = 500
 
 # Hindernis
-hindernis_x = 400
+hindernis_x = WIDTH
 hindernis_breite = 40
 hindernis_hoehe = 60
 
@@ -31,7 +32,7 @@ def draw():
     screen.fill("skyblue")
 
     # Boden zeichnen
-    screen.draw.filled_rect(Rect(0, boden_y, WIDTH, 100), "green")
+    screen.draw.filled_rect(Rect(0, boden_y, WIDTH, HEIGHT - boden_y), "green")
 
     # Box zeichnen
     screen.draw.filled_rect(
@@ -49,12 +50,12 @@ def draw():
     screen.draw.text(f"Punkte: {punkte}", (10, 10), color="black", fontsize=30)
 
     # Anleitung
-    screen.draw.text("Tippe zum Springen!", (100, 50), color="gray", fontsize=20)
+    screen.draw.text("Tippe zum Springen!", (WIDTH // 4, 50), color="gray", fontsize=20)
 
     # Game Over Nachricht
     if not spiel_laeuft:
-        screen.draw.text("GAME OVER!", (100, 250), color="red", fontsize=50)
-        screen.draw.text("Tippe zum Neustarten", (80, 320), color="black", fontsize=25)
+        screen.draw.text("GAME OVER!", (WIDTH // 4, HEIGHT // 2 - 50), color="red", fontsize=50)
+        screen.draw.text("Tippe zum Neustarten", (WIDTH // 5, HEIGHT // 2 + 20), color="black", fontsize=25)
 
 def update():
     global box_y, box_speed_y, hindernis_x, punkte, spiel_laeuft, geschwindigkeit
@@ -62,7 +63,7 @@ def update():
     if not spiel_laeuft:
         return  # Nichts machen wenn Spiel vorbei
 
-    # Schwerkraft - Box fällt nach unten
+    # Schwerkraft - Box faellt nach unten
     box_speed_y = box_speed_y + schwerkraft
     box_y = box_y + box_speed_y
 
@@ -76,22 +77,22 @@ def update():
 
     # Neues Hindernis wenn altes weg ist
     if hindernis_x < -hindernis_breite:
-        hindernis_x = WIDTH + random.randint(0, 200)
+        hindernis_x = WIDTH + random.randint(0, WIDTH // 2)
         punkte = punkte + 1
         # Spiel wird schneller
         if geschwindigkeit < 15:
             geschwindigkeit = geschwindigkeit + 0.3
 
-    # Kollision prüfen (hat Box das Hindernis berührt?)
+    # Kollision pruefen (hat Box das Hindernis beruehrt?)
     hindernis_y = boden_y - hindernis_hoehe
 
-    # Prüfen ob sich Box und Hindernis überlappen
+    # Pruefen ob sich Box und Hindernis ueberlappen
     if box_x + box_breite > hindernis_x and box_x < hindernis_x + hindernis_breite:
         if box_y + box_hoehe > hindernis_y:
             spiel_laeuft = False
 
 def on_mouse_down(pos):
-    global box_speed_y, spiel_laeuft, punkte, hindernis_x, geschwindigkeit
+    global box_speed_y, spiel_laeuft, punkte, hindernis_x, geschwindigkeit, box_y
 
     if spiel_laeuft:
         # Nur springen wenn Box auf dem Boden ist
@@ -101,8 +102,10 @@ def on_mouse_down(pos):
         # Spiel neu starten
         spiel_laeuft = True
         punkte = 0
-        hindernis_x = 400
+        hindernis_x = WIDTH
         geschwindigkeit = 6
+        box_y = boden_y - box_hoehe
+        box_speed_y = 0
 
 # Diese Zeile startet das Spiel!
 pgzrun.go()

@@ -1,11 +1,12 @@
 # === SPACE SHOOTER ===
-# Schieße auf Aliens!
+# Schiesse auf Aliens!
 #
 # WICHTIG: Du brauchst diese Bilder im Ordner "images/":
 # - rakete.png (dein Raumschiff)
 # - alien.png (die Aliens)
 # - schuss.png (der Laserstrahl)
 
+import pygame
 import pgzrun
 from pgzero.builtins import Actor
 from pygame import Rect
@@ -16,10 +17,10 @@ HEIGHT = 600
 
 # Raumschiff
 rakete = Actor("rakete")
-rakete.x = 200
-rakete.midbottom = (200, HEIGHT - 20)
+rakete.x = WIDTH // 2
+rakete.midbottom = (WIDTH // 2, HEIGHT - 20)
 
-# Schüsse
+# Schuesse
 schuesse = []
 
 # Aliens
@@ -34,7 +35,7 @@ def erstelle_alien():
     alien = Actor("alien")
     alien.x = random.randint(50, WIDTH - 50)
     alien.y = -30
-    alien.speed = random.uniform(2, 5)  # Zufällige Geschwindigkeit
+    alien.speed = random.uniform(2, 5)  # Zufaellige Geschwindigkeit
     aliens.append(alien)
 
 def draw():
@@ -48,7 +49,7 @@ def draw():
         y = random.randint(0, HEIGHT)
         screen.draw.filled_circle((x, y), 1, "white")
 
-    # Schüsse zeichnen
+    # Schuesse zeichnen
     for schuss in schuesse:
         schuss.draw()
 
@@ -63,12 +64,12 @@ def draw():
     screen.draw.text(f"Punkte: {punkte}", (10, 10), color="white", fontsize=30)
     screen.draw.text(f"Leben: {leben}", (10, 50), color="red", fontsize=30)
 
-    # Schieß-Button
-    screen.draw.filled_rect(Rect(WIDTH/2 - 50, HEIGHT - 80, 100, 50), "red")
-    screen.draw.text("FEUER!", (WIDTH/2 - 35, HEIGHT - 70), color="white", fontsize=25)
+    # Schiess-Button
+    screen.draw.filled_rect(Rect(WIDTH // 2 - 50, HEIGHT - 80, 100, 50), "red")
+    screen.draw.text("FEUER!", (WIDTH // 2 - 35, HEIGHT - 70), color="white", fontsize=25)
 
     if leben <= 0:
-        screen.draw.text("GAME OVER", (100, 280), color="red", fontsize=45)
+        screen.draw.text("GAME OVER", (WIDTH // 4, HEIGHT // 2 - 20), color="red", fontsize=45)
 
 def update():
     global alien_timer, punkte, leben
@@ -82,7 +83,7 @@ def update():
         erstelle_alien()
         alien_timer = 0
 
-    # Schüsse bewegen
+    # Schuesse bewegen
     for schuss in schuesse[:]:
         schuss.y = schuss.y - 10
 
@@ -98,9 +99,9 @@ def update():
         if alien.y > HEIGHT + 30:
             aliens.remove(alien)
             leben = leben - 1
-            # sounds.autsch.play()
+            sounds.autsch.play()
 
-    # Treffer prüfen
+    # Treffer pruefen
     for schuss in schuesse[:]:
         for alien in aliens[:]:
             if schuss.colliderect(alien):
@@ -108,7 +109,7 @@ def update():
                     schuesse.remove(schuss)
                 aliens.remove(alien)
                 punkte = punkte + 10
-                # sounds.explosion.play()
+                sounds.explosion.play()
                 break
 
 def on_mouse_down(pos):
@@ -117,17 +118,17 @@ def on_mouse_down(pos):
     if leben <= 0:
         return
 
-    # Rakete bewegen (obere Hälfte des Bildschirms)
+    # Rakete bewegen (obere Haelfte des Bildschirms)
     if pos[1] < HEIGHT - 100:
         rakete.x = pos[0]
 
-    # Schieß-Button gedrückt?
-    feuer_button = Rect(WIDTH/2 - 50, HEIGHT - 80, 100, 50)
+    # Schiess-Button gedrueckt?
+    feuer_button = Rect(WIDTH // 2 - 50, HEIGHT - 80, 100, 50)
     if feuer_button.collidepoint(pos):
         schuss = Actor("schuss")
         schuss.midbottom = rakete.midtop
         schuesse.append(schuss)
-        # sounds.schuss.play()
+        sounds.schuss.play()
 
 def on_mouse_move(pos):
     if leben > 0 and pos[1] < HEIGHT - 100:

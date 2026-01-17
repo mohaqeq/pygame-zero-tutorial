@@ -1,7 +1,8 @@
 # === BREAKOUT ===
-# Zerstöre alle Steine mit dem Ball!
-# Tippe oder ziehe um den Schläger zu bewegen.
+# Zerstoere alle Steine mit dem Ball!
+# Tippe oder ziehe um den Schlaeger zu bewegen.
 
+import pygame
 import pgzrun
 from pygame import Rect
 
@@ -9,15 +10,15 @@ WIDTH = 400
 HEIGHT = 600
 
 # Ball
-ball_x = 200
-ball_y = 400
+ball_x = WIDTH // 2
+ball_y = HEIGHT * 2 // 3
 ball_groesse = 12
 ball_speed_x = 4
 ball_speed_y = -4
 
-# Schläger
-schlaeger_x = 150
-schlaeger_y = 550
+# Schlaeger
+schlaeger_x = WIDTH // 2 - 40
+schlaeger_y = HEIGHT - 50
 schlaeger_breite = 80
 schlaeger_hoehe = 12
 
@@ -60,7 +61,7 @@ def draw():
     # Ball zeichnen
     screen.draw.filled_circle((ball_x, ball_y), ball_groesse, "white")
 
-    # Schläger zeichnen
+    # Schlaeger zeichnen
     screen.draw.filled_rect(
         Rect(schlaeger_x, schlaeger_y, schlaeger_breite, schlaeger_hoehe),
         "cyan"
@@ -68,15 +69,15 @@ def draw():
 
     # Punkte und Leben anzeigen
     screen.draw.text(f"Punkte: {punkte}", (10, 10), color="white", fontsize=25)
-    screen.draw.text(f"Leben: {leben}", (300, 10), color="white", fontsize=25)
+    screen.draw.text(f"Leben: {leben}", (WIDTH - 100, 10), color="white", fontsize=25)
 
     # Gewonnen?
     if len(steine) == 0:
-        screen.draw.text("DU HAST GEWONNEN!", (50, 300), color="green", fontsize=35)
+        screen.draw.text("DU HAST GEWONNEN!", (WIDTH // 8, HEIGHT // 2), color="green", fontsize=35)
 
     # Verloren?
     if leben <= 0:
-        screen.draw.text("GAME OVER", (100, 300), color="red", fontsize=45)
+        screen.draw.text("GAME OVER", (WIDTH // 4, HEIGHT // 2), color="red", fontsize=45)
 
 def update():
     global ball_x, ball_y, ball_speed_x, ball_speed_y, punkte, leben
@@ -88,7 +89,7 @@ def update():
     ball_x = ball_x + ball_speed_x
     ball_y = ball_y + ball_speed_y
 
-    # Ball prallt von Wänden ab
+    # Ball prallt von Waenden ab
     if ball_x - ball_groesse <= 0 or ball_x + ball_groesse >= WIDTH:
         ball_speed_x = -ball_speed_x
 
@@ -96,14 +97,14 @@ def update():
     if ball_y - ball_groesse <= 0:
         ball_speed_y = -ball_speed_y
 
-    # Ball fällt runter - Leben verlieren
+    # Ball faellt runter - Leben verlieren
     if ball_y > HEIGHT:
         leben = leben - 1
-        ball_x = 200
-        ball_y = 400
+        ball_x = WIDTH // 2
+        ball_y = HEIGHT * 2 // 3
         ball_speed_y = -4
 
-    # Ball trifft Schläger
+    # Ball trifft Schlaeger
     if ball_y + ball_groesse >= schlaeger_y:
         if ball_x >= schlaeger_x and ball_x <= schlaeger_x + schlaeger_breite:
             ball_speed_y = -abs(ball_speed_y)
@@ -122,7 +123,7 @@ def update():
 
 def on_mouse_down(pos):
     global schlaeger_x
-    schlaeger_x = pos[0] - schlaeger_breite / 2
+    schlaeger_x = pos[0] - schlaeger_breite // 2
 
     if schlaeger_x < 0:
         schlaeger_x = 0
@@ -131,7 +132,7 @@ def on_mouse_down(pos):
 
 def on_mouse_move(pos):
     global schlaeger_x
-    schlaeger_x = pos[0] - schlaeger_breite / 2
+    schlaeger_x = pos[0] - schlaeger_breite // 2
 
     if schlaeger_x < 0:
         schlaeger_x = 0
